@@ -1,5 +1,5 @@
 ---
-title: Introduction to Guidelines for IOOS SOS 1.0
+title: IOOS NetCDF Application Profile
 keywords: sample homepage
 tags: [getting_started]
 #sidebar: home_sidebar
@@ -7,31 +7,27 @@ sidebar: mydoc_sidebar
 topnav: topnav
 toc: false
 #permalink: index.html
-summary: This brief description summarizes the content of the Guidelines. The other topics on this site provide additional information and detail about working with all aspects of the IOOS SOS 1.0.
+summary: Guidelines, links and examples to help the IOOS community to use netCDF and related related technologies like ncSOS, ncISO, OPeNDAP, THREDDS, ERDDAP, etc. to achieve interoperability. 
 ---
 
-## IOOS SOS Application Profile
+## **IOOS Profile Scope**{: style="color: crimson"}
 
-U.S. IOOS distributes ocean observations using the OGC Sensor Observation Service. To support this effort U.S. IOOS has developed a profile of SOS v1.0 (henceforth IOOS SOS v1.0) that includes specific behaviors for the SOS interface and for the output formats delivered in response to the three operations of the SOS Core Profile.
-The GitHub repository contains documentation of the IOOS SOS v1.0 profile, example templates for the responses, and information on two reference implementations developed to support the IOOS SOS v1.0 profile. To facilitate the practical implementation of the SOS, IOOS has developed the IOOS Application Profile (AP) for SOS, which includes a series of operation templates, controlled vocabularies, IOOS Conventions for SOS Implementation, and a set of tests for IOOS SOS implementations.
+The Profile defines the bare minimal set of attributes for IOOS Data Providers to include in their NetCDF data files. The Profile allows the NetCDF metadata to overlap with the IOOS SOS metadata in order to ensure a comprehensive cross-walk from NetCDF to IOOS SOS representation via the ncSOS service.
+ 
+While matching the IOOS SOS metadata, the Profile allows the lowest achievable divergence of the IOOS NetCDF files from the NODC/NCEI NetCDF Templates - the Profile includes the Templates' attributes and augment them with a small number of IOOS-specific attributes just to ensure that NetCDF files inherently contain metadata required for the IOOS SOS output in cases when the NODC/NCEI Templates come short. 
 
-### IOOS SOS 1.0 WSDD
+In general, a Data Provider may use any metadata attributes in the NetCDF file; however, apart from the IOOS-specific portion, the IOOS Profile highly recommends to restrict the variety to the attributes and values provided by the following Conventions and Templates:
 
-The Web Service Description Document (WSDD) provides a description of a Sensor Observation Service (SOS) that has been developed by U.S. IOOS for deployment by NOAA data providers and IOOS Regional Associations (RAs). This service provides a service consumer with the capability to access ocean observations data products, such as time series and profiles, which have XML-based encodings and included in the SWE Common Data Model.
+* [**NOAA NCEI NetCDF Templates v2.0**](http://www.nodc.noaa.gov/data/formats/netcdf/). 
+* [**Climate and Forecast (CF) Conventions v1.6**](http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html).
+* [**ACDD v1.3**](http://wiki.esipfed.org/index.php/Attribute_Convention_for_Data_Discovery_1-3). 
 
-### IOOS SOS 1.0 Templates
 
- * GetCapabilities: A template for generic (independent of feature type) GetCapabilities response.
- * DescribeSensor-Network: A template for generic (independent of feature type) SensorML DescribeSensor response (network of stations)
- * DescribeSensor-Station: A template for generic (independent of feature type) SensorML DescribeSensor response (single station)
- * OM GetObservation: A template for a generic (independent of feature type) GetObservation response (the result block in this template is empty; see SWE templates for guidance on the result block)
-* SWE-SingleStation-SingleProperty-TimeSeries: A template for SWE Data Record’s static and dynamic fields (single station with a single sensor)
- * SWE-SingleStation-TimeSeriesProfile: A template for SWE Data Record’s static and dynamic fields (a station with profiling sensors)
- * SWE-SingleStation-TimeSeriesProfile-QC: A template for SWE Data Record’s static and dynamic fields (a station with profiling sensors including quality elements for some quantities)
- * SWE-MultiStation-TimeSeries: A template for SWE Data Record’s static and dynamic fields (multiple stations with a variety of sensors)
- * SWE-MultiStation-TimeSeries-QC: A template for SWE Data Record’s static and dynamic fields (multiple stations with a variety of sensors including quality elements for some quantities)
+## [**IOOS Metadata Profile for NetCDF, Version 1.1**{: style="color: crimson"}](./ioos-netcdf-metadata-description-v1-1.html)
 
-### IOOS SOS 1.0 Compliance and Interoperability Tests
+This document provides a description of the **valid**{: style="color: green"} IOOS NetCDF Metadata Profile that IOOS Program Office has developed for distribution of the IOOS data using THREDDS or ERDDAP servers. The use of the Profile is strongly recommended to all IOOS Data Providers, including RAs and various DACs.
 
-This document describes a collection of tests that have to be run in order to ensure a required level of compliance with IOOS SOS Profile 1.0 (IOOS Convention), and official OGC SOS 1.0.0 specification.
+## [**IOOS Metadata Profile for NetCDF, Version 1.0**{: style="color: crimson"}](./ioos-netcdf-metadata-description-v1-0.html)
+
+This document provides a description of the **deprecated**{: style="color: red"} IOOS NetCDF Metadata Profile.
 
