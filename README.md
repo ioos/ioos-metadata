@@ -1,2 +1,2 @@
-# sos-guidelines-jekyll
-IOOS SOS Guidelines pages with Jekyll Documentation Theme
+# ioos-netcdf
+GitHub Pages for IOOS NetCDF Guidelines with Jekyll Documentation Theme

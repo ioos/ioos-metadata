@@ -20,15 +20,6 @@ entries:
       output: pdf
       type: frontmatter
 
-#  - title: IOOS SOS Application Profile 1.0
-#    output: web
-#
-#    folderitems:
-#
-#    - title: Introduction to Guidelines for IOOS SOS 1.0
-#      url: /animal-telemetry-jekyll/index.html
-#      output: web
-
   - title: "IOOS NetCDF Application Profile"
     output: web, pdf
 
