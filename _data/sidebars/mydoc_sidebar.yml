@@ -26,7 +26,7 @@ entries:
     folderitems:
 
     - title: IOOS Profile Scope
-      url: /index.html#ioos-profile-scope
+      url: /index.html
       output: web
 
   - title: IOOS Metadata Profile for NetCDF
@@ -46,7 +46,7 @@ entries:
         subfolderitems:
 
         - title: "Revision History"
-          url: /ioos-netcdf-metadata-description-v1-1.html#revision-history
+          url: /ioos-netcdf-metadata-description-v1-1.html
           output: web
 
         - title: "Caveats"
