@@ -1,13 +1,13 @@
 ---
 title: "IOOS Metadata Profile for NetCDF, Version 1.1"
 keywords: sample homepage
-tags: [getting_started]
+tags: []
 #sidebar: home_sidebar
 sidebar: mydoc_sidebar
 topnav: topnav
 toc: false
 #permalink: index.html
-summary:  ACTIVE VERSION 
+summary:  ACTIVE VERSION
 ---
 
 
@@ -27,21 +27,21 @@ _This page provides description of the **current valid** IOOS NetCDF Metadata Pr
 ## **Scope**{: style="color: crimson"}
 
 The Profile defines the bare minimal set of attributes for IOOS Data Providers to include in their NetCDF data files. The Profile allows the NetCDF metadata to overlap with the IOOS SOS metadata in order to ensure a comprehensive cross-walk from NetCDF to IOOS SOS representation via the ncSOS service.
- 
-While matching the IOOS SOS metadata, the Profile allows the lowest achievable divergence of the IOOS NetCDF files from the NODC/NCEI NetCDF Templates - the Profile includes the Templates' attributes and augment them with a small number of IOOS-specific attributes just to ensure that NetCDF files inherently contain metadata required for the IOOS SOS output in cases when the NODC/NCEI Templates come short. 
+
+While matching the IOOS SOS metadata, the Profile allows the lowest achievable divergence of the IOOS NetCDF files from the NODC/NCEI NetCDF Templates - the Profile includes the Templates' attributes and augment them with a small number of IOOS-specific attributes just to ensure that NetCDF files inherently contain metadata required for the IOOS SOS output in cases when the NODC/NCEI Templates come short.
 
 In general, a Data Provider may use any metadata attributes in the NetCDF file; however, apart from the IOOS-specific portion, the IOOS Profile highly recommends to restrict the variety to the attributes and values provided by the following Conventions and Templates:
 
-* [**NOAA NCEI NetCDF Templates v2.0**](http://www.nodc.noaa.gov/data/formats/netcdf/). 
+* [**NOAA NCEI NetCDF Templates v2.0**](http://www.nodc.noaa.gov/data/formats/netcdf/).
 * [**Climate and Forecast (CF) Conventions v1.6**](http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html).
-* [**ACDD v1.3**](http://wiki.esipfed.org/index.php/Attribute_Convention_for_Data_Discovery_1-3). 
+* [**ACDD v1.3**](http://wiki.esipfed.org/index.php/Attribute_Convention_for_Data_Discovery_1-3).
 
 -->
 
 ## **Caveats**{: style="color: crimson"}
 
 <!--
-Although the IOOS Program Office **strongly discourages** from following the [**NOAA NODC NetCDF Templates v1.1**](http://www.nodc.noaa.gov/data/formats/netcdf/v1.1/) and [**Attribute Conventions for Dataset Discovery (ACDD) v1.1**](http://wiki.esipfed.org/index.php/Attribute_Convention_for_Data_Discovery_1-1), the IOOS Program Office recognizes that certain Data Providers may have a substantial volume of NetCDF files based on them; therefore, such files would still be admissible until the Data Provider adopts the recommended versions. 
+Although the IOOS Program Office **strongly discourages** from following the [**NOAA NODC NetCDF Templates v1.1**](http://www.nodc.noaa.gov/data/formats/netcdf/v1.1/) and [**Attribute Conventions for Dataset Discovery (ACDD) v1.1**](http://wiki.esipfed.org/index.php/Attribute_Convention_for_Data_Discovery_1-1), the IOOS Program Office recognizes that certain Data Providers may have a substantial volume of NetCDF files based on them; therefore, such files would still be admissible until the Data Provider adopts the recommended versions.
 -->
 
   1. This document encompasses only a fraction of the whole IOOS NetCDF Metadata Profile:
@@ -51,23 +51,23 @@ Although the IOOS Program Office **strongly discourages** from following the [**
  2. The rest of the Profile tallies with the [**NOAA NCEI NetCDF Templates v2.0**](http://www.nodc.noaa.gov/data/formats/netcdf/).  A set of "Gold Standard" example NetCDF files, which precisely follow the NCEI Templates, may be found [here](http://data.nodc.noaa.gov/ncei/example/data/netcdf/) or [here](http://data.nodc.noaa.gov/thredds/catalog/example/catalog.html).
 
  3. From the Profile perspective, the attributes can be either **required** or **recommended** / **suggested**:
-  - all **required** attributes must have meaningful values assigned to them in accordance with the rules prescribed by the corresponding Convention or Template. 
-  - each and all of the **recommended** and **suggested** attributes may be omitted; however, it is highly desirable that these attributes are included into the NetcDF metadata ***AND*** have meaningful values assigned to them. 
-   
+  - all **required** attributes must have meaningful values assigned to them in accordance with the rules prescribed by the corresponding Convention or Template.
+  - each and all of the **recommended** and **suggested** attributes may be omitted; however, it is highly desirable that these attributes are included into the NetcDF metadata ***AND*** have meaningful values assigned to them.
+
  4. The **`platform_variable:ioos_code`** and **`platform_variable:short_name`** are the only **interchangeable** attributes - either a single **`platform_variable:ioos_code`** or a combination of **`platform_variable:short_name`** with **`naming_authority`** is **required** to ensure that ncSOS will be able to produce the IOOS SOS Asset Identifier for the specific platform (see the [NetCDF to IOOS SOS Crosswalk](https://github.com/ioos/ioos-netcdf/blob/gh-pages/_docs/NetCDF-to-SOS%20Mappings_clean_2016-04-07a.xlsx) for details). The rest of attributes ***may not*** be substituted for one another.
- <!-- The **`platform_vocabulary`** attribute is at the moment the only pure ACDD v1.3 attribute that is included in the Profile.--> 
+ <!-- The **`platform_vocabulary`** attribute is at the moment the only pure ACDD v1.3 attribute that is included in the Profile.-->
 
  5. The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/index.html) currently uses a slightly different [NetCDF Metadata Profile](https://github.com/ioos/ioosngdac/wiki/NGDAC-NetCDF-File-Format-Version-2); work is in progress to harmonize the NGDAC and IOOS NetCDF Profiles.
 
 ## **IOOS NetCDF Metadata Profile Attributes**{: style="color: crimson"}
 
-Name | Convention | Description | Type | Role 
+Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
 contributor_name | ACDD | The name of any individuals or institutions that contributed to the creation of this data. Combined with the **`contributor_role`**, it provides the full description of the contributor. | global | required
 contributor_role | ACDD | The role of any individuals or institutions that contributed to the creation of this data. <br>For the IOOS ncSOS, **`contributor_role = "sponsor"`** defines a person, group, or organization’s full or partial support of an IOOS activity, asset, model, or product. | global | required
 creator_address | IOOS | Street address of the person or organization that collected the data.  | global | recommended
 creator_city | IOOS | City of the person or organization that collected the data.  | global | recommended
-creator_country | IOOS | Country of the person or organization that operates a platform or network, which collected the observation data. | global | required 
+creator_country | IOOS | Country of the person or organization that operates a platform or network, which collected the observation data. | global | required
 creator_email  | ACDD | Email address of the person or institution that collected the data. | global | required
 creator_name  | ACDD | Name of the person or organization that collected the data. | global | recommended
 creator_phone | IOOS | The phone number of the person or group that collected the data. | global | recommended
@@ -84,7 +84,7 @@ instrument_variable:discriminant | IOOS | The value of a **`discriminant`** appl
 keywords | ACDD | A comma separated list of key words and phrases. | global | recommended
 license  | ACDD | Describe the restrictions to data access and distribution. | global | recommended
 naming_authority  | ACDD | The organization that provides the **`id`** for the dataset. <br>The naming authority should be uniquely specified by this attribute; the combination of the **`naming_authority`** and the **`id`** should be a globally unique identifier for the dataset. A reverse-DNS naming is recommended; URIs are also acceptable. <br><br>Example:<br> **`edu.ucar.unidata`** | global | required
-platform | ACDD | Name of the platform(s) that supported the sensor data used to create this data set or product. Platforms can be of any type, including satellite, ship, station, aircraft or other. The controlled vocabulary must be indicate in **`platform_vocabulary`** (see example there).<br>The value of the attribute should be set to another variable which contains the details of the platform. There can be multiple platforms involved depending on if all the instances of the featureType in the collection share the same platform or not. If multiple platforms are involved, a variable should be defined for each platform and referenced from the geophysical variable in a <b>space</b> separated string. | global | required 
+platform | ACDD | Name of the platform(s) that supported the sensor data used to create this data set or product. Platforms can be of any type, including satellite, ship, station, aircraft or other. The controlled vocabulary must be indicate in **`platform_vocabulary`** (see example there).<br>The value of the attribute should be set to another variable which contains the details of the platform. There can be multiple platforms involved depending on if all the instances of the featureType in the collection share the same platform or not. If multiple platforms are involved, a variable should be defined for each platform and referenced from the geophysical variable in a <b>space</b> separated string. | global | required
 platform_variable:ioos_code | IOOS | Provides IOOS asset identification similar to **`wmo_code`** and **`nodc_code`**. The attribute is a URN that should follow the "[IOOS Convention for Asset Identification](http://ioos.github.io/conventions-for-observing-asset-identifiers/ioos-assets-v1-0.html)" with a general pattern of _**`urn:ioos:asset_type:authority:label[:discriminant]`**_.  <br><br>Examples: {::nomarkdown}<i><ul> <li> <b><code>urn:ioos:glider:wmo:4801902:20160218T1913Z</code></b> <li><b><code>urn:ioos:station:us.glos:45024</code></b> </ul></i>{:/} <br>**NOTE:** interchangeable with **`platform_variable:short_name`** | variable | required
 platform_variable:long_name | NCEI Templates | Provide a descriptive, long name for this variable. | variable | required
 platform_variable:short_name | IOOS | Provide a short name for the platform.  Similar to ID, a **`short_name`** can be any unique string of characters that does not include blanks. <br><br>Examples: {::nomarkdown}<i><ul> <li> <b><code>station_1:short_name = “carquinez”</code></b> <li><b><code>station_1:short_name = “cb0102</code></b></i> </ul>{:/} <br>**NOTE:** interchangeable with **`platform_variable:ioos_code`** | variable | required

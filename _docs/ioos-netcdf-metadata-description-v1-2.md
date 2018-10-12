@@ -1,7 +1,7 @@
 ---
-title: "IOOS Metadata Profile for NetCDF, Version 1.1"
+title: "IOOS Metadata Profile for NetCDF, Version 1.2"
 keywords: sample homepage
-tags: [getting_started]
+tags: []
 #sidebar: home_sidebar
 sidebar: mydoc_sidebar
 topnav: topnav
