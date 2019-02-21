@@ -1,49 +1,27 @@
 ---
-title: "IOOS Metadata Profile for NetCDF, Version 1.2"
-keywords: sample homepage
+title: "IOOS Metadata Profile Version 1.2"
+keywords: ioos, metadata, netCDF, 1.2
 tags: []
 #sidebar: home_sidebar
 sidebar: mydoc_sidebar
 topnav: topnav
 toc: false
 #permalink: index.html
-summary:  ACTIVE VERSION
+summary:  This is the currently active IOOS Metadata Profile version.  See links in the navbar to the left for previously deprecated versions.
 ---
 
-
-<!--
-_This page provides description of the **current valid** IOOS NetCDF Metadata Profile that IOOS Program Office has developed for distribution of the IOOS data using THREDDS or ERDDAP servers. The use of the Profile is strongly recommended to all IOOS Data Providers, including RAs and various DACs._
--->
-
-## **Revision History**{: style="color: crimson"}
+## **Revision History**
 
 
 | Version | Description | Date  |
 |:--- |:--- |:--- |
-| 1.0 | [Initial version based on the NODC Templates 1.1 and ACDD 1.1](./ioos-netcdf-metadata-description-v1-0.html) | 2016-10-01 |
-| 1.1 | Updated version based on the NCEI Templates 2.0 and ACDD 1.3 | 2016-11-01 |
+| 1.0 | [Initial version based on the NODC Templates 1.1 and ACDD 1.1](./ioos-metadata-profile-v1-0.html) | 2016-10-01 |
+| 1.1 | [Updated version based on the NCEI Templates 2.0 and ACDD 1.3](./ioos-metadata-profile-v1-1.html) | 2016-11-01 |
 | 1.2 | Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `info_url` <br>* Make `creator_institution`, `creator_url`, and `publisher_url` required <br>* Add `contributor_url` and `contributor_email`<br>* Make `contributor_name`, `contributor_role`, and `institution` recommended (previously were required)<br>* Clarify vocabulary for `contributor_role`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Clarify use of `platform` variable  | 2018-12-01 |
 
-<!--
-## **Scope**{: style="color: crimson"}
 
-The Profile defines the bare minimal set of attributes for IOOS Data Providers to include in their NetCDF data files. The Profile allows the NetCDF metadata to overlap with the IOOS SOS metadata in order to ensure a comprehensive cross-walk from NetCDF to IOOS SOS representation via the ncSOS service.
+## **Caveats**
 
-While matching the IOOS SOS metadata, the Profile allows the lowest achievable divergence of the IOOS NetCDF files from the NODC/NCEI NetCDF Templates - the Profile includes the Templates' attributes and augment them with a small number of IOOS-specific attributes just to ensure that NetCDF files inherently contain metadata required for the IOOS SOS output in cases when the NODC/NCEI Templates come short.
-
-In general, a Data Provider may use any metadata attributes in the NetCDF file; however, apart from the IOOS-specific portion, the IOOS Profile highly recommends to restrict the variety to the attributes and values provided by the following Conventions and Templates:
-
-* [**NOAA NCEI NetCDF Templates v2.0**](http://www.nodc.noaa.gov/data/formats/netcdf/).
-* [**Climate and Forecast (CF) Conventions v1.6**](http://cf-pcmdi.llnl.gov/documents/cf-conventions/1.6/cf-conventions.html).
-* [**ACDD v1.3**](http://wiki.esipfed.org/index.php/Attribute_Convention_for_Data_Discovery_1-3).
-
--->
-
-## **Caveats**{: style="color: crimson"}
-
-<!--
-Although the IOOS Program Office **strongly discourages** from following the [**NOAA NODC NetCDF Templates v1.1**](http://www.nodc.noaa.gov/data/formats/netcdf/v1.1/) and [**Attribute Conventions for Dataset Discovery (ACDD) v1.1**](http://wiki.esipfed.org/index.php/Attribute_Convention_for_Data_Discovery_1-1), the IOOS Program Office recognizes that certain Data Providers may have a substantial volume of NetCDF files based on them; therefore, such files would still be admissible until the Data Provider adopts the recommended versions.
--->
 
   1. This document encompasses only a fraction of the whole IOOS NetCDF Metadata Profile:
    - attributes that are IOOS-specific;
@@ -55,12 +33,12 @@ Although the IOOS Program Office **strongly discourages** from following the [**
   - all **required** attributes must have meaningful values assigned to them in accordance with the rules prescribed by the corresponding Convention or Template.
   - each and all of the **recommended** attributes may be omitted; however, it is highly desirable that these attributes are included into the NetcDF metadata ***AND*** have meaningful values assigned to them.
 
- 4. The **`platform_variable:ioos_code`** and **`platform_variable:short_name`** are the only **interchangeable** attributes - either a single **`platform_variable:ioos_code`** or a combination of **`platform_variable:short_name`** with **`naming_authority`** is **required** to ensure that ncSOS will be able to produce the IOOS SOS Asset Identifier for the specific platform (see the [NetCDF to IOOS SOS Crosswalk](https://github.com/ioos/ioos-netcdf/blob/gh-pages/_docs/NetCDF-to-SOS%20Mappings_clean_2016-04-07a.xlsx) for details). The rest of attributes ***may not*** be substituted for one another.
+ 4. The **`platform_variable:ioos_code`** and **`platform_variable:short_name`** are the only **interchangeable** attributes - either a single **`platform_variable:ioos_code`** or a combination of **`platform_variable:short_name`** with **`naming_authority`** is **required** to ensure that ncSOS will be able to produce the IOOS SOS Asset Identifier for the specific platform (see the [NetCDF to IOOS SOS Crosswalk](https://github.com/ioos/ioos-metadata/blob/gh-pages/_docs/NetCDF-to-SOS%20Mappings_clean_2016-04-07a.xlsx) for details). The rest of attributes ***may not*** be substituted for one another.
  <!-- The **`platform_vocabulary`** attribute is at the moment the only pure ACDD v1.3 attribute that is included in the Profile.-->
 
  5. The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/index.html) currently uses a slightly different [NetCDF Metadata Profile](https://github.com/ioos/ioosngdac/wiki/NGDAC-NetCDF-File-Format-Version-2); work is in progress to harmonize the NGDAC and IOOS NetCDF Profiles.
 
-## **IOOS NetCDF Metadata Profile Attributes**{: style="color: crimson"}
+## **IOOS Metadata Profile Attributes**
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:

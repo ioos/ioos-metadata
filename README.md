@@ -1,2 +1,2 @@
-# ioos-netcdf
-GitHub Pages for IOOS NetCDF Guidelines with Jekyll Documentation Theme
+# ioos-metadata
+GitHub Pages for IOOS Metadata Profile with Jekyll Documentation Theme
