@@ -33,7 +33,7 @@ entries:
       url: /index.html#profile-versions
       output: web
 
-  - title: "Profile Versions"
+  - title: IOOS Metadata Profile Documents
     output: web
 
     folderitems:
@@ -44,49 +44,61 @@ entries:
 
       subfolders:
 
-      - title: "Version 1.2 (Current)"
+      - title: Version 1.2 (Current)
         output: web
 
         subfolderitems:
 
-        - title: "Revision History"
+        - title: Summary
           url: /ioos-metadata-profile-v1-2.html
           output: web
 
-        - title: "Caveats"
+        - title: Revision History
+          url: /ioos-metadata-profile-v1-2.html#revision-history
+          output: web
+
+        - title: Caveats
           url: /ioos-metadata-profile-v1-2.html#caveats
           output: web
 
-        - title: "Metadata Profile Attributes"
+        - title: Metadata Profile Attributes
           url: /ioos-metadata-profile-v1-2.html#ioos-metadata-profile-attributes
           output: web
 
-      - title: "Version 1.1 (Deprecated)"
+      - title: Version 1.1 (Deprecated)
         output: web
 
         subfolderitems:
 
-        - title: "Revision History"
+        - title: Summary
           url: /ioos-metadata-profile-v1-1.html
           output: web
 
-        - title: "Caveats"
+        - title: Revision History
+          url: /ioos-metadata-profile-v1-1.html#revision-history
+          output: web
+
+        - title: Caveats
           url: /ioos-metadata-profile-v1-1.html#caveats
           output: web
 
-        - title: "Metadata Profile Attributes"
+        - title: Metadata Profile Attributes
           url: /ioos-metadata-profile-v1-1.html#ioos-netcdf-metadata-profile-attributes
           output: web
 
-      - title: "Version 1.0 (Deprecated)"
+      - title: Version 1.0 (Deprecated)
         output: web
 
         subfolderitems:
 
-        - title: "Caveats"
+        - title: Summary
+          url: /ioos-metadata-profile-v1-0.html
+          output: web
+
+        - title: Caveats
           url: /ioos-metadata-profile-v1-0.html#caveats
           output: web
 
-        - title: "Metadata Profile Attributes"
+        - title: Metadata Profile Attributes
           url: /ioos-metadata-profile-v1-0.html#ioos-netcdf-metadata-profile-attributes
           output: web
