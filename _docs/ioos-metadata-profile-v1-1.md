@@ -1,7 +1,7 @@
 ---
 title: "IOOS Metadata Profile Version 1.1"
-keywords: ioos, metadata, netCDF, 1.1
-tags: []
+keywords: [ioos, metadata, netCDF, 1.1]
+tags: [ioos, metadata, netCDF, 1.1]
 #sidebar: home_sidebar
 sidebar: mydoc_sidebar
 topnav: topnav
