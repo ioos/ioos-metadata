@@ -20,7 +20,7 @@ entries:
       output: pdf
       type: frontmatter
 
-  - title: "IOOS Metadata Profile"
+  - title: IOOS Metadata Profile
     output: web, pdf
 
     folderitems:
