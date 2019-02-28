@@ -17,26 +17,40 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 |:--- |:--- |:--- |
 | 1.0 | [Initial version based on the NODC Templates 1.1 and ACDD 1.1](./ioos-metadata-profile-v1-0.html) | 2016-10-01 |
 | 1.1 | [Updated version based on the NCEI Templates 2.0 and ACDD 1.3](./ioos-metadata-profile-v1-1.html) | 2016-11-01 |
-| 1.2 | Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `info_url` <br>* Make `creator_institution`, `creator_url`, and `publisher_url` required <br>* Add `contributor_url` and `contributor_email`<br>* Make `contributor_name`, `contributor_role`, and `institution` recommended (previously were required)<br>* Clarify vocabulary for `contributor_role`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Clarify use of `platform` variable  | 2018-12-01 |
+| **1.2** |**Present Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `info_url` <br>* Make `creator_institution`, `creator_url`, and `publisher_url` required <br>* Add `contributor_url` and `contributor_email`<br>* Make `contributor_name`, `contributor_role`, and `institution` recommended (previously were required)<br>* Clarify vocabulary for `contributor_role`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Clarify use of `platform` variable  | **2018-12-01** |
 
 
-## **Caveats**
+## **Notes/Caveats**
 
+1. The IOOS Metadata Profile is a compound profile that builds off of the [**NOAA NCEI NetCDF Templates v2.0**](https://www.nodc.noaa.gov/data/formats/netcdf/), meaning the full IOOS Metadata Profile is a combination of the NCEI Templates plus IOOS-specific guidance included in this document, such as:
+* attributes that are IOOS-specific (i.e. additions to the NCEI Templates)
+* attributes with a different role in the NCEI Templates; for example, the attribute **`_FillValue`** is **required** by the NCEI Template; however, in the IOOS Profile it is listed as **recommended** only;  conversely the opposite is possible as well
+* attributes with modified or further qualified meanings/definitions
 
-  1. This document encompasses only a fraction of the whole IOOS NetCDF Metadata Profile:
-   - attributes that are IOOS-specific;
-   - attributes with a different role in the Templates; for example, the attribute **`_FillValue`** is required by the NODC Template; however, the Profile just recommends to use it because it is optional in the IOOS SOS metadata set (whether the Template requirement should prevail, is beyond the scope of the Profile description);
-   - attributes that are **required** by the Profile regardless of their role in the Templates.
- 2. The rest of the Profile tallies with the [**NOAA NCEI NetCDF Templates v2.0**](http://www.nodc.noaa.gov/data/formats/netcdf/).  A set of "Gold Standard" example NetCDF files, which precisely follow the NCEI Templates, may be found [here](http://data.nodc.noaa.gov/ncei/example/data/netcdf/) or [here](http://data.nodc.noaa.gov/thredds/catalog/example/catalog.html).
+1. The NCEI Templates in turn build off of the ACDD and CF conventions.  Some attributes in the IOOS Profile originate from ACDD and CF (consult the `Convention` field in the table to determine the origin of each attribute).  Links to each are below:
+* [NOAA NCEI NetCDF Templates 2.0](https://www.nodc.noaa.gov/data/formats/netcdf/v2.0/)
+* [Attribute Convention for Data Discovery 1.3](http://wiki.esipfed.org/index.php/Attribute_Convention_for_Data_Discovery_1-3)
+* [Climate and Forecast Conventions (CF) 1.7](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html)
 
- 3. From the Profile perspective, the attributes can be either **required** or **recommended**:
-  - all **required** attributes must have meaningful values assigned to them in accordance with the rules prescribed by the corresponding Convention or Template.
-  - each and all of the **recommended** attributes may be omitted; however, it is highly desirable that these attributes are included into the NetcDF metadata ***AND*** have meaningful values assigned to them.
+1. In the IOOS Profile, attributes can be either **required** or **recommended**:
+* all **required** attributes must have meaningful values assigned to them in accordance with the rules prescribed by the corresponding Convention or Template.
+* each and all of the **recommended** attributes may be omitted; however, it is highly desirable that these attributes are included into the netCDF metadata ***AND*** have meaningful values assigned to them.
+* consult the `Role` field value in the table to determine the value for each attribute
 
- 4. The **`platform_variable:ioos_code`** and **`platform_variable:short_name`** are the only **interchangeable** attributes - either a single **`platform_variable:ioos_code`** or a combination of **`platform_variable:short_name`** with **`naming_authority`** is **required** to ensure that ncSOS will be able to produce the IOOS SOS Asset Identifier for the specific platform (see the [NetCDF to IOOS SOS Crosswalk](https://github.com/ioos/ioos-metadata/blob/gh-pages/_docs/NetCDF-to-SOS%20Mappings_clean_2016-04-07a.xlsx) for details). The rest of attributes ***may not*** be substituted for one another.
+1. The **`platform_variable:ioos_code`** and **`platform_variable:short_name`** are the only **interchangeable** attributes - either a single **`platform_variable:ioos_code`** or a combination of **`platform_variable:short_name`** with **`naming_authority`** is **required** to ensure that ncSOS will be able to produce the IOOS SOS Asset Identifier for the specific platform (see the [NetCDF to IOOS SOS Crosswalk](https://github.com/ioos/ioos-metadata/blob/gh-pages/_docs/NetCDF-to-SOS%20Mappings_clean_2016-04-07a.xlsx) for details). The rest of attributes ***may not*** be substituted for one another.
  <!-- The **`platform_vocabulary`** attribute is at the moment the only pure ACDD v1.3 attribute that is included in the Profile.-->
 
- 5. The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/index.html) currently uses a slightly different [NetCDF Metadata Profile](https://github.com/ioos/ioosngdac/wiki/NGDAC-NetCDF-File-Format-Version-2); work is in progress to harmonize the NGDAC and IOOS NetCDF Profiles.
+1. Consult the NCEI 'Gold Standard' example netCDF files, which precisely follow the NCEI Templates and can be a good starting point for building an IOOS Profile-compliant file.  They are available via the following links:
+   * [NCEI 'Gold Standard' netCDF - HTTP](https://data.nodc.noaa.gov/ncei/example/data/netcdf/)
+   * [NCEI 'Gold Standard' netCDF - THREDDS](https://data.nodc.noaa.gov/thredds/catalog/example/catalog.html)
+
+1. Consult the IOOS Metadata Profile example datasets, published in the 'Standards' ERDDAP instance.  References for specific attribute usage link from the table to datasets in this service.  
+* IOOS Metadata Profile Examples: [https://standards.sensors.ioos.us/erddap](https://standards.sensors.ioos.us/erddap)
+* IOOS Metadata Profile ERDDAP dataset examples from the Sensor Cache: [http://erddap.sensors.axds.co/erddap/](http://erddap.sensors.axds.co/erddap/)   
+
+1. The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/index.html) currently uses a slightly different [netCDF File Format (V2)](https://ioos.github.io/ioosngdac/ngdac-netcdf-file-format-version-2); work is in progress to harmonize the NGDAC File Format and IOOS Metadata Profile.
+
+
 
 ## **IOOS Metadata Profile Attributes**
 
