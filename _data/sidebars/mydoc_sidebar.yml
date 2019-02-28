@@ -44,7 +44,7 @@ entries:
 
       subfolders:
 
-      - title: Version 1.2 (Current)
+      - title: Version 1.2 (Active)
         output: web
 
         subfolderitems:
