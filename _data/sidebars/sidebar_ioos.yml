@@ -2,7 +2,7 @@
 
 entries:
 - title: sidebar
-  product: "Menu"
+  product: Menu
   levels: three
   version:
   folders:

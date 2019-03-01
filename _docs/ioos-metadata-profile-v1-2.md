@@ -2,7 +2,6 @@
 title: "IOOS Metadata Profile Version 1.2"
 keywords: [ioos, metadata, netCDF, 1.2]
 tags: [ioos, metadata, netCDF, 1.2]
-topnav: topnav
 toc: false
 #permalink: index.html
 summary:  This is the currently active IOOS Metadata Profile version.  See links in the navbar to the left for previously deprecated versions.

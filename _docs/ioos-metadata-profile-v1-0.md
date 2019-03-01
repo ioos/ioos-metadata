@@ -2,7 +2,6 @@
 title: "IOOS Metadata Profile Version 1.0"
 keywords: [ioos, metadata, netCDF, 1.0]
 tags: [ioos, metadata, netCDF, 1.0]
-topnav: topnav
 toc: false
 #permalink: index.html
 summary: Deprecated 2016.  Visit the [1.2 Metadata Profile](./ioos-metadata-profile-v1-2.html) page for the current version.
