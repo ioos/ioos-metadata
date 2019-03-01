@@ -2,8 +2,6 @@
 title: "IOOS Metadata Profile Version 1.0"
 keywords: [ioos, metadata, netCDF, 1.0]
 tags: [ioos, metadata, netCDF, 1.0]
-#sidebar: home_sidebar
-sidebar: mydoc_sidebar
 topnav: topnav
 toc: false
 #permalink: index.html
