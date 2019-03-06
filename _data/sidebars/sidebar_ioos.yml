@@ -44,7 +44,7 @@ entries:
           url: /ioos-metadata-profile-v1-2.html#revision-history
           output: web
 
-        - title: Caveats
+        - title: Notes/Caveats
           url: /ioos-metadata-profile-v1-2.html#notescaveats
           output: web
 
