@@ -45,7 +45,7 @@ entries:
           output: web
 
         - title: Caveats
-          url: /ioos-metadata-profile-v1-2.html#caveats
+          url: /ioos-metadata-profile-v1-2.html#notescaveats
           output: web
 
         - title: Metadata Profile Attributes
