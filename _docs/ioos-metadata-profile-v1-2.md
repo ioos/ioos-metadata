@@ -37,9 +37,7 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 1. The **`platform_variable:ioos_code`** and **`platform_variable:short_name`** are the only **interchangeable** attributes - either a single **`platform_variable:ioos_code`** or a combination of **`platform_variable:short_name`** with **`naming_authority`** is **required** to ensure that ncSOS will be able to produce the IOOS SOS Asset Identifier for the specific platform (see the [NetCDF to IOOS SOS Crosswalk](https://github.com/ioos/ioos-metadata/blob/gh-pages/_docs/NetCDF-to-SOS%20Mappings_clean_2016-04-07a.xlsx) for details). The rest of attributes ***may not*** be substituted for one another.
  <!-- The **`platform_vocabulary`** attribute is at the moment the only pure ACDD v1.3 attribute that is included in the Profile.-->
 
-1. Consult the NCEI 'Gold Standard' example netCDF files, which precisely follow the NCEI Templates and can be a good starting point for building an IOOS Profile-compliant file.  They are available via the following links:
-   * [NCEI 'Gold Standard' netCDF - HTTP](https://data.nodc.noaa.gov/ncei/example/data/netcdf/)
-   * [NCEI 'Gold Standard' netCDF - THREDDS](https://data.nodc.noaa.gov/thredds/catalog/example/catalog.html)
+1. Consult the ["Gold Standard" example netCDF files](gold-standard-examples.html), which follow this profile.
 
 1. Consult the IOOS Metadata Profile example datasets, published in the 'Standards' ERDDAP instance.  References for specific attribute usage link from the table to datasets in this service.  
 * IOOS Metadata Profile Examples: [https://standards.sensors.ioos.us/erddap](https://standards.sensors.ioos.us/erddap)

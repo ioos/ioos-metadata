@@ -20,6 +20,10 @@ entries:
       url: /index.html#profile-versions
       output: web
 
+    - title: Gold Standard Examples
+      url: /gold-standard-examples.html
+      output: web
+
   - title: IOOS Metadata Profile Documents
     output: web
 
