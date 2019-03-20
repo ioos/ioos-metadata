@@ -60,10 +60,28 @@ id | ACDD | An identifier for the data set, provided by and unique within its na
 naming_authority  | ACDD | The organization that provides the **`id`** for the dataset. <br>The naming authority should be uniquely specified by this attribute; the combination of the **`naming_authority`** and the **`id`** should be a globally unique identifier for the dataset. A reverse-DNS naming is recommended; URIs are also acceptable. <br><br>Example:<br> **`edu.ucar.unidata`** | global | **required**
 summary  | ACDD | One paragraph describing the data set. |  global | recommended
 info_url  | IOOS | URL for background information about this dataset. | global | **required**
+references  | ACDD | Published or web-based references that describe the data or methods used to produce it. Recommend URIs (such as a URL or DOI) for papers or other references. | global | recommended
 featureType | CF | CF attribute for identifying the featureType, e.g. featureType = "timeSeries". | global | **required**
 keywords | ACDD | A comma separated list of key words and phrases. | global | recommended
 license  | ACDD | Describe the restrictions to data access and distribution. | global | recommended
 standard_name_vocabulary  | ACDD | Standardized field which uses the [CF Standard Names](http://www.cfconventions.org/documents.html/). If a variables does not have an existing standard_name in the CF-managed list, this attribute should not be used. In these cases, a standard name can be proposed to the CF community for consideration and acceptance. | global | **required**
+
+#### Example
+
+Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
+
+```
+NC_GLOBAL {
+    title                           Morro Bay - BS1 MET
+    id                              57163
+    naming_authority                com.axiomdatascience
+    summary                         Timeseries data from 'Morro Bay - BS1 MET' (morro-bay-bs1-met)
+    info_url                        https://sensors.ioos.us/?sensor_version=v2#metadata/57163/station
+    references                      http://www.slosea.org/about/dash.php,http://cpool1.marine.calpoly.edu/cpool/CCMS_MorroBay/,https://www.cencoos.org/data/shore/morro
+    featureType                     TimeSeries
+    standard_name_vocabulary        NetCDF Climate and Forecast (CF) Metadata Convention Standard Name
+}
+```
 
 ### Attribution
 
@@ -97,6 +115,43 @@ publisher_state | IOOS | State of the person or organization that distributes th
 publisher_phone | IOOS | The phone number of the person or group that distributes the data files.  | global | recommended
 publisher_type | ACDD | Specifies type of publisher with one of the following: 'person', 'group', 'institution', or 'position'. If this attribute is not specified, the publisher is assumed to be a person. | global | recommended
 
+#### Example
+
+Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
+
+```
+NC_GLOBAL {
+    creator_institution     California Polytechnic State University, Center for Coastal Marine Sciences
+    creator_email           marineops at calpoly.edu
+    creator_country         USA
+    creator_url             http://www.marine.calpoly.edu/
+    creator_name            California Polytechnic State University, Center for Coastal Marine Sciences
+    creator_sector          academic
+    creator_type            institution
+    institution             California Polytechnic State University, Center for Coastal Marine Sciences
+}
+```
+
+```
+NC_GLOBAL {
+    contributor_name                Central & Northern California Ocean Observing System (CeNCOOS),Axiom Data Science
+    contributor_role                contributor,processor
+    contributor_email               cencoos_communications@mbari.org,feedback@axiomdatascience.com
+    contributor_url                 http://cencoos.org/,https://www.axiomdatascience.com
+    contributor_role_vocabulary     CI_RoleCode
+}
+```
+
+```
+NC_GLOBAL {
+    publisher_name          California Polytechnic State University, Center for Coastal Marine Sciences
+    publisher_country       USA
+    publisher_email         marineops at calpoly.edu
+    publisher_url           http://www.marine.calpoly.edu/
+    publisher_institution   California Polytechnic State University, Center for Coastal Marine Sciences
+    publisher_type          institution
+}
+```
 
 ### Variables
 
@@ -108,6 +163,25 @@ geophysical_variable:standard_name | CF | Standardized field which uses the [CF 
 geophysical_variable:units  | CF | Required for most all variables that represent dimensional quantities. The value should come from [**`udunits`**](http://www.unidata.ucar.edu/software/udunits/) authoritative vocabulary, which is documented in the CF standard name table with it's corresponding standard name. The **`udunits`** package includes a file `udunits.dat` which lists its supported unit names. | variable | **required**
 instrument_variable:discriminant | IOOS | The value of a **`discriminant`** applies to the like-named field in the IOOS SOS Asset Identifier URN; it ensures that in case of multiple sensors measuring the same **`observedProperty`**, each sensor has a unique ID. <br><br>Examples: {::nomarkdown}<ul> <li>sea_water_temperature:<b>top</b> <li> sea_water_temperature:<b>bottom</b> <li> sea_water_temperature:<b>nortek_adp_514</b></ul>{:/}| variable | **required**, if applicable
 
+#### Example
+
+Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
+
+```
+Attributes {
+    air_temperature {
+        String platform "station";
+        Float64 _FillValue -9999.0;
+        String standard_name "air_temperature";
+        String long_name "Air Temperature";
+        String urn "http://mmisw.org/ont/cf/parameter/air_temperature";
+        String units "degree_Celsius";
+    }
+}
+```
+
+See the `station` variable below.
+
 ### Platform
 
 Name | Convention | Description | Type | Role
@@ -118,6 +192,30 @@ platform_variable:short_name | IOOS | Provide a short name for the platform.  Si
 platform_variable:type | IOOS | In  conjunction with a **`platform_vocabulary`** attribute, identifies platform's type as defined in the [IOOS Platform Categories vocabulary](https://mmisw.org/ont/ioos/platform), or [SeaVoX Platform Categories vocabulary](http://vocab.nerc.ac.uk/collection/L06/current/"), or any other vocabulary. The URL of the actual vocabulary must be published in the **`platform_vocabulary`** global attribute. <br><br>Alternatively, the **`platform`** and **`platform_vocabulary`** pair of attributes may be used; however, this option is not recommended (see details in the **`platform_vocabulary`** description.) | variable | **required**
 platform_vocabulary | ACDD | Controlled vocabulary for the names used in the "platform" attribute.<br><br> It is recommended that this attribute is used in conjunction with the **`platform_variable:type`** attribute. In that case, the recommended value for the **`platform_vocabulary`** attribute is a URL to either the [IOOS Platform Category vocabulary](http://mmisw.org/ont/ioos/platform), or [SeaVoX Platform Categories vocabulary](http://vocab.nerc.ac.uk/collection/L06/current/). <br><br>Example:<br> **`platform_vocabulary = "http://mmisw.org/ont/ioos/platform"`**<br><br>As an alternative (although not recommended), a NetCDF file may follow the NCEI Template v2.0, which suggests the use of "NASA GCMD Platform Keywords Version 8.1" string as the fixed value for the **`platform_vocabulary`**, and does not stipulate for the **`platform_variable:type`**. Instead, the actual type of the platform must be placed in the global **`platform`** attribute as described in the Science Keyword Rules (http://gcmd.nasa.gov/learn/rules.html) for NASA Global Change Master Directory (GCMD) Keywords (http://gcmd.nasa.gov/learn/keywords.html). <br><br>Example:<br> **`platform: In Situ Ocean-based Platforms > MOORINGS`** | global | **required**
 platform (global attribute) | ACDD/NCEI |  Name of the *type* of platform(s) that supported the sensor data used to create this data set or product. Platforms can be of any type, including satellite, ship, station, aircraft or other. The controlled vocabulary must be indicated in the `platform_vocabulary` field. <br><br>Example (global variable): {::nomarkdown}<ul> <li> <b><code>platform "buoy";</code></b> <li><b><code>platform_vocabulary "IOOS Platform Vocabulary";</code></b> </ul>{:/} | global | **required**
+
+#### Example
+
+Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
+
+```
+Attributes {
+    station {
+        String cf_role "timeseries_id";
+        String ioos_category "Identifier";
+        String ioos_code "urn:ioos:station:com.axiomdatascience:57163";
+        String long_name "Morro Bay - BS1 MET";
+        String short_name "morro-bay-bs1-met";
+        String type "fixed";
+    }
+}
+```
+
+```
+NC_GLOBAL {
+    platform_vocabulary     http://mmisw.org/ont/ioos/platform
+    platform                fixed
+}
+```
 
 <br>
 
