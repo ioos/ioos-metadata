@@ -14,7 +14,7 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 |:--- |:--- |:--- |
 | 1.0 | [Initial version based on the NODC Templates 1.1 and ACDD 1.1](./ioos-metadata-profile-v1-0.html) | 2016-10-01 |
 | 1.1 | [Updated version based on the NCEI Templates 2.0 and ACDD 1.3](./ioos-metadata-profile-v1-1.html) | 2016-11-01 |
-| **1.2** |**Present Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `info_url` <br>* Make `creator_institution`, `creator_url`, and `publisher_url` required <br>* Add `contributor_url` and `contributor_email`<br>* Make `contributor_name`, `contributor_role`, and `institution` recommended (previously were required)<br>* Clarify vocabulary for `contributor_role`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Clarify use of `platform` variable  | **2018-12-01** |
+| **1.2** |**Present Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `info_url` <br>* Make `creator_institution`, `creator_url`, and `publisher_url` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary`<br>* Make `contributor_name`, `contributor_role`, and `institution` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Clarify use of `platform` variable  | **2018-12-01** |
 
 
 ## **Notes/Caveats**
@@ -39,9 +39,9 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 
 1. Consult the ["Gold Standard" example netCDF files](gold-standard-examples.html), which follow this profile.
 
-1. Consult the IOOS Metadata Profile example datasets, published in the 'Standards' ERDDAP instance.  References for specific attribute usage link from the table to datasets in this service.  
+1. Consult the IOOS Metadata Profile example datasets, published in the 'Standards' ERDDAP instance.  References for specific attribute usage link from the table to datasets in this service.
 * IOOS Metadata Profile Examples: [https://standards.sensors.ioos.us/erddap](https://standards.sensors.ioos.us/erddap)
-* IOOS Metadata Profile ERDDAP dataset examples from the Sensor Cache: [http://erddap.sensors.axds.co/erddap/](http://erddap.sensors.axds.co/erddap/)   
+* IOOS Metadata Profile ERDDAP dataset examples from the Sensor Cache: [http://erddap.sensors.axds.co/erddap/](http://erddap.sensors.axds.co/erddap/)
 
 1. The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/index.html) currently uses a slightly different [netCDF File Format (V2)](https://ioos.github.io/ioosngdac/ngdac-netcdf-file-format-version-2); work is in progress to harmonize the NGDAC File Format and IOOS Metadata Profile.
 
@@ -53,16 +53,16 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
-title  | ACDD | One sentence about the data contained within the file. | global | **required**
-id | ACDD | An identifier for the data set, provided by and unique within its naming authority. The combination of the **`naming authority`** and the **`id`** should be globally unique, but the **`id`** can be globally unique by itself also. IDs can be URLs, URNs, DOIs, meaningful text strings, a local key, or any other unique string of characters. The **`id`** should not include blanks. | global | **required**
-naming_authority  | ACDD | The organization that provides the **`id`** for the dataset. <br>The naming authority should be uniquely specified by this attribute; the combination of the **`naming_authority`** and the **`id`** should be a globally unique identifier for the dataset. A reverse-DNS naming is recommended; URIs are also acceptable. <br><br>Example:<br> **`edu.ucar.unidata`** | global | **required**
-summary  | ACDD | One paragraph describing the data set. |  global | recommended
-info_url  | IOOS | URL for background information about this dataset. | global | **required**
-references  | ACDD | Published or web-based references that describe the data or methods used to produce it. Recommend URIs (such as a URL or DOI) for papers or other references. | global | recommended
 featureType | CF | CF attribute for identifying the featureType, e.g. featureType = "timeSeries". | global | **required**
+id | ACDD | An identifier for the data set, provided by and unique within its naming authority. The combination of the **`naming authority`** and the **`id`** should be globally unique, but the **`id`** can be globally unique by itself also. IDs can be URLs, URNs, DOIs, meaningful text strings, a local key, or any other unique string of characters. The **`id`** should not include blanks. | global | **required**
+info_url  | IOOS | URL for background information about this dataset. | global | **required**
 keywords | ACDD | A comma separated list of key words and phrases. | global | recommended
 license  | ACDD | Describe the restrictions to data access and distribution. | global | recommended
+naming_authority  | ACDD | The organization that provides the **`id`** for the dataset. <br>The naming authority should be uniquely specified by this attribute; the combination of the **`naming_authority`** and the **`id`** should be a globally unique identifier for the dataset. A reverse-DNS naming is recommended; URIs are also acceptable. <br><br>Example:<br> **`edu.ucar.unidata`** | global | **required**
+references  | ACDD | Published or web-based references that describe the data or methods used to produce it. Recommend URIs (such as a URL or DOI) for papers or other references. | global | recommended
 standard_name_vocabulary  | ACDD | Standardized field which uses the [CF Standard Names](http://www.cfconventions.org/documents.html/). If a variables does not have an existing standard_name in the CF-managed list, this attribute should not be used. In these cases, a standard name can be proposed to the CF community for consideration and acceptance. | global | **required**
+summary  | ACDD | One paragraph describing the data set. |  global | recommended
+title  | ACDD | One sentence about the data contained within the file. | global | **required**
 
 #### Example
 
@@ -70,14 +70,14 @@ Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.senso
 
 ```
 NC_GLOBAL {
-    title                           Morro Bay - BS1 MET
-    id                              57163
-    naming_authority                com.axiomdatascience
-    summary                         Timeseries data from 'Morro Bay - BS1 MET' (morro-bay-bs1-met)
-    info_url                        https://sensors.ioos.us/?sensor_version=v2#metadata/57163/station
-    references                      http://www.slosea.org/about/dash.php,http://cpool1.marine.calpoly.edu/cpool/CCMS_MorroBay/,https://www.cencoos.org/data/shore/morro
-    featureType                     TimeSeries
-    standard_name_vocabulary        NetCDF Climate and Forecast (CF) Metadata Convention Standard Name
+    featureType               TimeSeries
+    id                        morro-bay-bs1-met
+    info_url                  https://sensors.ioos.us/?sensor_version=v2#metadata/57163/station
+    naming_authority          edu.calpoly.marine
+    references                http://www.slosea.org/about/dash.php,https://www.cencoos.org/data/shore/morro
+    standard_name_vocabulary  CF Standard Name Table v63
+    summary                   Timeseries data from 'Morro Bay - BS1 MET' (morro-bay-bs1-met)
+    title                     Morro Bay - BS1 MET
 }
 ```
 
@@ -85,33 +85,34 @@ NC_GLOBAL {
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
-creator_institution  | ACDD | Institution that collected the data. This should be specified even if it matches the value of **`publisher_institution`**, or if **`creator_type`** is institution. | global | **required**
-creator_country | IOOS | Country of the person or organization that operates a platform or network, which collected the observation data. | global | **required**
-creator_email  | ACDD | Email address of the person or institution that collected the data. | global | **required**
-creator_sector | IOOS | [IOOS classifier](http://mmisw.org/ont/ioos/sector) that best describes the platform (network) operator's societal sector. <br><br>Example:<br> **`creator_sector = "academic"`** | global |**required**
-creator_url  | ACDD/IOOS | The URL of the *institution* that collected the data. Note that this should always reference an institution URL, and not a personal URL, even if **`creator_type=person`**.  | global | **required**
-creator_name  | ACDD | Name of the person or organization that collected the data. | global | recommended
-creator_address | IOOS | Street address of the person or organization that collected the data.  | global | recommended
-creator_city | IOOS | City of the person or organization that collected the data.  | global | recommended
-creator_state | IOOS | State of the person or organization that collected the data.  | global | recommended
-creator_zipcode | IOOS | ZIP code of the person or organization that collected the data.  | global | recommended
-creator_phone | IOOS | The phone number of the person or group that collected the data. | global | recommended
-creator_type | ACDD | Specifies type of creator with one of the following: 'person', 'group', 'institution', or 'position'. If this attribute is not specified, the creator is assumed to be a person.  | global | recommended
-institution  | ACDD | The institution of the person or group that collected the data. | global | recommended
+contributor_email | IOOS | Email addresses of the individuals or institutions that contributed to the creation of this data. Multiple emails should be given in CSV format, and presented in the same order and number as the names in `contributor_names`. | global | recommended
 contributor_name | ACDD | The name of any individuals or institutions that contributed to the creation of this data. Combined with the **`contributor_role`**, it provides the full description of the contributor. Multiple names should be given in CSV format. <br><br>Examples: {::nomarkdown}<ul> <li>Pacific Islands Ocean Observing System (PacIOOS)</li> <li>Great Lakes Observing System (GLOS),LimnoTech</li></ul>{:/} | global | recommended
 contributor_role | ACDD | The role of any individuals or institutions that contributed to the creation of this data. The CI_RoleCode vocabulary ([NERC](http://vocab.nerc.ac.uk/collection/G04/current/), [GEOIDE](https://geo-ide.noaa.gov/wiki/index.php?title=ISO_19115_and_19115-2_CodeList_Dictionaries#CI_RoleCode)) should be used. Multiple roles should be given in CSV format, and presented in the same order and number as the names in `contributor_names`.<br>For the IOOS ncSOS, **`contributor_role = "sponsor"`** defines a person, group, or organization’s full or partial support of an IOOS activity, asset, model, or product. <br><br>Examples:{::nomarkdown}<ul> <li>sponsor</li> <li> sponsor,collaborator</li></ul>{:/}  | global | recommended
-contributor_email | IOOS | Email addresses of the individuals or institutions that contributed to the creation of this data. Multiple emails should be given in CSV format, and presented in the same order and number as the names in `contributor_names`. | global | recommended
+contributor_role_vocabulary | IOOS | The URL of the controlled vocabulary used for the `contributor_role` attribute. The default is "http://vocab.nerc.ac.uk/collection/G04/current/". | global | recommended
 contributor_url | IOOS | The URL of the individuals or institutions that contributed to the creation of this data. Multiple URLs should be given in CSV format, and presented in the same order and number as the names in `contributor_names`. | global | recommended
-publisher_name  | ACDD | Name of the person or group that distributes the data files. Use the conventions described above when identifying persons and/or institutions when applicable. | global | **required**
-publisher_country | IOOS | Country of the person or organization that distributes the data.   | global | **required**
-publisher_email  | ACDD | The email address of the person or group that distributes the data files. | global | **required**
-publisher_url  | ACDD/IOOS | URL of the person or group that distributes the data files. Note that this should always reference an institution URL, and not a personal URL, even if **`publisher_type=person`**.   | global | **required**
+creator_address | IOOS | Street address of the person or organization that collected the data.  | global | recommended
+creator_city | IOOS | City of the person or organization that collected the data.  | global | recommended
+creator_country | IOOS | Country of the person or organization that operates a platform or network, which collected the observation data. | global | **required**
+creator_email  | ACDD | Email address of the person or institution that collected the data. | global | **required**
+creator_institution  | ACDD | Institution that collected the data. This should be specified even if it matches the value of **`publisher_institution`**, or if **`creator_type`** is institution. | global | **required**
+creator_name  | ACDD | Name of the person or organization that collected the data. | global | recommended
+creator_phone | IOOS | The phone number of the person or group that collected the data. | global | recommended
+creator_sector | IOOS | [IOOS classifier](http://mmisw.org/ont/ioos/sector) that best describes the platform (network) operator's societal sector. <br><br>Example:<br> **`creator_sector = "academic"`** | global |**required**
+creator_state | IOOS | State of the person or organization that collected the data.  | global | recommended
+creator_type | ACDD | Specifies type of creator with one of the following: 'person', 'group', 'institution', or 'position'. If this attribute is not specified, the creator is assumed to be a person.  | global | recommended
+creator_url  | ACDD/IOOS | The URL of the *institution* that collected the data. Note that this should always reference an institution URL, and not a personal URL, even if **`creator_type=person`**.  | global | **required**
+creator_zipcode | IOOS | ZIP code of the person or organization that collected the data.  | global | recommended
+institution  | ACDD | The institution of the person or group that collected the data. | global | recommended
 publisher_address | IOOS | Street address of the person or organization that distributes the data.   | global | recommended
 publisher_city | IOOS | City of the person or organization that distributes the data.   | global | recommended
-publisher_zipcode | IOOS | ZIP code of the person or organization that distributes the data.   | global | recommended
-publisher_state | IOOS | State of the person or organization that distributes the data.   | global | recommended
+publisher_country | IOOS | Country of the person or organization that distributes the data.   | global | **required**
+publisher_email  | ACDD | The email address of the person or group that distributes the data files. | global | **required**
+publisher_name  | ACDD | Name of the person or group that distributes the data files. Use the conventions described above when identifying persons and/or institutions when applicable. | global | **required**
 publisher_phone | IOOS | The phone number of the person or group that distributes the data files.  | global | recommended
+publisher_state | IOOS | State of the person or organization that distributes the data.   | global | recommended
 publisher_type | ACDD | Specifies type of publisher with one of the following: 'person', 'group', 'institution', or 'position'. If this attribute is not specified, the publisher is assumed to be a person. | global | recommended
+publisher_url  | ACDD/IOOS | URL of the person or group that distributes the data files. Note that this should always reference an institution URL, and not a personal URL, even if **`publisher_type=person`**.   | global | **required**
+publisher_zipcode | IOOS | ZIP code of the person or organization that distributes the data.   | global | recommended
 
 #### Example
 
@@ -119,35 +120,35 @@ Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.senso
 
 ```
 NC_GLOBAL {
-    creator_institution     California Polytechnic State University, Center for Coastal Marine Sciences
-    creator_email           marineops at calpoly.edu
-    creator_country         USA
-    creator_url             http://www.marine.calpoly.edu/
-    creator_name            California Polytechnic State University, Center for Coastal Marine Sciences
-    creator_sector          academic
-    creator_type            institution
-    institution             California Polytechnic State University, Center for Coastal Marine Sciences
+    creator_country      USA
+    creator_email        marineops at calpoly.edu
+    creator_institution  California Polytechnic State University, Center for Coastal Marine Sciences
+    creator_name         California Polytechnic State University, Center for Coastal Marine Sciences
+    creator_sector       academic
+    creator_type         institution
+    creator_url          http://www.marine.calpoly.edu/
+    institution          California Polytechnic State University, Center for Coastal Marine Sciences
 }
 ```
 
 ```
 NC_GLOBAL {
-    contributor_name                Central & Northern California Ocean Observing System (CeNCOOS),Axiom Data Science
-    contributor_role                contributor,processor
-    contributor_email               cencoos_communications@mbari.org,feedback@axiomdatascience.com
-    contributor_url                 http://cencoos.org/,https://www.axiomdatascience.com
-    contributor_role_vocabulary     CI_RoleCode
+    contributor_email            cencoos_communications@mbari.org,feedback@axiomdatascience.com
+    contributor_name             Central & Northern California Ocean Observing System (CeNCOOS),Axiom Data Science
+    contributor_role             contributor,processor
+    contributor_url              http://cencoos.org/,https://www.axiomdatascience.com
+    contributor_role_vocabulary  http://vocab.nerc.ac.uk/collection/G04/current/
 }
 ```
 
 ```
 NC_GLOBAL {
-    publisher_name          California Polytechnic State University, Center for Coastal Marine Sciences
-    publisher_country       USA
-    publisher_email         marineops at calpoly.edu
-    publisher_url           http://www.marine.calpoly.edu/
-    publisher_institution   California Polytechnic State University, Center for Coastal Marine Sciences
-    publisher_type          institution
+    publisher_country      USA
+    publisher_email        marineops at calpoly.edu
+    publisher_institution  California Polytechnic State University, Center for Coastal Marine Sciences
+    publisher_name         California Polytechnic State University, Center for Coastal Marine Sciences
+    publisher_type         institution
+    publisher_url          http://www.marine.calpoly.edu/
 }
 ```
 
@@ -155,8 +156,9 @@ NC_GLOBAL {
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
+geophysical_variable:_FillValue<br>geospatial_variable:_FillValue | CF | This value is considered to be a special value that indicates undefined or missing data, and is returned when reading values that were not written. The type of this variable should match the type of the unpacked variable data. {::nomarkdown}<ul>  <li>time:_FillValue = 0.0f    <li>lat:_FillValue = 0.0f    <li>on:_FillValue = 0.0f    <li>z:_FillValue = 0.0f    <li>sea_water_temperature:_FillValue = 0.0f</ul>{:/} | variable | recommended
+geophysical_variable:missing_value<br>geospatial_variable:missing_value | CF | This should always be equal to the `_FillValue` attribute and both are used for legacy library support. {::nomarkdown}<ul>  <li>time:missing_value = 0.0f    <li>lat:missing_value = 0.0f    <li>on:missing_value = 0.0f    <li>z:missing_value = 0.0f    <li>sea_water_temperature:missing_value = 0.0f</ul>{:/} | variable | recommended
 geophysical_variable:platform | ACDD/NCEI | This attribute can be used with a geophysical variable to identify the platform that was used in the collection of the data. The value of the attribute should be set to another variable which contains the details of the platform. See the <em>platform_variable</em> attributes below. <br><br>For an example, see the [NCEI Templates timeSeries example (Stearns Wharf)](https://data.nodc.noaa.gov/thredds/catalog/ioos/sccoos/stearns_wharf/catalog.html?dataset=ioos/sccoos/stearns_wharf/stearns_wharf-2013.nc). | variable | **required**
-geophysical_variable:_FillValue<br>geospatial_variable:_FillValue | CF | This value is considered to be a special value that indicates undefined or missing data, and is returned when reading values that were not written: {::nomarkdown}<ul>  <li>time:_FillValue = 0.0f    <li>lat:_FillValue = 0.0f    <li>on:_FillValue = 0.0f    <li>z:_FillValue = 0.0f    <li>sea_water_temperature:_FillValue = 0.0f</ul>{:/} | variable | recommended
 geophysical_variable:standard_name | CF | Standardized field which uses the [CF Standard Names](http://www.cfconventions.org/documents.html/). If a variables does not have an existing standard_name in the CF-managed list, this attribute should not be used. In these cases, a standard name can be proposed to the CF community for consideration and acceptance. | variable | **required**
 geophysical_variable:units  | CF | Required for most all variables that represent dimensional quantities. The value should come from [**`udunits`**](http://www.unidata.ucar.edu/software/udunits/) authoritative vocabulary, which is documented in the CF standard name table with it's corresponding standard name. The **`udunits`** package includes a file `udunits.dat` which lists its supported unit names. | variable | **required**
 instrument_variable:discriminant | IOOS | The value of a **`discriminant`** applies to the like-named field in the IOOS SOS Asset Identifier URN; it ensures that in case of multiple sensors measuring the same **`observedProperty`**, each sensor has a unique ID. <br><br>Examples: {::nomarkdown}<ul> <li>sea_water_temperature:<b>top</b> <li> sea_water_temperature:<b>bottom</b> <li> sea_water_temperature:<b>nortek_adp_514</b></ul>{:/}| variable | **required**, if applicable
@@ -168,12 +170,13 @@ Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.senso
 ```
 Attributes {
     air_temperature {
-        String platform "station";
-        Float64 _FillValue -9999.0;
-        String standard_name "air_temperature";
-        String long_name "Air Temperature";
-        String urn "http://mmisw.org/ont/cf/parameter/air_temperature";
-        String units "degree_Celsius";
+        _FillValue     -9999.0
+        missing_value  -9999.0
+        long_name      Air Temperature
+        platform       station
+        standard_name  air_temperature
+        units          degree_Celsius
+        urn            http://mmisw.org/ont/cf/parameter/air_temperature
     }
 }
 ```
@@ -184,12 +187,12 @@ See the `station` variable below.
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
+platform (global attribute) | ACDD/NCEI |  Name of the *type* of platform(s) that supported the sensor data used to create this data set or product. Platforms can be of any type, including satellite, ship, station, aircraft or other. The controlled vocabulary must be indicated in the `platform_vocabulary` field. <br><br>Example (global variable): {::nomarkdown}<ul> <li> <b><code>platform "buoy";</code></b> <li><b><code>platform_vocabulary "IOOS Platform Vocabulary";</code></b> </ul>{:/} | global | **required**
 platform_variable:ioos_code | IOOS | Provides IOOS asset identification similar to **`wmo_code`** and **`nodc_code`**. The attribute is a URN that should follow the "[IOOS Convention for Asset Identification](http://ioos.github.io/conventions-for-observing-asset-identifiers/ioos-assets-v1-0.html)" with a general pattern of _**`urn:ioos:asset_type:authority:label[:discriminant]`**_.  <br><br>Examples: {::nomarkdown}<ul> <li> <b><code>urn:ioos:glider:wmo:4801902:20160218T1913Z</code></b> <li><b><code>urn:ioos:station:us.glos:45024</code></b> </ul>{:/} <br>**NOTE:** interchangeable with **`platform_variable:short_name`** | variable | **required**
 platform_variable:long_name | NCEI Templates | Provide a descriptive, long name for this variable. | variable | **required**
 platform_variable:short_name | IOOS | Provide a short name for the platform.  Similar to ID, a **`short_name`** can be any unique string of characters that does not include blanks. <br><br>Examples: {::nomarkdown}<ul> <li> <b><code>station_1:short_name = “carquinez”</code></b> <li><b><code>station_1:short_name = “cb0102</code></b> </ul>{:/} <br>**NOTE:** interchangeable with **`platform_variable:ioos_code`** | variable | **required**
 platform_variable:type | IOOS | In  conjunction with a **`platform_vocabulary`** attribute, identifies platform's type as defined in the [IOOS Platform Categories vocabulary](https://mmisw.org/ont/ioos/platform), or [SeaVoX Platform Categories vocabulary](http://vocab.nerc.ac.uk/collection/L06/current/"), or any other vocabulary. The URL of the actual vocabulary must be published in the **`platform_vocabulary`** global attribute. <br><br>Alternatively, the **`platform`** and **`platform_vocabulary`** pair of attributes may be used; however, this option is not recommended (see details in the **`platform_vocabulary`** description.) | variable | **required**
 platform_vocabulary | ACDD | Controlled vocabulary for the names used in the "platform" attribute.<br><br> It is recommended that this attribute is used in conjunction with the **`platform_variable:type`** attribute. In that case, the recommended value for the **`platform_vocabulary`** attribute is a URL to either the [IOOS Platform Category vocabulary](http://mmisw.org/ont/ioos/platform), or [SeaVoX Platform Categories vocabulary](http://vocab.nerc.ac.uk/collection/L06/current/). <br><br>Example:<br> **`platform_vocabulary = "http://mmisw.org/ont/ioos/platform"`**<br><br>As an alternative (although not recommended), a NetCDF file may follow the NCEI Template v2.0, which suggests the use of "NASA GCMD Platform Keywords Version 8.1" string as the fixed value for the **`platform_vocabulary`**, and does not stipulate for the **`platform_variable:type`**. Instead, the actual type of the platform must be placed in the global **`platform`** attribute as described in the Science Keyword Rules (http://gcmd.nasa.gov/learn/rules.html) for NASA Global Change Master Directory (GCMD) Keywords (http://gcmd.nasa.gov/learn/keywords.html). <br><br>Example:<br> **`platform: In Situ Ocean-based Platforms > MOORINGS`** | global | **required**
-platform (global attribute) | ACDD/NCEI |  Name of the *type* of platform(s) that supported the sensor data used to create this data set or product. Platforms can be of any type, including satellite, ship, station, aircraft or other. The controlled vocabulary must be indicated in the `platform_vocabulary` field. <br><br>Example (global variable): {::nomarkdown}<ul> <li> <b><code>platform "buoy";</code></b> <li><b><code>platform_vocabulary "IOOS Platform Vocabulary";</code></b> </ul>{:/} | global | **required**
 
 #### Example
 
@@ -198,20 +201,20 @@ Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.senso
 ```
 Attributes {
     station {
-        String cf_role "timeseries_id";
-        String ioos_category "Identifier";
-        String ioos_code "urn:ioos:station:com.axiomdatascience:57163";
-        String long_name "Morro Bay - BS1 MET";
-        String short_name "morro-bay-bs1-met";
-        String type "fixed";
+        cf_role        timeseries_id
+        ioos_category  Identifier
+        ioos_code      urn:ioos:station:edu.calpoly.marine:57163
+        long_name      Morro Bay - BS1 MET
+        short_name     morro-bay-bs1-met
+        type           fixed
     }
 }
 ```
 
 ```
 NC_GLOBAL {
-    platform_vocabulary     http://mmisw.org/ont/ioos/platform
-    platform                fixed
+    platform             fixed
+    platform_vocabulary  http://mmisw.org/ont/ioos/platform
 }
 ```
 
