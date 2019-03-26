@@ -10,11 +10,11 @@ summary:  Describes gold standard examples for various dataset types and scenari
 
 ## **Overview**
 
-The page provides links to example datasets that satisfy the [IOOS Metadata Profile v1.2](ioos-metadata-profile-v1-2.html). 
+The page provides links to example datasets that satisfy the [IOOS Metadata Profile v1.2](ioos-metadata-profile-v1-2.html).
 
-Since the IOOS standard builds off of the [**NOAA NCEI NetCDF Templates**](https://www.nodc.noaa.gov/data/formats/netcdf/), 
+Since the IOOS standard builds off of the [**NOAA NCEI NetCDF Templates**](https://www.nodc.noaa.gov/data/formats/netcdf/),
 the NCEI "Gold Standard" examples ([HTTP](https://data.nodc.noaa.gov/ncei/example/data/netcdf/), [THREDDS](https://data.nodc.noaa.gov/thredds/catalog/example/catalog.html))
-provide a great starting point. The IOOS Gold Standard Examples focus on IOOS-specific 
+provide a great starting point. The IOOS Gold Standard Examples focus on IOOS-specific
 guidelines, and can serve as templates for data providers within the organization.
 
 
@@ -33,8 +33,8 @@ Links:
 
 In this example, multiple packages are served in a single ERDDAP dataset.
 
-* [ERDDAP Dataset](http://erddap.sensors.axds.co/erddap/tabledap/ssbn7-sun2wave-sun2w-sunset-n.html) 
-* [View in CeNCOOS Data Portal](https://portal.secoora.org/?&sensor_version=v2#metadata/100058/station/data)
+* [ERDDAP Dataset](http://erddap.sensors.axds.co/erddap/tabledap/ssbn7-sun2wave-sun2w-sunset-n.html)
+* [View in SECOORA Data Portal](https://portal.secoora.org/?&sensor_version=v2#metadata/100058/station/data)
 
 ### Moored buoy, multiple packages, each with its own dataset
 
@@ -51,7 +51,3 @@ In this example, multiple packages are served in a single ERDDAP dataset.
 ### Moving station, Wave Glider
 
 *Example coming soon...*
-
-
-
-
