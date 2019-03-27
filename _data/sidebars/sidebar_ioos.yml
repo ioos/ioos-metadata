@@ -20,8 +20,8 @@ entries:
       url: /index.html#profile-versions
       output: web
 
-    - title: Gold Standard Examples
-      url: /gold-standard-examples.html
+    - title: Current Active Profile (1.2)
+      url: /ioos-metadata-profile-v1-2.html
       output: web
 
   - title: IOOS Metadata Profile Documents
@@ -52,8 +52,16 @@ entries:
           url: /ioos-metadata-profile-v1-2.html#notescaveats
           output: web
 
+        - title: Gold Standard Examples
+          url: /ioos-metadata-profile-v1-2.html#gold-standard-example-datasets
+          output: web
+
         - title: Metadata Profile Attributes
           url: /ioos-metadata-profile-v1-2.html#ioos-metadata-profile-attributes
+          output: web
+
+        - title: Rules for IOOS Asset Identifier Generation
+          url: /ioos-metadata-profile-v1-2.html#rules-for-ioos-asset-identifier-generation
           output: web
 
       - title: Version 1.1 (Deprecated)
