@@ -166,7 +166,7 @@ geophysical_variable:_FillValue<br>geospatial_variable:_FillValue | CF | This va
 geophysical_variable:missing_value<br>geospatial_variable:missing_value | CF | This should always be equal to the `_FillValue` attribute and both are used for legacy library support. {::nomarkdown}<ul>  <li>time:missing_value = -999999.0f    <li>lat:missing_value = -999999.0f    <li>lon:missing_value =-999999.0f    <li>z:missing_value = -999999.0f <li>sea_water_temperature:missing_value = Float.NaN</ul>{:/} | variable | recommended
 geophysical_variable:standard_name | CF | Standardized field which uses the [CF Standard Names](http://www.cfconventions.org/documents.html/). If a variables does not have an existing standard_name in the CF-managed list, this attribute should not be used. In these cases, a standard name can be proposed to the CF community for consideration and acceptance. | variable | **required**
 geophysical_variable:standard_name_uri | IOOS | The URI of a **`standard_name`** in the online vocabulary listed in the global **`standard_name_vocabulary`** attribute.<br><br>Example: {::nomarkdown}<ul> <li> <b><code>sea_water_temperature:standard_name_uri = "http://vocab.nerc.ac.uk/collection/P07/current/CFSN0335/"</code></b> </li>  <li> <b><code>sea_water_temperature:standard_name = "sea_water_temperature"</code></b> </li> </ul>{:/} | variable | recommended
-geophysical_variable:units  | CF | Required for most all variables that represent dimensional quantities. The value should come from [**`udunits`**](http://www.unidata.ucar.edu/software/udunits/) authoritative vocabulary, which is documented in the CF standard name table with it's corresponding standard name. The **`udunits`** package includes a file `udunits.dat` which lists its supported unit names. | variable | **required**
+geophysical_variable:units  | CF | Required for most all variables that represent dimensional quantities. The value for a geophysical variable's **`units`** attribute should match or be derived from the canonical units specified for the variable's **`standard_name`** in the CF Standard Name table. <br><br>CF units are specified by the  [**`udunits`**](http://www.unidata.ucar.edu/software/udunits/) package, which includes a file `udunits.dat` listing the valid individual unit names (e.g., "g" and "m") from which which composite **`units`** strings can be formed (e.g., "kg m-3"). <br><br>For example, all temperature standard names have canonical units of "K", but often geophysical variables that measure temperature are specified with **`units`** of `degree_Celsius` or some variant thereof. | variable | **required**
 
 #### Example
 
@@ -193,7 +193,7 @@ See the `station` variable below.
 
 The correct method for specifying platform metadata has historically been a source of confusion. The IOOS Metadata Profile aims to simplify platform metadata specification with the addition of a few global attributes (**`platform_id`** and **`platform_name`**, as well as the OceanSITES-derived **`wmo_platform_code`**) and clarification of existing standards for global attributes and the platform container variable. Data providers are encouraged to carefully review this section and upstream standards, and especially to review gold standard example datasets.
 
-**Important**: The IOOS Metadata Profile restricts datasets to include only **one platform per dataset**.  This simplifies the dataset structure significantly, allows for attribution that might otherwise be handled by variable-level attributes of the **`platform_variable`** to be replaced by the global attributes described above, and simplifies creation of aggregated datasets in ERDDAP.
+**Important**: The IOOS Metadata Profile restricts datasets to include only **one platform per dataset**.  This simplifies the dataset structure significantly, allows for attribution that might otherwise be handled by variable-level attributes of the **`platform_variable`** to be replaced by the global attributes described below, and simplifies creation of aggregated datasets of multiple individual platform datasets in ERDDAP.
 
 
 Name | Convention | Description | Type | Role
@@ -214,6 +214,15 @@ For more information about CF Discrete Sampling Geometries and associated requir
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
 platform_variable:cf_role | [CF](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/build/ch09s05.html) | Specifies the [CF sampling geometry feature type](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/build/ch09.html). Allowed values are `timeseries_id`, `profile_id`, and `trajectory_id`.  | variable | **required**
+
+#### Example
+
+**To Do: Add an example from Gold Standard datasets of proper use of cf_role.  Specifically, can we accommodate each of these featureTypes in our profile (and give an example of a couple)**
+
+```
+Excerpt from the relevant CF docs section: CF files that contain timeSeries, profile or trajectory featureTypes, should include only a single occurrence of a cf_role attribute;  CF files that contain timeSeriesProfile or trajectoryProfile may contain two occurrences, corresponding to the two levels of structure in these feature types
+
+```
 
 
 ### Platform Variable (To Remove)
