@@ -52,7 +52,7 @@ In addition to the Gold Standard datasets, there are some in-line examples highl
 
 ### Global
 
-The attributes listed below are a collection of high-level attributes recommended largely by the inherited conventions used by the IOOS Metadata Profile (CF, ACDD).  They generally describe the dataset in human-readable terms, define specific conventions used by other attributes (`standard_name_vocabulary`), or qualify other attributes (`naming_authority`).  A high-quality dataset will generally include meaningful values for all of these attributes, even though they are not all technically required according to the profile.
+The attributes listed below are a collection of high-level attributes recommended largely by the parent conventions of the IOOS Metadata Profile (CF, ACDD).  Their purpose is to describe the dataset in human-readable terms, define specific conventions used by other attributes (`standard_name_vocabulary`), or qualify other attributes (`naming_authority`).  A high-quality dataset will generally include meaningful values for all of these attributes, even though they are not all required according to the profile.
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
