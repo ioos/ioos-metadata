@@ -60,9 +60,14 @@ entries:
           url: /ioos-metadata-profile-v1-2.html#ioos-metadata-profile-attributes
           output: web
 
+        - title: Requirements for IOOS Dataset GTS Ingestion
+          url: /ioos-metadata-profile-v1-2.html#requirements-for-ioos-dataset-gts-ingestion
+          output: web
+
         - title: Rules for IOOS Asset Identifier Generation
           url: /ioos-metadata-profile-v1-2.html#rules-for-ioos-asset-identifier-generation
           output: web
+
 
       - title: Version 1.1 (Deprecated)
         output: web

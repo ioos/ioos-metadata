@@ -223,46 +223,39 @@ platform_variable:cf_role | [CF](http://cfconventions.org/Data/cf-conventions/cf
 
 ```
 Excerpt from the relevant CF docs section: CF files that contain timeSeries, profile or trajectory featureTypes, should include only a single occurrence of a cf_role attribute;  CF files that contain timeSeriesProfile or trajectoryProfile may contain two occurrences, corresponding to the two levels of structure in these feature types
-
 ```
 
+### GTS Ingest and QARTOD
 
-### Platform Variable (to be removed)
+A collection of variables that relate to requirements for IOOS datasets to be ingested into the GTS, including requirements for data quality control flag variables, following the [QARTOD](https://ioos.noaa.gov/project/qartod/) guidelines.  More information on the specifics of the GTS ingest process are available in the [Requirements for IOOS Datasets to be Ingested to the GTS](#requirements-for-ioos-dataset-gts-ingestion) section below.  
 
-The following `platform_variable` attributes will be removed and replaced by corresponding global attributes listed in the [Platform](#platform) section above.  The table below is retained for reference purposes until the Profile 1.2 is finalized and agreed upon.
-
-`ioos_code` will no longer be used in this profile.  Asset Identifiers will be derived/inferred based on global attribute values.  See [rules](#rules-for-ioos-asset-identifier-generation) for this.  
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
-~~platform_variable:ioos_code~~ | ~~IOOS~~ | ~~Provides IOOS asset identification similar to **`wmo_code`** and **`nodc_code`**. The attribute is a URN that should follow the "[IOOS Convention for Asset Identification](http://ioos.github.io/conventions-for-observing-asset-identifiers/ioos-assets-v1-0.html)" with a general pattern of _**`urn:ioos:asset_type:authority:label[:discriminant]`**_.  <br><br>Examples: {::nomarkdown}<ul> <li> <b><code>urn:ioos:glider:wmo:4801902:20160218T1913Z</code></b> <li><b><code>urn:ioos:station:us.glos:45024</code></b> </ul>{:/} <br>**NOTE:** interchangeable with **`platform_variable:short_name`**~~ | ~~variable~~ | ~~**required**~~
-~~platform_variable:long_name~~| ~~NCEI Templates~~ | ~~Provide a descriptive, long name for this variable.~~ | ~~variable~~ | ~~**required**~~
-~~platform_variable:short_name~~ | ~~IOOS~~ | ~~Provide a short name for the platform.  Similar to ID, a **`short_name`** can be any unique string of characters that does not include blanks. <br><br>Examples: {::nomarkdown}<ul> <li> <b><code>station_1:short_name = “carquinez”</code></b> <li><b><code>station_1:short_name = “cb0102</code></b> </ul>{:/} <br>**NOTE:** interchangeable with **`platform_variable:ioos_code`**~~ | ~~variable~~ | ~~**required**~~
-~~platform_variable:type~~ | ~~IOOS~~ | ~~In conjunction with a **`platform_vocabulary`** attribute, identifies platform's type as defined in the [IOOS Platform Categories vocabulary](https://mmisw.org/ont/ioos/platform), or [SeaVoX Platform Categories vocabulary](http://vocab.nerc.ac.uk/collection/L06/current/"), or any other vocabulary. The URL of the actual vocabulary must be published in the **`platform_vocabulary`** global attribute. <br><br>Alternatively, the **`platform`** and **`platform_vocabulary`** pair of attributes may be used; however, this option is not recommended (see details in the **`platform_vocabulary`** description.)~~ | ~~variable~~ | ~~**required**~~
-
-
+gts_ingest | IOOS |  **Global** attribute that indicates the data provider intends this dataset to be published on the GTS.<br><br>To publish a dataset to the GTS, this attribute must have a value of `true`. | global | **required**, if applicable
+gts_ingest | IOOS |  **Variable** attribute, used in concert with the global equivalent, that indicates a variable's data should be published to the GTS.<br><br>To publish a dataset to the GTS, this attribute must have a value of `true`. <br><br>More information on the handling of variables with this attribute set to `true` can be found in the [GTS requirements](#requirements-for-ioos-dataset-gts-ingestion) section below. | variable | **required**, if applicable
+*_qc_agg | IOOS |  **Not an Attribute**: **`_qc_agg`** is the 'rollup' QC flag variable indicating whether or not specific measurements recorded in the corresponding **`geophysical_variable`** have passed QARTOD quality control tests.<br><br>For more information on the **`_qc_agg`** variable, refer to the [GTS requirements](#requirements-for-ioos-dataset-gts-ingestion) section below.  <br><br>Examples: {::nomarkdown}<ul> <li> <b><code>air_temperature</code></b> <li><b><code>air_temperature_qc_agg</code></b> </ul>{:/} | N/A | **required**, if applicable
 
 #### Example
 
-Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
+Taken from [some compliant dataset we will have available](https://standards.sensors.ioos.us/erddap/).
 
 ```
-Attributes {
-    station {
-        cf_role        timeseries_id
-        ioos_category  Identifier
-        ioos_code      urn:ioos:station:edu.calpoly.marine:57163
-        long_name      Morro Bay - BS1 MET
-        short_name     morro-bay-bs1-met
-        type           fixed
-    }
+NC_GLOBAL {
+    wmo_platform_code    42124
+    gts_ingest           true
 }
 ```
 
 ```
-NC_GLOBAL {
-    platform             fixed
-    platform_vocabulary  http://mmisw.org/ont/ioos/platform
+Attributes {
+    air_temperature {
+        gts_ingest     true
+        standard_name  air_temperature
+        units          degree_Celsius
+    }
+    air_temperature_qc_agg {
+    }
 }
 ```
 
@@ -312,33 +305,77 @@ Attributes {
 
 }
 ```
+<br><br>
 
+## Requirements for IOOS Dataset GTS Ingestion
+
+IOOS partners with NOAA [NDBC](https://www.ndbc.noaa.gov/) to ingest datasets to the WMO [Global Telecommunication System(GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  This process will leverage an IOOS data provider's ERDDAP server as a data interchange server.  In order to allow NDBC to query and filter the correct subset of datasets in an ERDDAP server to process, **data providers must ensure the following dataset attribution requirements are met**.  
+
+Refer to the tables above for detailed descriptions of the attributes shown below.<br><br>
+
+#### For NDBC to pull data for a dataset to the GTS:
+
+1. The dataset should be in ERDDAP
+1. The dataset should have a global attribute called **`wmo_platform_code`**, with the WMO ID as the value
+1. The dataset should have a global attribute called **`gts_ingest`** with a value of **`true`**
+1. Any variables the RA wants to push to NDBC should have an attribute called **`gts_ingest`** with value of **`true`**
+1. These variables should have a **`standard_name`** attribute with a value that's a valid CF parameter name
+1. The variable should have a **`units`** attribute, with a value that's a valid unit (that is, the units are convertible to the CF canonical unit using the [**`udunits`**](http://www.unidata.ucar.edu/software/udunits/) library)
+1. The dataset should include a variable with a value of the QC aggregate flag.<br><br>
+
+#### Requirements for the QC aggregate (aka rollup) flag:
+
+Currently, RAs are pushing XML to NDBC, so they can exclude "QC fail" values. ERDDAP datasets will have all the data, including observations marked "qc fail", so NDBC needs a method to infer the dataset variable that contains the QC aggregate/rollup flag for the corresponding observation variable.  Therefore:
+
+1. The value of this QC aggregate flag variable is the UNESCO/QARTOD v2 convention (9=missing, 2=not eval, 1=pass, 3=suspect, 4=fail)
+1. The name of this variable should be **`geophysical_variable + _qc_agg`** (for example, **`air_temperature`** and **`air_temperature_qc_agg`**).  ERDDAP is case sensitive for variable names, so the valid QC aggregate variable should always be **`_qc_agg`**, not **`_QC_AGG`**, regardless of capitalization of the variable itself.
+1. NDBC should exclude any values that are QC fail (and missing) but include everything else (not eval, pass, suspect)
+
+Additional **`_qc_agg`** info:
+
+* Pick the worst result out of all of the individual tests and promote that. It's called a "Summary Flag" in the [QARTOD Data Flags](https://github.com/axiom-data-science/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) manual (pg 3).
+* Here's how it's done in the [ioos_qc library](https://github.com/axiom-data-science/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) with the [corresponding test](https://github.com/axiom-data-science/ioos_qc/blob/master/tests/test_qartod.py#L766-L783).  
+* Here is an example dataset that follows these requirements: [https://erddap.sensors.axds.co/erddap/tabledap/humboldt-1.html](https://erddap.sensors.axds.co/erddap/tabledap/humboldt-1.html)
+
+Notes:
+
+* Although having **`gts_ingest`** on both the dataset itself and each of its variables is redundant, it allows for more efficient querying across a large ERDDAP server
+* Some of the data that NDBC pulls never makes it to the GTS, but it still used in other NDBC products
+* If you set **`gts_ingest`** on a variable the NDBC doesn't care about, NDBC will just ignore it.
+* RAs may publish information about individual QC tests, but NDBC doesn't care about this. They only want to know about the rollup/aggregate flag.  
+
+<br><br>
 
 ## Rules for IOOS Asset Identifier Generation
 
-The [IOOS Asset Identifier 1.0](https://ioos.github.io/conventions-for-observing-asset-identifiers/ioos-assets-v1-0.html) can be constructed from the Metadata Profile attributes as described below. <br><br>  
+For reference, the [IOOS Asset Identifier 1.0](https://ioos.github.io/conventions-for-observing-asset-identifiers/ioos-assets-v1-0.html) is composed of the following components:
 
-For reference, the Asset Identifier is composed of the following components:
+Asset Identifier = **`urn:ioos:asset_type:authority:label[:component][:discriminant][#functional_parameters]``**
 
-Asset Identifier = <code><b>urn:ioos:asset_type:authority:label[:component][:discriminant][#functional_parameters]</b></code><br><br>
+The IOOS Asset Identifier can be constructed by combining the Metadata Profile attributes according to their definitions to match the above pattern.<br><br>
+
+**Rules for generating the Asset Identifier from IOOS Metadata Profile attribution:**
 
 If **`platform_id`** present:
 
-Asset Identifier = <code><b>'urn:ioos:' + platform + ':' + naming_authority + ':' + platform_id</b></code><br><br>
+Asset Identifier = **`'urn:ioos:' + platform + ':' + naming_authority + ':' + platform_id`**<br><br>
 
 If **`platform_id`** not present:
 
-Asset Identifier = <code><b>'urn:ioos:' + platform + ':' + naming_authority + ':' + id</b></code><br><br>
+Asset Identifier = **`'urn:ioos:' + platform + ':' + naming_authority + ':' + id`**<br><br>
 
 For datasets with a **`wmo_platform_code`** global attribute, a second Asset Identifier is also assumed, according to the following rules:
 
-WMO Asset Identifier = <code><b>'urn:ioos:' + platform + ':wmo:' + wmo_platform_code</b></code><br><br>
+WMO Asset Identifier = **`'urn:ioos:' + platform + ':wmo:' + wmo_platform_code`**
 
-This means it is possible for a single dataset to have two valid IOOS Asset Identifiers.  It is also possible to define as many custom global 'id' attributes as necessary.  For example, RAs may define their own identification scheme outside those described here, or, if there is another organization (such as NCEI) for which an id is appropriate, it may be included as well (e.g. **`ncei_id = 123456789`** or  **`ncei_accession = 123456789`**).  While these won't technically be considered to be IOOS Asset Identifiers, there is still the opportunity to identify datasets using community-agreed-upon global identifier attributes.
+This means it is possible for a single dataset to have two valid IOOS Asset Identifiers.  It is also possible to define as many custom global 'id' attributes as necessary.  For example, RAs may define their own identification scheme outside those described here, or, if there is another organization (such as NCEI) for which an id is appropriate, it may be included as well (e.g. **`ncei_id = 123456789`** or  **`ncei_accession = 123456789`**).  While these won't technically be considered to be IOOS Asset Identifiers, there is still the opportunity to identify datasets using community-agreed-upon global identifier attributes.<br><br>
 
-Additional considerations regarding IOOS Asset Identifiers:
+**Additional considerations regarding IOOS Asset Identifiers:**
 
 * At the moment, the specification constrains the valid **`asset_type`**s to be: glider, station, network, sensor, and survey.  For the purposes of the IOOS Metadata Profile, the values of **`platform'** can be more broad, however the resulting Asset Identifiers may not be valid according to that specification.
 
 * If an **`instrument_variable`** is defined for the dataset, it becomes possible for each data variable associated with it (via the **`:instrument`** variable attribute) to have its own Asset Identifier that is more fully qualified than the global-variable-defined dataset Asset Identifier described above.  See the [documentation](#instrument) for **`instrument_variable:component`** and **`instrument_variable:discriminant`** for details.
-<br>
+
+IOOS Asset Identifier rules for a dataset with variables that include an **`instrument_variable`** reference:
+
+Asset Identifier = **`'urn:ioos:' + platform + ':' + naming_authority + ':' + platform_id + ':' + instrument_variable:component + ':' + instrument_variable:discriminant`**<br><br>
