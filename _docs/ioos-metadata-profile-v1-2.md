@@ -14,7 +14,7 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 |:--- |:--- |:--- |
 | 1.0 | [Initial version based on the NODC Templates 1.1 and ACDD 1.1](./ioos-metadata-profile-v1-0.html) | 2016-10-01 |
 | 1.1 | [Updated version based on the NCEI Templates 2.0 and ACDD 1.3](./ioos-metadata-profile-v1-1.html) | 2016-11-01 |
-| **1.2** |**Present Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `info_url` <br>* Make `creator_institution`, `creator_url`, and `publisher_url` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary`<br>* Make `contributor_name`, `contributor_role`, and `institution` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset <br>* Clarify use of `platform` variable, add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_uri` <br> * Add `instrument_variable:component`| **2019-05-02** |
+| **1.2** |**Present Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `info_url` <br>* Make `creator_institution`, `creator_url`, `license`, `publisher_url`, and `summary` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary` (recommended)<br>* Make `contributor_name`, `contributor_role`, `institution`, and `publisher_name` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset; clarify use of 'Platform' variable and related `platform` global and variable attributes <br> * Add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_uri` <br> * Add `instrument_variable:component` <br> * Add `flag_method` and `references` for QARTOD flag variable description <br> * Add `gts_ingest` to indicate datasets and variables intended for GTS harvest | **2019-05-02** |
 
 
 ## Notes/Caveats
@@ -115,7 +115,7 @@ publisher_city | IOOS | City of the person or organization that distributes the 
 publisher_country | IOOS | Country of the person or organization that distributes the data.   | global | **required**
 publisher_email  | ACDD | The email address of the person or group that distributes the data files. | global | **required**
 publisher_institution  | ACDD | Institution that distributes the data. This should be specified even if **`publisher_type`** is institution (in which case **`publisher_name`** would have an identical value). | global | **required**
-publisher_name  | ACDD | Name of the person or group that distributes the data files. <br><br>Follow the guidance described in the **`publisher_type`** attribute for how to populate this field depending on whether a person, institution, group, or position. | global | **required**
+publisher_name  | ACDD | Name of the person or group that distributes the data files. <br><br>Follow the guidance described in the **`publisher_type`** attribute for how to populate this field depending on whether a person, institution, group, or position. | global | recommended
 publisher_phone | IOOS | The phone number of the person or group that distributes the data files.  | global | recommended
 publisher_state | IOOS | State of the person or organization that distributes the data.   | global | recommended
 publisher_type | ACDD | Specifies type of publisher with one of the following: 'person', 'group', 'institution', or 'position'. If this attribute is not specified, the publisher is assumed to be a person. | global | recommended
@@ -225,39 +225,64 @@ platform_variable:cf_role | [CF](http://cfconventions.org/Data/cf-conventions/cf
 Excerpt from the relevant CF docs section: CF files that contain timeSeries, profile or trajectory featureTypes, should include only a single occurrence of a cf_role attribute;  CF files that contain timeSeriesProfile or trajectoryProfile may contain two occurrences, corresponding to the two levels of structure in these feature types
 ```
 
-### GTS Ingest and QARTOD
+### Quality Control/QARTOD
 
-A collection of variables that relate to requirements for IOOS datasets to be ingested into the GTS, including requirements for data quality control flag variables, following the [QARTOD](https://ioos.noaa.gov/project/qartod/) guidelines.  More information on the specifics of the GTS ingest process are available in the [Requirements for IOOS Datasets to be Ingested to the GTS](#requirements-for-ioos-dataset-gts-ingestion) section below.  
+Guidance for implementing [QARTOD](https://ioos.noaa.gov/project/qartod/) quality control flag variables in a standardized fashion.  QARTOD flag variables are associated with data variables using the CF 'Ancillary Variables' approach.  More information on this is available in [CF Chapter 3.4](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data).  The **`flag_method`** and **`references`** attributes listed in the table below are intended to be used as extensions to the existing CF **`status_flag`** standard name approach to representing the 'quality or other status of a data variable'.  Describing the CF **`status_flag`** design is beyond the scope here, although it is well explained in the CF documentation in: [Chapter 3.5 Flags](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#flags), and [Appendix C: Standard Name Modifiers](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#standard-name-modifiers).
+
+
+Name | Convention | Description | Type | Role
+:--------- | :-------: | :------------------- | :--------: | :-------:
+ancillary_variables | CF | From [CF Chapter 3.4](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data): <br> <br> When one data variable provides metadata about the individual values of another data variable it may be desirable to express this association by providing a link between the variables. For example, instrument data may have associated measures of uncertainty. The attribute **`ancillary_variables`** is used to express these types of relationships. It is a string attribute whose value is a blank separated list of variable names. The nature of the relationship between variables associated via ancillary_variables must be determined by other attributes. | variable | **required**, if applicable
+flag_method | IOOS | Identifies the type of QARTOD test represented by this variable.  Values and meanings of the data found in this variable are defined by the attributes **`flag_values`** or **`flag_masks`** and **`flag_meanings`**, as defined in the [CF guidelines](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#flags).  Values of `flag_method` are constrained by a vocabulary published here: _________________.  | variable | **required**, if applicable
+references | CF | Published or web-based references that describe the data or methods used to produce it. Recommend URIs (such as a URL or DOI) for papers or other references.  For QARTOD, this should be used to refer by URI to a resource that describes the test configuration, parameters used, etc. | variable | **required**, if applicable
+
+#### Example
+
+Source: Big Carlos Pass ERDDAP Gold-Standard [dataset](http://erddap.sensors.axds.co/erddap/tabledap/big-carlos-pass-active.html).  **NOTE: this link is dead**
+
+```
+air_temperature {
+  String ancillary_variables "air_temperature_can_name_this_whatever_you_want air_temperature_flat_line_test";
+  String long_name "Air Temperature";
+  String standard_name "air_temperature";
+  String units "degree_Celsius";
+}
+air_temperature_can_name_this_whatever_you_want {
+  String flag_meanings "PASS NOT_EVALUATED SUSPECT FAIL MISSING";
+  String flag_values "1, 2, 3, 4, 9";
+  String long_name "Air Temperature QARTOD Aggregate Flag";
+  String standard_name "status_flag";
+  String flag_method "qartod_aggregate";
+  String references "https://github.com/glos/glos-qartod/wiki/QARTOD-101";
+}
+air_temperature_flat_line_test {
+  String flag_meanings "PASS NOT_EVALUATED SUSPECT FAIL MISSING";
+  String flag_values "1, 2, 3, 4, 9";
+  String long_name "Air Temperature QARTOD Flat Line Test Flag";
+  String standard_name "status_flag";
+  String flag_method "qartod_flat_line";
+  String references "https://github.com/glos/glos-qartod/wiki/QARTOD-101";
+}
+```
+
+### GTS Ingest
+
+A collection of variables that relate to requirements for IOOS datasets to be ingested into the GTS.   and a description of the specifics of the GTS ingest process used by IOOS is available in the [Requirements for IOOS Datasets to be Ingested to the GTS](#requirements-for-ioos-dataset-gts-ingestion) section below.  
 
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
 gts_ingest | IOOS |  **Global** attribute that indicates the data provider intends this dataset to be published on the GTS.<br><br>To publish a dataset to the GTS, this attribute must have a value of `true`. | global | **required**, if applicable
 gts_ingest | IOOS |  **Variable** attribute, used in concert with the global equivalent, that indicates a variable's data should be published to the GTS.<br><br>To publish a dataset to the GTS, this attribute must have a value of `true`. <br><br>More information on the handling of variables with this attribute set to `true` can be found in the [GTS requirements](#requirements-for-ioos-dataset-gts-ingestion) section below. | variable | **required**, if applicable
-*_qc_agg | IOOS |  **Not an Attribute**: **`_qc_agg`** is the 'rollup' QC flag variable indicating whether or not specific measurements recorded in the corresponding **`geophysical_variable`** have passed QARTOD quality control tests.<br><br>For more information on the **`_qc_agg`** variable, refer to the [GTS requirements](#requirements-for-ioos-dataset-gts-ingestion) section below.  <br><br>Examples: {::nomarkdown}<ul> <li> <b><code>air_temperature</code></b> <li><b><code>air_temperature_qc_agg</code></b> </ul>{:/} | N/A | **required**, if applicable
 
 #### Example
 
 Taken from [some compliant dataset we will have available](https://standards.sensors.ioos.us/erddap/).
 
 ```
-NC_GLOBAL {
-    wmo_platform_code    42124
-    gts_ingest           true
-}
+To Do: Add example dataset here
 ```
 
-```
-Attributes {
-    air_temperature {
-        gts_ingest     true
-        standard_name  air_temperature
-        units          degree_Celsius
-    }
-    air_temperature_qc_agg {
-    }
-}
-```
 
 
 ### Instrument
@@ -311,7 +336,7 @@ Attributes {
 
 IOOS partners with NOAA [NDBC](https://www.ndbc.noaa.gov/) to ingest datasets to the WMO [Global Telecommunication System(GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  This process will leverage an IOOS data provider's ERDDAP server as a data interchange server.  In order to allow NDBC to query and filter the correct subset of datasets in an ERDDAP server to process, **data providers must ensure the following dataset attribution requirements are met**.  
 
-Refer to the tables above for detailed descriptions of the attributes shown below.<br><br>
+Refer to the [GTS Ingest](#gts-ingest) table above for detailed descriptions of the attributes shown below.<br><br>
 
 #### For NDBC to pull data for a dataset to the GTS:
 
@@ -321,9 +346,13 @@ Refer to the tables above for detailed descriptions of the attributes shown belo
 1. Any variables the RA wants to push to NDBC should have an attribute called **`gts_ingest`** with value of **`true`**
 1. These variables should have a **`standard_name`** attribute with a value that's a valid CF parameter name
 1. The variable should have a **`units`** attribute, with a value that's a valid unit (that is, the units are convertible to the CF canonical unit using the [**`udunits`**](http://www.unidata.ucar.edu/software/udunits/) library)
-1. The dataset should include a variable with a value of the QC aggregate flag.<br><br>
+1. The dataset should include at a minimum for all data variables with attribute **`gts_ingest: true`** an ancillary variable representing the QARTOD aggregate flag.<br><br>
 
 #### Requirements for the QC aggregate (aka rollup) flag:
+
+***Here we need to also describe the significance of the `qartod_aggregate` `flag_method` and how it works.  Perhaps list out all of the accepted values of `flag_method` directly here...**
+
+**To be replaced:**
 
 Currently, RAs are pushing XML to NDBC, so they can exclude "QC fail" values. ERDDAP datasets will have all the data, including observations marked "qc fail", so NDBC needs a method to infer the dataset variable that contains the QC aggregate/rollup flag for the corresponding observation variable.  Therefore:
 
