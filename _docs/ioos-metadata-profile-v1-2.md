@@ -58,7 +58,7 @@ Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
 featureType | CF | CF attribute for identifying the featureType, e.g. featureType = "timeSeries". | global | **required**
 id | ACDD | An identifier for the data set, provided by and unique within its naming authority. The combination of the **`naming authority`** and the **`id`** should be globally unique, but the **`id`** can be globally unique by itself also. IDs can be URLs, URNs, DOIs, meaningful text strings, a local key, or any other unique string of characters. The **`id`** should not include blanks. | global | **required**
-info_url  | IOOS | URL for background information about this dataset. | global | **required**
+infoUrl  | IOOS | URL for background information about this dataset. | global | **required**
 keywords | ACDD | A comma separated list of key words and phrases. | global | recommended
 license  | ACDD | Describe the restrictions to data access and distribution. | global | recommended
 naming_authority  | ACDD | The organization that provides the **`id`** for the dataset. <br>The naming authority should be uniquely specified by this attribute; the combination of the **`naming_authority`** and the **`id`** should be a globally unique identifier for the dataset. A reverse-DNS naming is recommended; URIs are also acceptable. <br><br>Example:<br> **`edu.ucar.unidata`** | global | **required**
@@ -272,8 +272,8 @@ A collection of variables that relate to requirements for IOOS datasets to be in
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
-gts_ingest | IOOS |  **Global** attribute that indicates the data provider intends this dataset to be published on the GTS.<br><br>To publish a dataset to the GTS, this attribute must have a value of `true`. | global | **required**, if applicable
-gts_ingest | IOOS |  **Variable** attribute, used in concert with the global equivalent, that indicates a variable's data should be published to the GTS.<br><br>To publish a dataset to the GTS, this attribute must have a value of `true`. <br><br>More information on the handling of variables with this attribute set to `true` can be found in the [GTS requirements](#requirements-for-ioos-dataset-gts-ingestion) section below. | variable | **required**, if applicable
+gts_ingest | IOOS |  **Global** attribute that indicates the data provider intends this dataset to be published on the GTS.<br><br>To publish a dataset to the GTS, this attribute must have a value of **`true`**. | global | **required**, if applicable
+gts_ingest | IOOS |  **Variable** attribute, used in concert with the global equivalent, that indicates a variable's data should be published to the GTS.<br><br>In order to publish a variable's data to the GTS, both the global **`gts_ingest`** attribute and this variable attribute must have a value of **`true`** (in addition to further requirements). <br><br>Refer to the  [GTS requirements](#requirements-for-ioos-dataset-gts-ingestion) section below for more detail on these requirements and on the handling of these variables. | variable | **required**, if applicable
 
 #### Example
 
@@ -336,7 +336,7 @@ Attributes {
 
 IOOS partners with NOAA [NDBC](https://www.ndbc.noaa.gov/) to ingest datasets to the WMO [Global Telecommunication System(GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  This process will leverage an IOOS data provider's ERDDAP server as a data interchange server.  In order to allow NDBC to query and filter the correct subset of datasets in an ERDDAP server to process, **data providers must ensure the following dataset attribution requirements are met**.  
 
-Refer to the [GTS Ingest](#gts-ingest) table above for detailed descriptions of the attributes shown below.<br><br>
+Refer to the [GTS Ingest](#gts-ingest) and [QARTOD](#quality-controlqartod) tables above for detailed descriptions of the attributes shown below.<br><br>
 
 #### For NDBC to pull data for a dataset to the GTS:
 
@@ -345,10 +345,10 @@ Refer to the [GTS Ingest](#gts-ingest) table above for detailed descriptions of 
 1. The dataset should have a global attribute called **`gts_ingest`** with a value of **`true`**
 1. Any variables the RA wants to push to NDBC should have an attribute called **`gts_ingest`** with value of **`true`**
 1. These variables should have a **`standard_name`** attribute with a value that's a valid CF parameter name
-1. The variable should have a **`units`** attribute, with a value that's a valid unit (that is, the units are convertible to the CF canonical unit using the [**`udunits`**](http://www.unidata.ucar.edu/software/udunits/) library)
-1. The dataset should include at a minimum for all data variables with attribute **`gts_ingest: true`** an ancillary variable representing the QARTOD aggregate flag.<br><br>
+1. The variable should include an ancillary variable representing the QARTOD aggregate flag (see rules for this below)
+1. The variable should have a **`units`** attribute, with a value that's a valid unit (that is, the units are convertible to the CF canonical unit using the [**`udunits`**](http://www.unidata.ucar.edu/software/udunits/) library) <br><br>
 
-#### Requirements for the QC aggregate (aka rollup) flag:
+#### Requirements for the QARTOD Aggregate ('qartod_aggregate') or 'Rollup' Flag:
 
 ***Here we need to also describe the significance of the `qartod_aggregate` `flag_method` and how it works.  Perhaps list out all of the accepted values of `flag_method` directly here...**
 
@@ -365,13 +365,14 @@ Additional **`_qc_agg`** info:
 * Pick the worst result out of all of the individual tests and promote that. It's called a "Summary Flag" in the [QARTOD Data Flags](https://github.com/axiom-data-science/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) manual (pg 3).
 * Here's how it's done in the [ioos_qc library](https://github.com/axiom-data-science/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) with the [corresponding test](https://github.com/axiom-data-science/ioos_qc/blob/master/tests/test_qartod.py#L766-L783).  
 * Here is an example dataset that follows these requirements: [https://erddap.sensors.axds.co/erddap/tabledap/humboldt-1.html](https://erddap.sensors.axds.co/erddap/tabledap/humboldt-1.html)
+<br> <br>
 
 Notes:
 
 * Although having **`gts_ingest`** on both the dataset itself and each of its variables is redundant, it allows for more efficient querying across a large ERDDAP server
 * Some of the data that NDBC pulls never makes it to the GTS, but it still used in other NDBC products
 * If you set **`gts_ingest`** on a variable the NDBC doesn't care about, NDBC will just ignore it.
-* RAs may publish information about individual QC tests, but NDBC doesn't care about this. They only want to know about the rollup/aggregate flag.  
+* RAs may publish ancillary variables with results of individual QC tests, however NDBC will only examine contents of the 'qartod_aggregate' variable for filtering purposes for GTS harvest.  
 
 <br><br>
 
