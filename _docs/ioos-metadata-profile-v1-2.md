@@ -336,7 +336,7 @@ Attributes {
 
 IOOS partners with NOAA [NDBC](https://www.ndbc.noaa.gov/) to ingest datasets to the WMO [Global Telecommunication System(GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  This process will leverage an IOOS data provider's ERDDAP server as a data interchange server.  In order to allow NDBC to query and filter the correct subset of datasets in an ERDDAP server to process, **data providers must ensure the following dataset attribution requirements are met**.  
 
-Refer to the [GTS Ingest](#gts-ingest) and [QARTOD](#quality-controlqartod) tables above for detailed descriptions of the attributes shown below.<br><br>
+Refer to the [GTS Ingest](#gts-ingest) and [QARTOD](#quality-controlqartod) tables above for detailed descriptions of the attributes shown below.
 
 #### For NDBC to pull data for a dataset to the GTS:
 
@@ -344,35 +344,49 @@ Refer to the [GTS Ingest](#gts-ingest) and [QARTOD](#quality-controlqartod) tabl
 1. The dataset should have a global attribute called **`wmo_platform_code`**, with the WMO ID as the value
 1. The dataset should have a global attribute called **`gts_ingest`** with a value of **`true`**
 1. Any variables the RA wants to push to NDBC should have an attribute called **`gts_ingest`** with value of **`true`**
-1. These variables should have a **`standard_name`** attribute with a value that's a valid CF parameter name
+1. The variable should have a **`standard_name`** attribute with a value that's a valid CF parameter name
 1. The variable should include an ancillary variable representing the QARTOD aggregate flag (see rules for this below)
 1. The variable should have a **`units`** attribute, with a value that's a valid unit (that is, the units are convertible to the CF canonical unit using the [**`udunits`**](http://www.unidata.ucar.edu/software/udunits/) library) <br><br>
 
 #### Requirements for the QARTOD Aggregate ('qartod_aggregate') or 'Rollup' Flag:
 
-***Here we need to also describe the significance of the `qartod_aggregate` `flag_method` and how it works.  Perhaps list out all of the accepted values of `flag_method` directly here...**
+Currently, IOOS RAs push a custom XML format to NDBC for GTS ingestion, so they can exclude "QC fail" values while generating the XML. ERDDAP datasets will have all observed data, including observations marked "QC fail", so NDBC needs a means to filter QC passing and failing data from the full timeseries.  This will be accomplished using a CF "ancillary variable" that represents the QC aggregate/rollup flag for each observation variable marked for GTS ingestion, as described below.  
 
-**To be replaced:**
+**Rules governing the 'aggregate/rollup' flag variable:**
 
-Currently, RAs are pushing XML to NDBC, so they can exclude "QC fail" values. ERDDAP datasets will have all the data, including observations marked "qc fail", so NDBC needs a method to infer the dataset variable that contains the QC aggregate/rollup flag for the corresponding observation variable.  Therefore:
+1. The value of the variable is the UNESCO/QARTOD v2 convention:
+    * 9 = Missing
+    * 2 = Not Eval
+    * 1 = Pass
+    * 3 = Suspect
+    * 4 = Fail
+1. The variable should use the CF [Ancillary Data](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data) approach to indicate its association with the data variable.  Specifically, it will:
+    1. Be referenced by the data variable using the attribute: **`ancillary_variables: 'quartod_aggregate_variable_name'`** (where 'quartod_aggregate_variable_name' can be any valid CF variable name)
+    1. Include **`standard_name: status_flag`** as an attribute to indicate it represents a status/quality flag
+    1. Include an attribute **`flag_method`** where the value of **`flag_method`** contains a string indicating the relevant QARTOD test name (in this case **`qartod_aggregate`**)
+    1. Optionally include a **`references`** attribute that contains a URI to an online resource describing details of the QC test, including code and/or parameters used in calculating it.  This is more relevant to individual QC test ancillary_variables that collectively make up the aggregate/rollup variable, however it may still be included here if desired
+1. The vocabulary used for the **`flag_method`** attribute is restricted and is as follows:
+    * **`qartod_aggregate`**: the aggregate/rollup flag
+    * **`qartod_spike`**:
+    * **`qartod_climatology`**:
+    * **`qartod_flatline`**:
+    * **`...`**:
+    * **`...`**:
+1. NDBC should exclude any values that are QC fail (and missing) but include everything else (not eval, pass, suspect) <br> <br>
 
-1. The value of this QC aggregate flag variable is the UNESCO/QARTOD v2 convention (9=missing, 2=not eval, 1=pass, 3=suspect, 4=fail)
-1. The name of this variable should be **`geophysical_variable + _qc_agg`** (for example, **`air_temperature`** and **`air_temperature_qc_agg`**).  ERDDAP is case sensitive for variable names, so the valid QC aggregate variable should always be **`_qc_agg`**, not **`_QC_AGG`**, regardless of capitalization of the variable itself.
-1. NDBC should exclude any values that are QC fail (and missing) but include everything else (not eval, pass, suspect)
-
-Additional **`_qc_agg`** info:
+Additional guidance for populating the 'aggregate/rollup' flag:
 
 * Pick the worst result out of all of the individual tests and promote that. It's called a "Summary Flag" in the [QARTOD Data Flags](https://github.com/axiom-data-science/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) manual (pg 3).
 * Here's how it's done in the [ioos_qc library](https://github.com/axiom-data-science/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) with the [corresponding test](https://github.com/axiom-data-science/ioos_qc/blob/master/tests/test_qartod.py#L766-L783).  
 * Here is an example dataset that follows these requirements: [https://erddap.sensors.axds.co/erddap/tabledap/humboldt-1.html](https://erddap.sensors.axds.co/erddap/tabledap/humboldt-1.html)
 <br> <br>
 
-Notes:
+Notes on GTS ingest and QC flagging:
 
 * Although having **`gts_ingest`** on both the dataset itself and each of its variables is redundant, it allows for more efficient querying across a large ERDDAP server
 * Some of the data that NDBC pulls never makes it to the GTS, but it still used in other NDBC products
 * If you set **`gts_ingest`** on a variable the NDBC doesn't care about, NDBC will just ignore it.
-* RAs may publish ancillary variables with results of individual QC tests, however NDBC will only examine contents of the 'qartod_aggregate' variable for filtering purposes for GTS harvest.  
+* RAs may publish ancillary variables with results of individual QC tests, however NDBC will only examine contents of the **`qartod_aggregate`** variable for filtering purposes for GTS harvest.  
 
 <br><br>
 
