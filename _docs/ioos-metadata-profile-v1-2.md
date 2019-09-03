@@ -25,7 +25,7 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 * attributes with a different role in the NCEI Templates; for example, the attribute **`_FillValue`** is **required** by the NCEI Template; however, in the IOOS Profile it is listed as **recommended** only;  conversely the opposite is possible as well
 * attributes with otherwise modified or further qualified meanings/definitions
 
-1. The NCEI Templates in turn build off of the ACDD and CF conventions.  Some attributes in the IOOS Profile originate from ACDD and CF (consult the `Convention` field in the table to determine the origin of each attribute).  Links to each are below:
+1. The NCEI Templates in turn built off of the ACDD and CF conventions.  Some attributes in the IOOS Profile originate from ACDD and CF (consult the `Convention` field in the table to determine the origin of each attribute).  Links to each are below:
 * [NOAA NCEI NetCDF Templates 2.0](https://www.nodc.noaa.gov/data/formats/netcdf/v2.0/)
 * [Attribute Convention for Data Discovery 1.3](http://wiki.esipfed.org/index.php/Attribute_Convention_for_Data_Discovery_1-3)
 * [Climate and Forecast Conventions (CF) 1.7](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html)
@@ -238,16 +238,16 @@ references | CF | Published or web-based references that describe the data or me
 
 #### Example
 
-Source: Big Carlos Pass ERDDAP Gold-Standard [dataset](http://erddap.sensors.axds.co/erddap/tabledap/big-carlos-pass-active.html).  **NOTE: this link is dead**
+Source: Big Carlos Pass ERDDAP [dataset](http://erddap.secoora.org/erddap/tabledap/edu_usf_marine_comps_1407d550.html).
 
 ```
 air_temperature {
-  String ancillary_variables "air_temperature_can_name_this_whatever_you_want air_temperature_flat_line_test";
+  String ancillary_variables "air_temperature_qc_agg air_temperature_flat_line_test";
   String long_name "Air Temperature";
   String standard_name "air_temperature";
   String units "degree_Celsius";
 }
-air_temperature_can_name_this_whatever_you_want {
+air_temperature_qc_agg {
   String flag_meanings "PASS NOT_EVALUATED SUSPECT FAIL MISSING";
   String flag_values "1, 2, 3, 4, 9";
   String long_name "Air Temperature QARTOD Aggregate Flag";
@@ -361,10 +361,10 @@ Currently, IOOS RAs push a custom XML format to NDBC for GTS ingestion, so they 
     * 3 = Suspect
     * 4 = Fail
 1. The variable should use the CF [Ancillary Data](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data) approach to indicate its association with the data variable.  Specifically, it will:
-    1. Be referenced by the data variable using the attribute: **`ancillary_variables: 'quartod_aggregate_variable_name'`** (where 'quartod_aggregate_variable_name' can be any valid CF variable name)
+    1. Be referenced by the data variable using the attribute: **`ancillary_variables: 'qartod_aggregate_variable_name'`** (where 'qartod_aggregate_variable_name' can be any valid CF variable name)
     1. Include **`standard_name: status_flag`** as an attribute to indicate it represents a status/quality flag
     1. Include an attribute **`flag_method`** where the value of **`flag_method`** contains a string indicating the relevant QARTOD test name (in this case **`qartod_aggregate`**)
-    1. Optionally include a **`references`** attribute that contains a URI to an online resource describing details of the QC test, including code and/or parameters used in calculating it.  This is more relevant to individual QC test ancillary_variables that collectively make up the aggregate/rollup variable, however it may still be included here if desired
+    1. Optionally include a **`references`** attribute that contains a URI to an online resource describing details of the QC test, including code and/or parameters used in calculating it. 
 1. The vocabulary used for the **`flag_method`** attribute is restricted and is as follows:
     * **`qartod_aggregate`**: the aggregate/rollup flag
     * **`qartod_spike`**:
