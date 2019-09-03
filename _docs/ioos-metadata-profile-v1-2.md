@@ -14,7 +14,7 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 |:--- |:--- |:--- |
 | 1.0 | [Initial version based on the NODC Templates 1.1 and ACDD 1.1](./ioos-metadata-profile-v1-0.html) | 2016-10-01 |
 | 1.1 | [Updated version based on the NCEI Templates 2.0 and ACDD 1.3](./ioos-metadata-profile-v1-1.html) | 2016-11-01 |
-| **1.2** |**Present Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `infoUrl` <br>* Make `creator_institution`, `creator_url`, `license`, `publisher_url`, and `summary` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary` (recommended)<br>* Make `contributor_name`, `contributor_role`, `institution`, and `publisher_name` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset; clarify use of 'Platform' variable and related `platform` global and variable attributes <br> * Add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_uri` <br> * Add `instrument_variable:component` <br> * Add `flag_method` and `references` for QARTOD flag variable description <br> * Add `gts_ingest` to indicate datasets and variables intended for GTS harvest | **2019-05-02** |
+| **1.2** |**Present Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `infoUrl` <br>* Make `creator_institution`, `creator_url`, `license`, `publisher_url`, and `summary` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary` (recommended)<br>* Make `contributor_name`, `contributor_role`, `institution`, and `publisher_name` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset; clarify use of 'Platform' variable and related `platform` global and variable attributes <br> * Add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_uri` <br> * Add `instrument_variable:component` <br> * Add `flag_methods` and `references` for QARTOD flag variable description <br> * Add `gts_ingest` to indicate datasets and variables intended for GTS harvest | **2019-05-02** |
 
 
 ## Notes/Caveats
@@ -227,13 +227,13 @@ Excerpt from the relevant CF docs section: CF files that contain timeSeries, pro
 
 ### Quality Control/QARTOD
 
-Guidance for implementing [QARTOD](https://ioos.noaa.gov/project/qartod/) quality control flag variables in a standardized fashion.  QARTOD flag variables are associated with data variables using the CF 'Ancillary Variables' approach.  More information on this is available in [CF Chapter 3.4](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data).  The **`flag_method`** and **`references`** attributes listed in the table below are intended to be used as extensions to the existing CF **`status_flag`** standard name approach to representing the 'quality or other status of a data variable'.  Describing the CF **`status_flag`** design is beyond the scope here, although it is well explained in the CF documentation in: [Chapter 3.5 Flags](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#flags), and [Appendix C: Standard Name Modifiers](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#standard-name-modifiers).
+Guidance for implementing [QARTOD](https://ioos.noaa.gov/project/qartod/) quality control flag variables in a standardized fashion.  QARTOD flag variables are associated with data variables using the CF 'Ancillary Variables' approach.  More information on this is available in [CF Chapter 3.4](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data).  The **`flag_methods`** and **`references`** attributes listed in the table below are intended to be used as extensions to the existing CF **`status_flag`** standard name approach to representing the 'quality or other status of a data variable'.  Describing the CF **`status_flag`** design is beyond the scope here, although it is well explained in the CF documentation in: [Chapter 3.5 Flags](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#flags), and [Appendix C: Standard Name Modifiers](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#standard-name-modifiers).
 
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
 ancillary_variables | CF | From [CF Chapter 3.4](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data): <br> <br> When one data variable provides metadata about the individual values of another data variable it may be desirable to express this association by providing a link between the variables. For example, instrument data may have associated measures of uncertainty. The attribute **`ancillary_variables`** is used to express these types of relationships. It is a string attribute whose value is a blank separated list of variable names. The nature of the relationship between variables associated via ancillary_variables must be determined by other attributes. | variable | **required**, if applicable
-flag_method | IOOS | Identifies the type of QARTOD test represented by this variable.  Values and meanings of the data found in this variable are defined by the attributes **`flag_values`** or **`flag_masks`** and **`flag_meanings`**, as defined in the [CF guidelines](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#flags).  Values of `flag_method` are constrained by a vocabulary published here: _________________.  | variable | **required**, if applicable
+flag_methods | IOOS | Identifies the type of QARTOD test represented by this variable.  Values and meanings of the data found in this variable are defined by the attributes **`flag_values`** or **`flag_masks`** and **`flag_meanings`**, as defined in the [CF guidelines](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#flags).  Values of `flag_methods` are constrained by a vocabulary published here: _________________.  | variable | **required**, if applicable
 references | CF | Published or web-based references that describe the data or methods used to produce it. Recommend URIs (such as a URL or DOI) for papers or other references.  For QARTOD, this should be used to refer by URI to a resource that describes the test configuration, parameters used, etc. | variable | **required**, if applicable
 
 #### Example
@@ -252,7 +252,7 @@ air_temperature_qc_agg {
   String flag_values "1, 2, 3, 4, 9";
   String long_name "Air Temperature QARTOD Aggregate Flag";
   String standard_name "status_flag";
-  String flag_method "qartod_aggregate";
+  String flag_methods "qartod_aggregate";
   String references "https://github.com/glos/glos-qartod/wiki/QARTOD-101";
 }
 air_temperature_flat_line_test {
@@ -260,7 +260,7 @@ air_temperature_flat_line_test {
   String flag_values "1, 2, 3, 4, 9";
   String long_name "Air Temperature QARTOD Flat Line Test Flag";
   String standard_name "status_flag";
-  String flag_method "qartod_flat_line";
+  String flag_methods "qartod_flat_line";
   String references "https://github.com/glos/glos-qartod/wiki/QARTOD-101";
 }
 ```
@@ -363,9 +363,9 @@ Currently, IOOS RAs push a custom XML format to NDBC for GTS ingestion, so they 
 1. The variable should use the CF [Ancillary Data](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data) approach to indicate its association with the data variable.  Specifically, it will:
     1. Be referenced by the data variable using the attribute: **`ancillary_variables: 'qartod_aggregate_variable_name'`** (where 'qartod_aggregate_variable_name' can be any valid CF variable name)
     1. Include **`standard_name: status_flag`** as an attribute to indicate it represents a status/quality flag
-    1. Include an attribute **`flag_method`** where the value of **`flag_method`** contains a string indicating the relevant QARTOD test name (in this case **`qartod_aggregate`**)
+    1. Include an attribute **`flag_methods`** where the value of **`flag_methods`** contains a string indicating the relevant QARTOD test name (in this case **`qartod_aggregate`**)
     1. Optionally include a **`references`** attribute that contains a URI to an online resource describing details of the QC test, including code and/or parameters used in calculating it. 
-1. The vocabulary used for the **`flag_method`** attribute is restricted and is as follows:
+1. The vocabulary used for the **`flag_methods`** attribute is restricted and is as follows:
     * **`qartod_aggregate`**: the aggregate/rollup flag
     * **`qartod_spike`**:
     * **`qartod_climatology`**:
