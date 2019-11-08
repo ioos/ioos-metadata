@@ -14,7 +14,7 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 |:--- |:--- |:--- |
 | 1.0 | [Initial version based on the NODC Templates 1.1 and ACDD 1.1](./ioos-metadata-profile-v1-0.html) | 2016-10-01 |
 | 1.1 | [Updated version based on the NCEI Templates 2.0 and ACDD 1.3](./ioos-metadata-profile-v1-1.html) | 2016-11-01 |
-| **1.2** |**Present Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `info_url` <br>* Make `creator_institution`, `creator_url`, `license`, `publisher_url`, and `summary` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary` (recommended)<br>* Make `contributor_name`, `contributor_role`, `institution`, and `publisher_name` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset; clarify use of 'Platform' variable and related `platform` global and variable attributes <br> * Add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_uri` <br> * Add `instrument_variable:component` <br> * Add `flag_method` and `references` for QARTOD flag variable description <br> * Add `gts_ingest` to indicate datasets and variables intended for GTS harvest | **2019-05-02** |
+| **1.2** |**Present Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `info_url` and `Conventions`<br>* Make `creator_institution`, `creator_url`, `license`, `publisher_url`, and `summary` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary` (recommended)<br>* Make `contributor_name`, `contributor_role`, `institution`, and `publisher_name` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset; clarify use of 'Platform' variable and related `platform` global and variable attributes <br> * Add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_uri` <br> * Add `instrument_variable:component` <br> * Add `flag_method` and `references` for QARTOD flag variable description <br> * Add `gts_ingest` to indicate datasets and variables intended for GTS harvest | **2019-05-02** |
 
 
 ## Notes/Caveats
@@ -42,28 +42,32 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 
 ## Gold Standard Example Datasets
 
-Consult the [IOOS Metadata Profile "Gold Standard" example netCDF files](gold-standard-examples.html), which follow this profile and can be used as templates to generate compliant datasets.  The Gold Standard datasets are hosted in ERDDAP, however since this profile can be applied to datasets hosted in THREDDS or other comparable data servers.
+IOOS provides a collection of "Gold Standard" example datasets in ERDDAP to demonstrate implementation of this Metadata Profile.  The Gold Standard datasets can be used as templates for data providers to generate their own compliant datasets in ERDDAP, and include a fully-deployable ERDDAP instance that includes both the example data and configuration files.  Consult the links below for more information:
 
-In addition to the Gold Standard datasets, there are some in-line examples highlighting specific attribute use cases that comply with the profile.
+* [IOOS Metadata Profile "Gold Standard" Example Datasets](gold-standard-examples.html)
+* [IOOS "ERDDAP Gold Standard" GitHub Repository](https://github.com/ioos/erddap-gold-standard)
+
+In addition to the Gold Standard datasets, there are some in-line examples included below that highlight specific attribute use cases that comply with the profile.
 
 
 
 ## IOOS Metadata Profile Attributes
 
-### Global
+### Dataset Description
 
-The attributes listed below are a collection of high-level attributes recommended largely by the parent conventions of the IOOS Metadata Profile (CF, ACDD).  Their purpose is to describe the dataset in human-readable terms, define specific conventions used by other attributes (`standard_name_vocabulary`), or qualify other attributes (`naming_authority`).  A high-quality dataset will generally include meaningful values for all of these attributes, even though they are not all required according to the profile.
+The attributes listed below are a collection of high-level attributes recommended largely by the parent conventions of the IOOS Metadata Profile (CF, ACDD).  Their purpose is to describe the dataset in human-readable terms, define specific conventions used by other attributes (**`standard_name_vocabulary`**), or qualify other attributes (**`naming_authority`**).  A high-quality dataset will generally include meaningful values for all of these attributes, even though they are not all required according to the profile.
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
+Conventions| CF | A comma-separated list of the conventions that are followed by the dataset. For files that follow this version of the IOOS Metadata Profile, include the string "IOOS-1.2".<br><br>Example: {::nomarkdown}<ul><li><b><code>Conventions = "CF-1.6, ACDD-1.3, IOOS-1.2"</b></code></li></ul>{:/} | global | **required** |
 featureType | CF | CF attribute for identifying the featureType, e.g. featureType = "timeSeries". | global | **required**
 id | ACDD | An identifier for the data set, provided by and unique within its naming authority. The combination of the **`naming authority`** and the **`id`** should be globally unique, but the **`id`** can be globally unique by itself also. IDs can be URLs, URNs, DOIs, meaningful text strings, a local key, or any other unique string of characters. The **`id`** should not include blanks. | global | **required**
-infoUrl  | IOOS | URL for background information about this dataset. | global | **required**
+infoUrl  | IOOS | URL for background information about this dataset. This attributed is also required by ERDDAP. | global | **required**
 keywords | ACDD | A comma separated list of key words and phrases. | global | recommended
 license  | ACDD | Describe the restrictions to data access and distribution. | global | recommended
-naming_authority  | ACDD | The organization that provides the **`id`** for the dataset. <br>The naming authority should be uniquely specified by this attribute; the combination of the **`naming_authority`** and the **`id`** should be a globally unique identifier for the dataset. A reverse-DNS naming is recommended; URIs are also acceptable. <br><br>Example:<br> **`edu.ucar.unidata`** | global | **required**
+naming_authority  | ACDD | The organization that provides the **`id`** for the dataset. <br>The naming authority should be uniquely specified by this attribute; the combination of the **`naming_authority`** and the **`id`** should be a globally unique identifier for the dataset. A reverse-DNS naming is recommended; URIs are also acceptable. <br><br>Example:{::nomarkdown}<ul><li><b><code>naming_authority = "edu.ucar.unidata"</b></code></li></ul>{:/} | global | **required**
 references  | ACDD | Published or web-based references that describe the data or methods used to produce it. Recommend URIs (such as a URL or DOI) for papers or other references. | global | recommended
-standard_name_vocabulary  | ACDD | The name and version of the controlled vocabulary from which variable standard names are taken. Values for any variable's **`standard_name`** attribute must come from the CF Standard Names vocabulary for the dataset to comply with CF. <br><br>The format for the **`standard_name`** attribute must follow the ACDD recommendation ('CF Standard Name Table vXX', where 'XX' is a version of the standard name table), in order to be valid and meet the ACDD conventions.<br><br>If a variables does not have an existing standard_name in the CF-managed list, the variable should not include a **`standard_name`** attribute. In these cases, a standard name can be proposed to the CF community for consideration.<br><br>  Example:<br>**`standard_name_vocabulary = 'CF Standard Name Table v64'`** | global | **required**
+standard_name_vocabulary  | ACDD | The name and version of the controlled vocabulary from which variable standard names are taken. Values for any variable's **`standard_name`** attribute must come from the CF Standard Names vocabulary for the dataset to comply with CF. <br><br>The format for the **`standard_name`** attribute must follow the ACDD recommendation ('CF Standard Name Table vXX', where 'XX' is a version of the standard name table), in order to be valid and meet the ACDD conventions.<br><br>If a variables does not have an existing standard_name in the CF-managed list, the variable should not include a **`standard_name`** attribute. In these cases, a standard name can be proposed to the CF community for consideration.<br><br>  Example:<br>{::nomarkdown}<ul><li><b><code>standard_name_vocabulary = "CF Standard Name Table v64"</b></code></li></ul>{:/} | global | **required**
 summary  | ACDD | One paragraph describing the data set. |  global | recommended
 title  | ACDD | One sentence about the data contained within the file. | global | **required**
 
@@ -93,9 +97,9 @@ Consult the [Gold Standard example datasets](gold-standard-examples.html) for go
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
 contributor_email | IOOS | Email addresses of the individuals or institutions that contributed to the creation of this data. Multiple emails should be given in CSV format, and presented in the same order and number as the names in **`contributor_names`**. | global | recommended
-contributor_name | ACDD | The name of any individuals or institutions that contributed to the creation of this data. Combined with the **`contributor_role`**, it provides the full description of the contributor. Multiple names should be given in CSV format. <br><br>Examples: {::nomarkdown}<ul><li><b><code>contributor_name = Pacific Islands Ocean Observing System (PacIOOS)</b></code></li> <li><b><code>contributor_name = Great Lakes Observing System (GLOS),LimnoTech</b></code></li></ul>{:/} | global | recommended
-contributor_role | ACDD | The role of any individuals or institutions that contributed to the creation of this data. The CI_RoleCode vocabulary ([NERC](http://vocab.nerc.ac.uk/collection/G04/current/), [GEOIDE](https://geo-ide.noaa.gov/wiki/index.php?title=ISO_19115_and_19115-2_CodeList_Dictionaries#CI_RoleCode)) should be used. Multiple roles should be given in CSV format, and presented in the same order and number as the names in **`contributor_names`**.<br>For the IOOS ncSOS, **`contributor_role = "sponsor"`** defines a person, group, or organization’s full or partial support of an IOOS activity, asset, model, or product. <br><br>Examples:  {::nomarkdown}<ul><li><b><code>contributor_role = sponsor</b></code></li> <li><b><code>contributor_role = sponsor,collaborator</b></code></li></ul>{:/} | global | recommended
-contributor_role_vocabulary | IOOS | The URL of the controlled vocabulary used for the **`contributor_role`** attribute. The default is ["http://vocab.nerc.ac.uk/collection/G04/current/"](http://vocab.nerc.ac.uk/collection/G04/current/). | global | recommended
+contributor_name | ACDD | The name of any individuals or institutions that contributed to the creation of this data. Combined with the **`contributor_role`**, it provides the full description of the contributor. Multiple names should be given in CSV format. <br><br>Examples: {::nomarkdown}<ul><li><b><code>contributor_name = "Pacific Islands Ocean Observing System (PacIOOS)"</b></code></li> <li><b><code>contributor_name = "Great Lakes Observing System (GLOS),LimnoTech"</b></code></li></ul>{:/} | global | recommended
+contributor_role | ACDD | The role of any individuals or institutions that contributed to the creation of this data. The CI_RoleCode vocabulary ([NERC](http://vocab.nerc.ac.uk/collection/G04/current/), [GEOIDE](https://geo-ide.noaa.gov/wiki/index.php?title=ISO_19115_and_19115-2_CodeList_Dictionaries#CI_RoleCode)) should be used. Multiple roles should be given in CSV format, and presented in the same order and number as the names in **`contributor_names`**.<br>For the IOOS ncSOS, **`contributor_role = "sponsor"`** defines a person, group, or organization’s full or partial support of an IOOS activity, asset, model, or product. <br><br>Examples:  {::nomarkdown}<ul><li><b><code>contributor_role = "sponsor"</b></code></li> <li><b><code>contributor_role = "sponsor, collaborator"</b></code></li></ul>{:/} | global | recommended
+contributor_role_vocabulary | IOOS | The URL of the controlled vocabulary used for the **`contributor_role`** attribute. <br><br>The default is ["http://vocab.nerc.ac.uk/collection/G04/current/"](http://vocab.nerc.ac.uk/collection/G04/current/). | global | recommended
 contributor_url | IOOS | The URL of the individuals or institutions that contributed to the creation of this data. Multiple URLs should be given in CSV format, and presented in the same order and number as the names in **`contributor_names`**. | global | recommended
 creator_address | IOOS | Street address of the person or organization that collected the data.  | global | recommended
 creator_city | IOOS | City of the person or organization that collected the data.  | global | recommended
@@ -104,7 +108,7 @@ creator_email  | ACDD | Email address of the person or institution that collecte
 creator_institution  | ACDD | Institution that collected the data. This should be specified even if it matches the value of **`publisher_institution`**, **`institution`** or if **`creator_type`** is institution. | global | **required**
 creator_name  | ACDD | Name of the person or organization that collected the data. <br><br>Follow the guidance described in the **`creator_type`** attribute for how to populate this field depending on whether a person, institution, group, or position. | global | recommended
 creator_phone | IOOS | The phone number of the person or group that collected the data. | global | recommended
-creator_sector | IOOS | [IOOS classifier](http://mmisw.org/ont/ioos/sector) that best describes the platform (network) operator's societal sector. <br><br>Example:<br> **`creator_sector = "academic"`** | global |**required**
+creator_sector | IOOS | [IOOS classifier](http://mmisw.org/ont/ioos/sector) that best describes the platform (network) operator's societal sector. <br><br>Example:{::nomarkdown}<ul><li><b><code>creator_sector = "academic"</b></code></li></ul>{:/} | global |**required**
 creator_state | IOOS | State of the person or organization that collected the data.  | global | recommended
 creator_type | ACDD | Specifies type of creator with one of the following: 'person', 'group', 'institution', or 'position'. If this attribute is not specified, the creator is assumed to be a person.  | global | recommended
 creator_url  | ACDD/IOOS | The URL of the *institution* that collected the data. Note that this should always reference an institution URL, and not a personal URL, even if **`creator_type=person`**.  | global | **required**
@@ -162,10 +166,12 @@ NC_GLOBAL {
 
 ### Variables
 
+A collection of variable attributes that should be applied to all geophysical or other measured parameter variable contained in the dataset.  These mostly include illustrations of CF convention attributes, with the addition of IOOS' **`standard_name_uri`**.
+
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
-geophysical_variable:_FillValue<br>geospatial_variable:_FillValue | CF | This value is considered to be a special value that indicates undefined or missing data, and is returned when reading values that were not written. The type of this variable should match the type of the unpacked variable data. {::nomarkdown}<ul>  <li>time:_FillValue = -999999.0f    <li>lat:_FillValue = -999999.0f    <li>lon:_FillValue = -999999.0f    <li>z:_FillValue = -999999.0f    <li>sea_water_temperature:_FillValue = Float.NaN</ul>{:/} | variable | recommended
-geophysical_variable:missing_value<br>geospatial_variable:missing_value | CF | This should always be equal to the `_FillValue` attribute and both are used for legacy library support. {::nomarkdown}<ul>  <li>time:missing_value = -999999.0f    <li>lat:missing_value = -999999.0f    <li>lon:missing_value =-999999.0f    <li>z:missing_value = -999999.0f <li>sea_water_temperature:missing_value = Float.NaN</ul>{:/} | variable | recommended
+geophysical_variable:_FillValue<br>geospatial_variable:_FillValue | CF | This value is considered to be a special value that indicates undefined or missing data, and is returned when reading values that were not written. The type of this variable should match the type of the unpacked variable data. {::nomarkdown}<ul><b><code>  <li>time:_FillValue = -999999.0f    <li>lat:_FillValue = -999999.0f    <li>lon:_FillValue = -999999.0f    <li>z:_FillValue = -999999.0f    <li>sea_water_temperature:_FillValue = Float.NaN</li></b></code></ul>{:/} | variable | recommended
+geophysical_variable:missing_value<br>geospatial_variable:missing_value | CF | This should always be equal to the `_FillValue` attribute and both are used for legacy library support. {::nomarkdown}<ul><b><code> <li>time:missing_value = -999999.0f    <li>lat:missing_value = -999999.0f    <li>lon:missing_value =-999999.0f    <li>z:missing_value = -999999.0f <li>sea_water_temperature:missing_value = Float.NaN</li></b></code></ul>{:/} | variable | recommended
 geophysical_variable:standard_name | CF | Standardized field which uses the [CF Standard Names](http://www.cfconventions.org/documents.html/). If a variables does not have an existing standard_name in the CF-managed list, this attribute should not be used. In these cases, a standard name can be proposed to the CF community for consideration and acceptance. | variable | **required**
 geophysical_variable:standard_name_uri | IOOS | The URI of a **`standard_name`** in the online vocabulary listed in the global **`standard_name_vocabulary`** attribute.<br><br>Example: {::nomarkdown}<ul> <li> <b><code>sea_water_temperature:standard_name_uri = "http://vocab.nerc.ac.uk/collection/P07/current/CFSN0335/"</code></b> </li>  <li> <b><code>sea_water_temperature:standard_name = "sea_water_temperature"</code></b> </li> </ul>{:/} | variable | recommended
 geophysical_variable:units  | CF | Required for most all variables that represent dimensional quantities. The value for a geophysical variable's **`units`** attribute should match or be derived from the canonical units specified for the variable's **`standard_name`** in the CF Standard Name table. <br><br>CF units are specified by the  [**`udunits`**](http://www.unidata.ucar.edu/software/udunits/) package, which includes a file `udunits.dat` listing the valid individual unit names (e.g., "g" and "m") from which which composite **`units`** strings can be formed (e.g., "kg m-3"). <br><br>For example, all temperature standard names have canonical units of "K", but often geophysical variables that measure temperature are specified with **`units`** of `degree_Celsius` or some variant thereof. | variable | **required**
@@ -177,34 +183,38 @@ Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.senso
 ```
 Attributes {
     air_temperature {
-        _FillValue     -9999.0
-        missing_value  -9999.0
-        long_name      Air Temperature
-        platform       station
-        standard_name  air_temperature
-        units          degree_Celsius
-        urn            http://mmisw.org/ont/cf/parameter/air_temperature
+        _FillValue        -9999.0
+        missing_value     -9999.0
+        long_name         Air Temperature
+        platform          station
+        standard_name     air_temperature
+        units             degree_Celsius
+        standard_name_uri http://vocab.nerc.ac.uk/collection/P07/current/CFSN0023/
     }
 }
 ```
 
-See the `station` variable below.
-
 
 ### Platform
 
-The correct method for specifying platform metadata has historically been a source of confusion. The IOOS Metadata Profile aims to simplify platform metadata specification with the addition of a few global attributes (**`platform_id`** and **`platform_name`**, as well as the OceanSITES-derived **`wmo_platform_code`**) and clarification of existing standards for global attributes and the platform container variable. Data providers are encouraged to carefully review this section and upstream standards, and especially to review gold standard example datasets.
+The correct method for specifying platform metadata has historically been a source of confusion. The IOOS Metadata Profile aims to simplify platform metadata specification with the addition of a few global attributes (**`platform_id`** and **`platform_name`**, as well as the OceanSITES-derived **`wmo_platform_code`**) and clarification of existing standards for global attributes and the platform container variable. Data providers are encouraged to carefully review this section and upstream standards, and especially to review the Gold Standard example datasets.
 
-**Important**: The IOOS Metadata Profile restricts datasets to include only **one platform per dataset**.  This simplifies the dataset structure significantly, allows for attribution that might otherwise be handled by variable-level attributes of the **`platform_variable`** to be replaced by the global attributes described below, and simplifies creation of aggregated datasets of multiple individual platform datasets in ERDDAP.
+**Important**:
+
+**One platform per dataset:**  The IOOS Metadata Profile restricts datasets to include only **one platform per dataset**.  This simplifies the dataset structure significantly, allows for attribution that might otherwise be handled by variable-level attributes of the **`platform_variable`** to be replaced by the global attributes described below, and simplifies creation of aggregated datasets of multiple individual platform datasets in ERDDAP.
+
+**Single-sensor datasets:** although multi-platform datasets are disallowed in the IOOS Metadata Profile, it does not disallow breaking an individual platform out into a single dataset per sensor.  Some IOOS RAs use this pattern already.  In this case, individual sensor datasets in ERDDAP will be associated together into a single platform by sharing a common global **`platform_id`** attribute value (indicating they belong to the same platform).  The code used to harvest sensor datasets for GTS publication or into the Sensor Map will perform this aggregation, so no action need be taken by the data provider themselves to aggregate these datasets in ERDDAP.  Each individual dataset needs to follow the [requirements for GTS ingest](#requirements-for-ioos-dataset-gts-ingest) individually.
+
+**Aggregated ERDDAP datasets:** ERDDAP provides the ability to create aggregated datasets from collections of individual datasets.  While this is encouraged as a way to streamline access for end users to related datasets, IOOS will not harvest aggregated datasets into upstream national products, nor will NDBC harvest them for GTS publication.  Therefore, do not include the related **`gts_ingest`** or **`ioos_ingest`** flags on any ERDDAP aggregated datasets.
 
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
-platform | ACDD/NCEI |  **Global** attribute specifying the name of the *type* of platform(s) that supported the sensor data used to create this data set or product. Platforms can be of any type, including satellite, ship, station, aircraft or other. The controlled vocabulary must be indicated in the **`platform_vocabulary`** field.<br><br>Example: {::nomarkdown}<ul> <li> <b><code>platform "buoy";</code></b> <li><b><code>platform_vocabulary "https://mmisw.org/ont/ioos/platform";</code></b> </ul>{:/}<br><br>The value of the **`platform`** global attribute is used in generating the [IOOS Asset Identifier]([https://ioos.github.io/conventions-for-observing-asset-identifiers/ioos-assets-v1-0.html]) for the dataset.  Consult the [Rules for Asset Identifier Generation](#rules-for-ioos-asset-identifier-generation) section below this table for details on how this formula works. | global | **required**
-platform | CF | **Variable** level attribute to be specified on each data variable with the value of the name of another container variable which contains platform metadata attributes. In the most common use case where a datasets contains a single platform - **a requirement according to this profile** - there will be a single platform container variable (usually named **`station`** or **`platform`**), and every data variable in the dataset will contain a **`platform`** attribute with the name of the platform variable. <br><br>The primary use of this platform variable is to specify CF feature type information.  See the [`platform_variable`](#platform-variable) section below. <br><br>Example: {::nomarkdown}<ul> <li> <b><code>sea_water_temperature:platform = "station"</code></b></li><li><b><code>station:cf_role = "profile_id"</code></b></li> </ul>{:/} | variable | **required**
+platform | ACDD/NCEI |  **Global** attribute specifying the name of the *type* of platform(s) that supported the sensor data used to create this data set or product. Platforms can be of any type, including satellite, ship, station, aircraft or other. The controlled vocabulary must be indicated in the **`platform_vocabulary`** field.<br><br>Example: {::nomarkdown}<ul> <li> <b><code>platform = "buoy";</code></b> <li><b><code>platform_vocabulary = "https://mmisw.org/ont/ioos/platform";</code></b> </ul>{:/}<br>The value of the **`platform`** global attribute is used in generating the [IOOS Asset Identifier]([https://ioos.github.io/conventions-for-observing-asset-identifiers/ioos-assets-v1-0.html]) for the dataset.  Consult the [Rules for Asset Identifier Generation](#rules-for-ioos-asset-identifier-generation) section below this table for details on how this formula works. | global | **required**
+platform | CF | **Variable** level attribute to be specified on each data variable with the value of the name of another container variable which contains platform metadata attributes. <br><br>In the most common use case where a datasets contains a single platform - **a requirement according to this profile** - there will be a single platform container variable (usually named **`station`** or **`platform`**), and every data variable in the dataset will contain a **`platform`** attribute with the name of the platform variable. To comply with the profile, in other words, each data variable must have the same value for the **`platform`** attribute. <br><br>The primary use of this platform variable is to specify CF feature type information.  See the [`platform_variable`](#platform-variable) section below. <br><br>Example: {::nomarkdown}<ul> <li> <b><code>sea_water_temperature:platform = "station"</code></b></li><li><b><code>station:cf_role = "profile_id"</code></b></li> </ul>{:/} | variable | **required**
 platform_id | IOOS | An optional, short identifier for the platform, if the data provider prefers to define an id that differs from the dataset identifier, as specified by the  **`id`** attribute.<br><br>  When **`platform_id`** is defined for a dataset, it is used in place of the **`id`** field in generating the IOOS Asset Identifier (consult the [Rules for Asset Identifier Generation](#rules-for-ioos-asset-identifier-generation) section below). <br><br>Examples: {::nomarkdown}<ul> <li> <b><code>platform_id = "carquinez"</code></b> <li><b><code>platform_id = "cb0102"</code></b> </ul>{:/} | global | recommended
 platform_name | IOOS | A descriptive, long name for the platform used in collecting the data.  <br><br>The value of **`platform_name`** will be used to label the platform in downstream applications, such as IOOS' National Products (Environmental Sensor Map, EDS, etc) <br><br>Examples: {::nomarkdown}<ul> <li> <b><code>platform_name = "Morro Bay - BS1 MET"</code></b> <li><b><code>platform_name = "Chesapeake Bay Buoy 102"</code></b> </ul>{:/} | global | **required**
-platform_vocabulary | ACDD | Controlled vocabulary for the names used in the **`platform`** attribute.<br><br> It is recommended that this attribute is used in conjunction with the **`platform_variable:type`** attribute. In that case, the recommended value for the **`platform_vocabulary`** attribute is a URL to either the [IOOS Platform Category vocabulary](http://mmisw.org/ont/ioos/platform), or [SeaVoX Platform Categories vocabulary](http://vocab.nerc.ac.uk/collection/L06/current/). <br><br>Example:<br> **`platform_vocabulary = "http://mmisw.org/ont/ioos/platform"`**<br><br>The IOOS Metadata Profile diverges from the NCEI Templates 2.0 in that the use of the "NASA GCMD Platform Keywords 8.1" as a **`platform_vocabulary`** is not allowed.  The reason for this is that the **`platform`** global attribute is used in generating the [IOOS Asset Identifier 1.0](https://ioos.github.io/conventions-for-observing-asset-identifiers/ioos-assets-v1-0.html) for the dataset, and thus requires a single string platform name with no blank characters.  GCMD Platform Keywords do not follow this pattern and therefore are disallowed.| global | **required**
+platform_vocabulary | ACDD | Controlled vocabulary for the names used in the **`platform`** attribute.<br><br> It is recommended that this attribute is used in conjunction with the **`platform_variable:type`** attribute. In that case, the recommended value for the **`platform_vocabulary`** attribute is a URL to either the [IOOS Platform Category vocabulary](http://mmisw.org/ont/ioos/platform), or [SeaVoX Platform Categories vocabulary](http://vocab.nerc.ac.uk/collection/L06/current/). <br><br>Example:{::nomarkdown}<ul> <li> <b><code> platform_vocabulary = "http://mmisw.org/ont/ioos/platform"</code></b> </ul>{:/}<br>The IOOS Metadata Profile diverges from the NCEI Templates 2.0 in that the use of the "NASA GCMD Platform Keywords 8.1" as a **`platform_vocabulary`** is not allowed.  The reason for this is that the **`platform`** global attribute is used in generating the [IOOS Asset Identifier 1.0](https://ioos.github.io/conventions-for-observing-asset-identifiers/ioos-assets-v1-0.html) for the dataset, and thus requires a single string platform name with no blank characters.  GCMD Platform Keywords do not follow this pattern and therefore are disallowed.| global | **required**
 wmo_platform_code | IOOS | The WMO identifier for the platform used to measure the data.<br><br>When a dataset is assigned a **`wmo_platform_code`** it is thereby assigned a secondary Asset Identifier for the **'wmo' `naming_authority`**.  See the  [Rules for Asset Identifier Generation](#rules-for-ioos-asset-identifier-generation) for more information.  <br><br>Examples: {::nomarkdown}<ul> <li> <b><code>wmo_platform_code = "44011"</code></b> </ul>{:/} | global | **required**, if applicable
 
 ### Platform Variable
@@ -227,13 +237,14 @@ Excerpt from the relevant CF docs section: CF files that contain timeSeries, pro
 
 ### Quality Control/QARTOD
 
-Guidance for implementing [QARTOD](https://ioos.noaa.gov/project/qartod/) quality control flag variables in a standardized fashion.  QARTOD flag variables are associated with data variables using the CF 'Ancillary Variables' approach.  More information on this is available in [CF Chapter 3.4](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data).  The **`flag_method`** and **`references`** attributes listed in the table below are intended to be used as extensions to the existing CF **`status_flag`** standard name approach to representing the 'quality or other status of a data variable'.  Describing the CF **`status_flag`** design is beyond the scope here, although it is well explained in the CF documentation in: [Chapter 3.5 Flags](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#flags), and [Appendix C: Standard Name Modifiers](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#standard-name-modifiers).
+Guidance for implementing [QARTOD](https://ioos.noaa.gov/project/qartod/) quality control flag variables in a standardized fashion.  QARTOD flag variables are associated with data variables using the CF "Ancillary Variables" approach.  More information on this is available in [CF Chapter 3.4](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data).  This profile utilizes CF ancillary variables containing both the **`status_flag`** standard name and a QARTOD-specific standard name to indicate the test result the QARTOD flag variable's values represent.  See **`ancillary_variables`** in the table below for an example.  The **`references`** attribute is intended to be used in this case as an additional external link with more information about the quality control tests applied, including parameters or other information the data provider makes available.
+
+Describing the CF **`status_flag`** design is beyond the scope here, although it is well explained in the CF documentation in: [Chapter 3.5 Flags](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#flags), and [Appendix C: Standard Name Modifiers](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#standard-name-modifiers).
 
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
-ancillary_variables | CF | From [CF Chapter 3.4](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data): <br> <br> When one data variable provides metadata about the individual values of another data variable it may be desirable to express this association by providing a link between the variables. For example, instrument data may have associated measures of uncertainty. The attribute **`ancillary_variables`** is used to express these types of relationships. It is a string attribute whose value is a blank separated list of variable names. The nature of the relationship between variables associated via ancillary_variables must be determined by other attributes. | variable | **required**, if applicable
-flag_method | IOOS | Identifies the type of QARTOD test represented by this variable.  Values and meanings of the data found in this variable are defined by the attributes **`flag_values`** or **`flag_masks`** and **`flag_meanings`**, as defined in the [CF guidelines](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#flags).  Values of `flag_method` are constrained by a vocabulary published here: _________________.  | variable | **required**, if applicable
+ancillary_variables | CF | From [CF Chapter 3.4](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data): <br> <br> When one data variable provides metadata about the individual values of another data variable it may be desirable to express this association by providing a link between the variables. For example, instrument data may have associated measures of uncertainty. The attribute **`ancillary_variables`** is used to express these types of relationships. It is a string attribute whose value is a blank separated list of variable names. The nature of the relationship between variables associated via ancillary_variables must be determined by other attributes. <br> <br>For purposes of the IOOS Metadata Profile, the **`ancillary_variables`** attribute associates the data variable with one or many associated QARTOD **`status_flag`** variables that describe it. Multiple QARTOD ancillary variables would be included as a space-separated list of individual test variable names (for cases where data provider includes multiple test results, or an aggregate or "rollup" flag in addition to individual flags).  Note the important [requirements for GTS ingest](#requirements-for-ioos-dataset-gts-ingest) described below to ensure a dataset properly specifies the QARTOD "rollup" flag variable.<br> <br>For example: the QARTOD Gross Range test for the 'sea_water_temperature' variable of a dataset would be represented this way: <br><br> {::nomarkdown}<ul> <li> <b><code>sea_water_temperature:ancillary_variables = "sea_water_temperature_gross_range_qc"</code></b></li><li><b><code>sea_water_temperature_gross_range_qc:standard_name = "status_flag qartod_gross_range_test_quality_flag"</code></b></li> </ul>{:/} | variable | **required**, if applicable
 references | CF | Published or web-based references that describe the data or methods used to produce it. Recommend URIs (such as a URL or DOI) for papers or other references.  For QARTOD, this should be used to refer by URI to a resource that describes the test configuration, parameters used, etc. | variable | **required**, if applicable
 
 #### Example
@@ -267,13 +278,31 @@ air_temperature_flat_line_test {
 
 ### GTS Ingest
 
-A collection of variables that relate to requirements for IOOS datasets to be ingested into the GTS.   and a description of the specifics of the GTS ingest process used by IOOS is available in the [Requirements for IOOS Datasets to be Ingested to the GTS](#requirements-for-ioos-dataset-gts-ingestion) section below.  
+A collection of variables that relate to requirements for IOOS datasets to be ingested into the GTS. A description of the specifics of the GTS ingest process used by IOOS is available in the [Requirements for IOOS Datasets to be Ingested to the GTS](#requirements-for-ioos-dataset-gts-ingest) section below.  
 
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
 gts_ingest | IOOS |  **Global** attribute that indicates the data provider intends this dataset to be published on the GTS.<br><br>To publish a dataset to the GTS, this attribute must have a value of **`true`**. | global | **required**, if applicable
-gts_ingest | IOOS |  **Variable** attribute, used in concert with the global equivalent, that indicates a variable's data should be published to the GTS.<br><br>In order to publish a variable's data to the GTS, both the global **`gts_ingest`** attribute and this variable attribute must have a value of **`true`** (in addition to further requirements). <br><br>Refer to the  [GTS requirements](#requirements-for-ioos-dataset-gts-ingestion) section below for more detail on these requirements and on the handling of these variables. | variable | **required**, if applicable
+gts_ingest | IOOS |  **Variable** attribute, used in concert with the global equivalent, that indicates a variable's data should be published to the GTS.<br><br>In order to publish a variable's data to the GTS, both the global **`gts_ingest`** attribute and this variable attribute must have a value of **`true`** (in addition to further requirements). <br><br>Refer to the  [GTS requirements](#requirements-for-ioos-dataset-gts-ingest) section below for more detail on these requirements and on the handling of these variables. | variable | **required**, if applicable
+
+#### Example
+
+Taken from [some compliant dataset we will have available](https://standards.sensors.ioos.us/erddap/).
+
+```
+To Do: Add example dataset here
+```
+
+### IOOS Ingest
+
+The **`ioos_ingest`** flag is intended to flag datasets that should not be harvested by IOOS national products (such as the IOOS Catalog and Sensor Map).  This allows data providers and ERDDAP operators the ability to exclude datasets that aren't appropriate for these products on an individual basis.  For example, an IOOS RA might host on the same server datasets that are not funded by IOOS or have any IOOS connection with sensor datasets intended for harvest by IOOS.  
+
+
+Name | Convention | Description | Type | Role
+:--------- | :-------: | :------------------- | :--------: | :-------:
+ioos_ingest | IOOS |  **Global** attribute that indicates the data provider intends this dataset to be harvested by IOOS national products.<br><br>To exclude a dataset from harvest by IOOS, this attribute must have a value of **`false`**. The default assumption is that all datasets are intended to be harvested. | global | recommended
+
 
 #### Example
 
@@ -332,7 +361,7 @@ Attributes {
 ```
 <br><br>
 
-## Requirements for IOOS Dataset GTS Ingestion
+## Requirements for IOOS Dataset GTS Ingest
 
 IOOS partners with NOAA [NDBC](https://www.ndbc.noaa.gov/) to ingest datasets to the WMO [Global Telecommunication System(GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  This process will leverage an IOOS data provider's ERDDAP server as a data interchange server.  In order to allow NDBC to query and filter the correct subset of datasets in an ERDDAP server to process, **data providers must ensure the following dataset attribution requirements are met**.  
 
@@ -348,6 +377,8 @@ Refer to the [GTS Ingest](#gts-ingest) and [QARTOD](#quality-controlqartod) tabl
 1. The variable should include an ancillary variable representing the QARTOD aggregate flag (see rules for this below)
 1. The variable should have a **`units`** attribute, with a value that's a valid unit (that is, the units are convertible to the CF canonical unit using the [**`udunits`**](http://www.unidata.ucar.edu/software/udunits/) library) <br><br>
 
+**Note:** it is not a requirement for a variable's QC flag ancillary variables to include a **`gts_ingest`** flag.
+
 #### Requirements for the QARTOD Aggregate ('qartod_aggregate') or 'Rollup' Flag:
 
 Currently, IOOS RAs push a custom XML format to NDBC for GTS ingestion, so they can exclude "QC fail" values while generating the XML. ERDDAP datasets will have all observed data, including observations marked "QC fail", so NDBC needs a means to filter QC passing and failing data from the full timeseries.  This will be accomplished using a CF "ancillary variable" that represents the QC aggregate/rollup flag for each observation variable marked for GTS ingestion, as described below.  
@@ -361,23 +392,28 @@ Currently, IOOS RAs push a custom XML format to NDBC for GTS ingestion, so they 
     * 3 = Suspect
     * 4 = Fail
 1. The variable should use the CF [Ancillary Data](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data) approach to indicate its association with the data variable.  Specifically, it will:
-    1. Be referenced by the data variable using the attribute: **`ancillary_variables: 'quartod_aggregate_variable_name'`** (where 'quartod_aggregate_variable_name' can be any valid CF variable name)
-    1. Include **`standard_name: status_flag`** as an attribute to indicate it represents a status/quality flag
-    1. Include an attribute **`flag_method`** where the value of **`flag_method`** contains a string indicating the relevant QARTOD test name (in this case **`qartod_aggregate`**)
-    1. Optionally include a **`references`** attribute that contains a URI to an online resource describing details of the QC test, including code and/or parameters used in calculating it.  This is more relevant to individual QC test ancillary_variables that collectively make up the aggregate/rollup variable, however it may still be included here if desired
-1. The vocabulary used for the **`flag_method`** attribute is restricted and is as follows:
-    * **`qartod_aggregate`**: the aggregate/rollup flag
-    * **`qartod_spike`**:
-    * **`qartod_climatology`**:
-    * **`qartod_flatline`**:
-    * **`...`**:
-    * **`...`**:
+    1. Be referenced by the data variable using the attribute: **`ancillary_variables: 'quartod_aggregate_variable_name'`** (where 'quartod_aggregate_variable_name' can be any valid CF variable name).
+    1. Include a compound **`standard_name: status_flag qartod_aggregate_quality_flag`** as an attribute.  The **`status_flag`** here indicates its relationship to the primary variable as a quality indicator, and the **`qartod_aggregate_quality_flag`** secondary standard name specifies that this variable represents the QARTOD aggregate flag
+    1. Optionally include a **`references`** attribute that contains a URI to an online resource describing details of the QC test, including code and/or parameters used in calculating it.  This is more relevant to individual QC test ancillary variables that collectively make up the aggregate/rollup variable, however it may still be included here if desired
+1. The secondary QARTOD standard name in the compound **`standard_name: status_flag qartod_aggregate_quality_flag`** attribute must be a valid QARTOD standard name - specifically '**`qartod_aggregate_quality_flag`**' in this case.  For reference however, at the time of writing, the full set of QARTOD standard names in [Standard Name table v70](http://cfconventions.org/Data/cf-standard-names/70/build/cf-standard-name-table.html) (November 2019) includes:
+    * **`qartod_aggregate_quality_flag`**: QARTOD aggregate/rollup flag
+    * **`qartod_gap_test_quality_flag`**: QARTOD Timing/Gap test
+    * **`qartod_syntax_test_quality_flag`**: QARTOD Syntax test
+    * **`qartod_location_test_quality_flag`**: QARTOD Location test
+    * **`qartod_gross_range_test_quality_flag`**: QARTOD Gross Range test
+    * **`qartod_climatology_test_quality_flag`**: QARTOD Climatology test
+    * **`qartod_spike_test_quality_flag`**: QARTOD Spike test
+    * **`qartod_rate_of_change_test_quality_flag`**: QARTOD Rate of Change test
+    * **`qartod_flat_line_test_quality_flag`**: QARTOD Flat Line test
+    * **`qartod_multi_variate_test_quality_flag`**: QARTOD Multi-variate test
+    * **`qartod_attenuated_signal_test_quality_flag`**: QARTOD Attenuated Signal test
+    * **`qartod_neighbor_test_quality_flag`**: QARTOD Neighbor test
 1. NDBC should exclude any values that are QC fail (and missing) but include everything else (not eval, pass, suspect) <br> <br>
 
 Additional guidance for populating the 'aggregate/rollup' flag:
 
-* Pick the worst result out of all of the individual tests and promote that. It's called a "Summary Flag" in the [QARTOD Data Flags](https://github.com/axiom-data-science/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) manual (pg 3).
-* Here's how it's done in the [ioos_qc library](https://github.com/axiom-data-science/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) with the [corresponding test](https://github.com/axiom-data-science/ioos_qc/blob/master/tests/test_qartod.py#L766-L783).  
+* Pick the worst result out of all of the individual tests and promote that. It's called a "Summary Flag" in the [QARTOD Data Flags](https://github.com/ioos/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) manual (pg 3).
+* Here's how it's done in the [ioos_qc library](https://github.com/ioos/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) with the [corresponding test](https://github.com/ioos/ioos_qc/blob/master/tests/test_qartod.py#L766-L783).  
 * Here is an example dataset that follows these requirements: [https://erddap.sensors.axds.co/erddap/tabledap/humboldt-1.html](https://erddap.sensors.axds.co/erddap/tabledap/humboldt-1.html)
 <br> <br>
 

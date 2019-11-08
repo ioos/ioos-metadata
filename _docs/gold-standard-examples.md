@@ -10,13 +10,13 @@ summary:  Describes gold standard examples for various dataset types and scenari
 
 ## **Overview**
 
-The page provides links to example datasets that satisfy the [IOOS Metadata Profile v1.2](ioos-metadata-profile-v1-2.html).
+The page provides links to example datasets that satisfy the [IOOS Metadata Profile 1.2](ioos-metadata-profile-v1-2.html).
 
-Since the IOOS standard builds off of the [**NOAA NCEI NetCDF Templates**](https://www.nodc.noaa.gov/data/formats/netcdf/),
-the NCEI "Gold Standard" examples ([HTTP](https://data.nodc.noaa.gov/ncei/example/data/netcdf/), [THREDDS](https://data.nodc.noaa.gov/thredds/catalog/example/catalog.html))
-provide a great starting point. The IOOS Gold Standard Examples focus on IOOS-specific
-guidelines, and can serve as templates for data providers within the organization.
+Since the IOOS standard builds off of the [**NOAA NCEI NetCDF Templates**](https://www.nodc.noaa.gov/data/formats/netcdf/), the NCEI "Gold Standard" examples ([HTTP](https://data.nodc.noaa.gov/ncei/example/data/netcdf/), [THREDDS](https://data.nodc.noaa.gov/thredds/catalog/example/catalog.html)) provide a great starting point.
 
+The IOOS Gold Standard Examples focus on IOOS-specific guidelines, and can serve as templates for data providers interested in implementing the profile.  In addition to the dataset links below, IOOS maintains a fully-deployable ERDDAP instance that includes both the example data and configuration files.  Consult the following link for more information:
+
+* [IOOS "ERDDAP Gold Standard" GitHub Repository](https://github.com/ioos/erddap-gold-standard)
 
 ## **Dataset Types and Examples**
 
