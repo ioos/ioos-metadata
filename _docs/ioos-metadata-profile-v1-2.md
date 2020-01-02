@@ -14,8 +14,7 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 |:--- |:--- |:--- |
 | 1.0 | [Initial version based on the NODC Templates 1.1 and ACDD 1.1](./ioos-metadata-profile-v1-0.html) | 2016-10-01 |
 | 1.1 | [Updated version based on the NCEI Templates 2.0 and ACDD 1.3](./ioos-metadata-profile-v1-1.html) | 2016-11-01 |
-| **1.2** |**Currently Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `info_url` and `Conventions`<br>* Make `creator_institution`, `creator_url`, `license`, `publisher_url`, and `summary` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary` (recommended)<br>* Make `contributor_name`, `contributor_role`, `institution`, and `publisher_name` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset; clarify use of 'Platform' variable and related `platform` global and variable attributes <br> * Add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_uri` <br> * Add `instrument_variable:component` <br> * Add `ancillary_variables` and `references` for QARTOD flag variable representation <br> * Add `gts_ingest` to indicate datasets and variables intended for GTS harvest <br> * Add `ioos_ingest` to indicate datasets intended to be harvested into IOOS national products <br> * Add QARTOD Aggregate/Rollup flag requirement (for GTS ingest) | **2020-12-18** |
-
+| **1.2** |**Currently Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `infoUrl` and `Conventions`<br>* Make `creator_institution`, `creator_url`, `license`, `publisher_url`, and `summary` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary` (recommended)<br>* Make `contributor_name`, `contributor_role`, `institution`, and `publisher_name` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset; clarify use of 'Platform' variable and related `platform` global and variable attributes <br> * Add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_uri` <br> * Add `instrument_variable:component` <br> * Add section for QARTOD flag variable representation <br> * Add `gts_ingest` to indicate datasets and variables intended for GTS harvest <br> * Add `ioos_ingest` to indicate datasets intended to be harvested into IOOS national products <br> * Add GTS Ingest requirements section | **2020-01-10** |
 
 ## Notes/Caveats
 
@@ -77,12 +76,12 @@ Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.senso
 
 ```
 NC_GLOBAL {
+    Conventions               IOOS-1.2, CF-1.6, ACDD-1.3
     featureType               TimeSeries
     id                        morro-bay-bs1-met
-    info_url                  https://sensors.ioos.us/?sensor_version=v2#metadata/57163/station
+    infoUrl                   https://data.cencoos.org/#metadata/57163/station
     naming_authority          edu.calpoly.marine
-    references                http://www.slosea.org/about/dash.php,https://www.cencoos.org/data/shore/morro
-    standard_name_vocabulary  CF Standard Name Table v63
+    standard_name_vocabulary  CF Standard Name Table v71
     summary                   Timeseries data from 'Morro Bay - BS1 MET' (morro-bay-bs1-met)
     title                     Morro Bay - BS1 MET
 }
@@ -205,7 +204,7 @@ The correct method for specifying platform metadata has historically been a sour
 
 **Single-sensor datasets:** although multi-platform datasets are disallowed in the IOOS Metadata Profile, it is acceptable to provide data for an individual platform across multiple datasets. Some IOOS RAs use this pattern already, and provide one dataset for sensor package (e.g., CTD, ADCP, met, etc).  In this case, individual sensor datasets in ERDDAP will be associated together into a single platform by sharing a common global **`platform_id`** attribute value (indicating they belong to the same platform).  The code used to harvest sensor datasets for GTS publication by NDBC or into the Sensor Map by IOOS will perform this aggregation, so no action need be taken by the data provider themselves to aggregate these datasets in ERDDAP.  Each individual dataset must follow the [requirements for GTS ingest](#requirements-for-ioos-dataset-gts-ingest) individually.
 
-**Aggregated ERDDAP datasets:** ERDDAP provides the ability to create aggregated datasets from collections of individual datasets.  While this is encouraged as a way to streamline access for end users to related datasets, IOOS will not harvest aggregated datasets into upstream national products, nor will NDBC harvest them for GTS publication.  Therefore, do not include the related **`gts_ingest`** or **`ioos_ingest`** flags on any ERDDAP aggregated datasets.
+**Aggregated ERDDAP datasets:** ERDDAP provides the ability to create aggregated datasets from collections of individual datasets.  While this is encouraged as a way to streamline access for end users to related datasets, IOOS will not harvest aggregated datasets into upstream national products, nor will NDBC harvest them for GTS publication.  Therefore, you should set **`gts_ingest=false`** and **`ioos_ingest=false`** flags on any ERDDAP aggregated datasets.
 
 
 Name | Convention | Description | Type | Role
@@ -227,13 +226,6 @@ Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
 platform_variable:cf_role | [CF](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/build/ch09s05.html) | Specifies the [CF sampling geometry feature type](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/build/ch09.html). Allowed values are `timeseries_id`, `profile_id`, and `trajectory_id`.  | variable | **required**
 
-#### Example
-
-**To Do: Add an example from Gold Standard datasets of proper use of cf_role.  Specifically, can we accommodate each of these featureTypes in our profile (and give an example of a couple)**
-
-```
-Excerpt from the relevant CF docs section: CF files that contain timeSeries, profile or trajectory featureTypes, should include only a single occurrence of a cf_role attribute;  CF files that contain timeSeriesProfile or trajectoryProfile may contain two occurrences, corresponding to the two levels of structure in these feature types
-```
 
 ### Quality Control/QARTOD
 
@@ -246,34 +238,29 @@ This profile requires that all variables containing results from QARTOD tests be
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
-ancillary_variables | CF | From [CF Chapter 3.4](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data):{::nomarkdown}<ul> <li>"When one data variable provides metadata about the individual values of another data variable it may be desirable to express this association by providing a link between the variables. For example, instrument data may have associated measures of uncertainty. The attribute <code><b>ancillary_variables</b></code> is used to express these types of relationships. It is a string attribute whose value is a blank separated list of variable names. The nature of the relationship between variables associated via ancillary_variables must be determined by other attributes." </li></ul>{:/}For purposes of the IOOS Metadata Profile, the **`ancillary_variables`** attribute associates the data variable with one or many QARTOD flag variables containing test results. Multiple QARTOD ancillary variables should be represented as a space-separated list of individual test variable names (for cases where data provider includes multiple test results, or includes the QARTOD "Aggregate/Rollup" flag in addition to individual flags, as required by this profile).<br><br>Example: the QARTOD Gross Range and "Aggregate/Rollup" flags for the 'sea_water_temperature' variable of a dataset would be represented this way: {::nomarkdown}<ul> <li> <b><code>sea_water_temperature:ancillary_variables = "sea_water_temperature_gross_range_qc sea_water_temperature_qc_agg"</code></b></li> <li><b><code>sea_water_temperature_gross_range_qc:standard_name = "gross_range_test_quality_flag"</code></b></li> <li><b><code>sea_water_temperature_qc_agg:standard_name = "aggregate_quality_flag"</code></b></li></ul>{:/}<br>The full set of CF Standard Names available to identify QARTOD flag ancillary variables at the time of release of this profile ([Standard Name Table v71](http://cfconventions.org/Data/cf-standard-names/71/build/cf-standard-name-table.html), 2020) includes: {::nomarkdown}<ul><li><code><b>aggregate_quality_flag</b></code>: Aggregate/Rollup flag</li><li><code><b>attenuated_signal_test_quality_flag</b></code>: Attenuated Signal Test flag</li><li><code><b>climatology_test_quality_flag</b></code>: Climatology Test flag</li><li><code><b>flat_line_test_quality_flag</b></code>: Flat Line Test flag</li><li><code><b>gap_test_quality_flag</b></code>: Timing/Gap Test flag</li><li><code><b>gross_range_test_quality_flag</b></code>: Gross Range Test flag</li><li><code><b>location_test_quality_flag</b></code>: Location Test flag</li><li><code><b>multi_variate_test_quality_flag</b></code>: Multi-variate Test flag</li><li><code><b>neighbor_test_quality_flag</b></code>: Neighbor Test flag </li><li><code><b>rate_of_change_test_quality_flag</b></code>: Rate of Change Test flag</li><li><code><b>spike_test_quality_flag</b></code>: Spike Test flag</li><li><code><b>syntax_test_quality_flag</b></code>:  Syntax Test flag</li></ul>{:/} | variable | **required**, if applicable
-references | CF | Published or web-based references that describe the data or methods used to produce it. Recommend URIs (such as a URL or DOI) for papers or other references.  For QARTOD, this should be used to refer by URI to a resource that describes the test configuration, parameters used, etc. | variable | **required**, if applicable
+geophysical_variable:ancillary_variables | CF | From [CF Chapter 3.4](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data):{::nomarkdown}<ul> <li>"When one data variable provides metadata about the individual values of another data variable it may be desirable to express this association by providing a link between the variables. For example, instrument data may have associated measures of uncertainty. The attribute <code><b>ancillary_variables</b></code> is used to express these types of relationships. It is a string attribute whose value is a blank separated list of variable names. The nature of the relationship between variables associated via ancillary_variables must be determined by other attributes." </li></ul>{:/}For purposes of the IOOS Metadata Profile, the **`ancillary_variables`** attribute associates the data variable with one or many QARTOD flag variables containing test results. Multiple QARTOD ancillary variables should be represented as a space-separated list of individual test variable names (for cases where data provider includes multiple test results, or includes the QARTOD "Aggregate/Rollup" flag in addition to individual flags, as required by this profile). | variable | **required**, if applicable
+qartod_variable:standard_name | CF | The full set of CF Standard Names available to identify QARTOD flag ancillary variables at the time of release of this profile ([Standard Name Table v71](http://cfconventions.org/Data/cf-standard-names/71/build/cf-standard-name-table.html), 2020) includes: {::nomarkdown}<ul><li><code><b>aggregate_quality_flag</b></code>: Aggregate/Rollup flag</li><li><code><b>attenuated_signal_test_quality_flag</b></code>: Attenuated Signal Test flag</li><li><code><b>climatology_test_quality_flag</b></code>: Climatology Test flag</li><li><code><b>flat_line_test_quality_flag</b></code>: Flat Line Test flag</li><li><code><b>gap_test_quality_flag</b></code>: Timing/Gap Test flag</li><li><code><b>gross_range_test_quality_flag</b></code>: Gross Range Test flag</li><li><code><b>location_test_quality_flag</b></code>: Location Test flag</li><li><code><b>multi_variate_test_quality_flag</b></code>: Multi-variate Test flag</li><li><code><b>neighbor_test_quality_flag</b></code>: Neighbor Test flag </li><li><code><b>rate_of_change_test_quality_flag</b></code>: Rate of Change Test flag</li><li><code><b>spike_test_quality_flag</b></code>: Spike Test flag</li><li><code><b>syntax_test_quality_flag</b></code>:  Syntax Test flag</li></ul>{:/} | variable | **required**, if applicable
+qartod_variable:references | CF | Published or web-based references that describe the data or methods used to produce it. Recommend URIs (such as a URL or DOI) for papers or other references.  For QARTOD, this should be used to refer by URI to a resource that describes the test configuration, parameters used, etc. | variable | **required**, if applicable
 
 #### Example
 
-Source: Big Carlos Pass ERDDAP Gold-Standard [dataset](http://erddap.sensors.axds.co/erddap/tabledap/big-carlos-pass-active.html).  **NOTE: this link is dead**
+Source: Morro Bay BS1 MET ERDDAP Gold-Standard [dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
 
 ```
-air_temperature {
-  String ancillary_variables "air_temperature_can_name_this_whatever_you_want air_temperature_flat_line_test";
-  String long_name "Air Temperature";
-  String standard_name "air_temperature";
-  String units "degree_Celsius";
-}
-air_temperature_can_name_this_whatever_you_want {
-  String flag_meanings "PASS NOT_EVALUATED SUSPECT FAIL MISSING";
-  String flag_values "1, 2, 3, 4, 9";
-  String long_name "Air Temperature QARTOD Aggregate Flag";
-  String standard_name "aggregate_quality_flag";
-  String references "https://github.com/glos/glos-qartod/wiki/QARTOD-101";
-}
-air_temperature_flat_line_test {
-  String flag_meanings "PASS NOT_EVALUATED SUSPECT FAIL MISSING";
-  String flag_values "1, 2, 3, 4, 9";
-  String long_name "Air Temperature QARTOD Flat Line Test Flag";
-  String standard_name "flat_line_test_quality_flag";
-  String references "https://github.com/glos/glos-qartod/wiki/QARTOD-101";
-}
+  air_temperature {
+    String standard_name "air_temperature";
+    String long_name "Air Temperature";
+    String units "degree_Celsius";
+    String ancillary_variables "air_temperature_qc_agg air_temperature_qc_tests";
+  }
+  air_temperature_qc_agg {
+    String standard_name "aggregate_quality_flag";
+    String long_name "Air Temperature QARTOD Aggregate Quality Flag";
+    String flag_values "1, 2, 3, 4, 9";
+    String flag_meanings "PASS NOT_EVALUATED SUSPECT FAIL MISSING";
+    String references "http://services.cormp.org/quality.php";
+    Int32 _FillValue 2;
+  }
 ```
 
 ### GTS Ingest
@@ -288,15 +275,33 @@ gts_ingest | IOOS |  **Variable** attribute, used in concert with the global equ
 
 #### Example
 
-Taken from [some compliant dataset we will have available](https://standards.sensors.ioos.us/erddap/).
+Taken from [PacIOOS's AWS-HIMB ERDDAP Dataset](https://pae-paha.pacioos.hawaii.edu/erddap/info/AWS-HIMB/index.html).
 
 ```
-To Do: Add example dataset here
+NC_GLOBAL {
+    gts_ingest "true";
+}
+
+air_temperature {
+    String gts_ingest "true";
+}
+
+sea_water_temperature {
+    String gts_ingest "true";
+}
+
+air_temperature_raw {
+    String gts_ingest "false";
+}
+
+sea_water_temperature_raw {
+    String gts_ingest "false";
+}
 ```
 
 ### IOOS Ingest
 
-The **`ioos_ingest`** flag is intended to flag datasets that should not be harvested by IOOS national products (such as the IOOS Catalog and Sensor Map).  This allows data providers and ERDDAP operators the ability to exclude datasets that aren't appropriate for these products on an individual basis.  For example, an IOOS RA might host on the same server datasets that are not funded by IOOS or have any IOOS connection with sensor datasets intended for harvest by IOOS.  
+The **`ioos_ingest`** flag is intended to flag datasets that should **not** be harvested by IOOS national products (such as the IOOS Catalog and Sensor Map).  This allows data providers and ERDDAP operators the ability to exclude datasets that aren't appropriate for these products on an individual basis.  For example, an IOOS RA might host on the same server datasets that are not funded by IOOS or have any IOOS connection with sensor datasets intended for harvest by IOOS.  
 
 
 Name | Convention | Description | Type | Role
@@ -306,12 +311,7 @@ ioos_ingest | IOOS |  **Global** attribute that indicates the data provider inte
 
 #### Example
 
-Taken from [some compliant dataset we will have available](https://standards.sensors.ioos.us/erddap/).
-
-```
-To Do: Add example dataset here
-```
-
+*Coming soon...*
 
 
 ### Instrument
@@ -391,25 +391,18 @@ Currently, IOOS RAs push a custom XML format to NDBC for GTS ingestion, so they 
     * 1 = Pass
     * 3 = Suspect
     * 4 = Fail
-1. The variable should use the CF [Ancillary Data](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data) approach to indicate its association with the data variable.  Specifically, it will:
-    1. Be referenced by the data variable using the attribute: **`ancillary_variables: 'quartod_aggregate_variable_name'`** (where 'quartod_aggregate_variable_name' can be any valid CF variable name).
-    1. Include the **`aggregate_quality_flag`** standard name attribute (e.g. **`standard_name: aggregate_quality_flag`**) indicating that this flag comprises the aggregate of one to many individual quality tests performed on the data (i.e. the "Aggregate/Rollup" flag).  **Note:** the CF Standard Names table includes several names intended to represent quality control test results - these should be used alongside the Aggregate/Rollup flag to represent individual QARTOD test results.  For the full set of names, see the [QARTOD/Quality Control](#quality-controlqartod) section of the profile
-    1. Optionally include a **`references`** attribute that contains a URI to an online resource describing details of the QC test, including code and/or parameters used in calculating it.  This is more relevant to individual QC test ancillary variables that collectively make up the aggregate/rollup variable, however it may still be included here if desired
+1. The value of the rollup flag should be the *worst* result out of all of the individual tests. It's called a "Summary Flag" in the [QARTOD Data Flags](https://github.com/ioos/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) manual (pg 3).
+    * Here's how it's done in the [ioos_qc library](https://github.com/ioos/ioos_qc/blob/3d8efba12644eb37b9ef35e6cdcf35189e789075/ioos_qc/qartod.py#L49-L80) with the [corresponding test](https://github.com/ioos/ioos_qc/blob/3d8efba12644eb37b9ef35e6cdcf35189e789075/tests/test_qartod.py#L1096-L1113).  
+1. The variable should have a standard name attribute of **`aggregate_quality_flag`**. See the [QARTOD](#quality-controlqartod) section above for more information.
 1. NDBC should exclude any values that are QC fail (and missing) but include everything else (not eval, pass, suspect) <br> <br>
 
-Additional guidance for populating the 'Aggregate/Rollup' flag:
-
-* Pick the worst result out of all of the individual tests and promote that. It's called a "Summary Flag" in the [QARTOD Data Flags](https://github.com/ioos/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) manual (pg 3).
-* Here's how it's done in the [ioos_qc library](https://github.com/ioos/ioos_qc/blob/master/ioos_qc/qartod.py#L46-L77) with the [corresponding test](https://github.com/ioos/ioos_qc/blob/master/tests/test_qartod.py#L766-L783).  
-* Here is an example dataset that follows these requirements: [https://erddap.sensors.axds.co/erddap/tabledap/humboldt-1.html](https://erddap.sensors.axds.co/erddap/tabledap/humboldt-1.html)
-<br> <br>
 
 Notes on GTS ingest and QC flagging:
 
 * Although having **`gts_ingest`** on both the dataset itself and each of its variables is redundant, it allows for more efficient querying across a large ERDDAP server
 * Some of the data that NDBC pulls never makes it to the GTS, but it still used in other NDBC products
 * If you set **`gts_ingest`** on a variable the NDBC doesn't care about, NDBC will just ignore it.
-* RAs may publish ancillary variables with results of individual QC tests, however NDBC will only examine contents of the **`qartod_aggregate`** variable for filtering purposes for GTS harvest.  
+* RAs may publish ancillary variables with results of individual QC tests, however NDBC will only examine contents of the **`aggregate_quality_flag`** variable for filtering purposes for GTS harvest.  
 
 <br><br>
 
