@@ -63,11 +63,11 @@ featureType | CF | CF attribute for identifying the featureType, e.g. featureTyp
 id | ACDD | An identifier for the data set, provided by and unique within its naming authority. The combination of the **`naming authority`** and the **`id`** should be globally unique, but the **`id`** can be globally unique by itself also. IDs can be URLs, URNs, DOIs, meaningful text strings, a local key, or any other unique string of characters. The **`id`** should not include blanks. | global | **required**
 infoUrl  | IOOS | URL for background information about this dataset. This attributed is also required by ERDDAP. | global | **required**
 keywords | ACDD | A comma separated list of key words and phrases. | global | recommended
-license  | ACDD | Describe the restrictions to data access and distribution. | global | recommended
+license  | ACDD | Describe the restrictions to data access and distribution. | global | required
 naming_authority  | ACDD | The organization that provides the **`id`** for the dataset. <br>The naming authority should be uniquely specified by this attribute; the combination of the **`naming_authority`** and the **`id`** should be a globally unique identifier for the dataset. A reverse-DNS naming is recommended; URIs are also acceptable. <br><br>Example:{::nomarkdown}<ul><li><b><code>naming_authority = "edu.ucar.unidata"</b></code></li></ul>{:/} | global | **required**
 references  | ACDD | Published or web-based references that describe the data or methods used to produce it. Recommend URIs (such as a URL or DOI) for papers or other references. | global | recommended
 standard_name_vocabulary  | ACDD | The name and version of the controlled vocabulary from which variable standard names are taken. Values for any variable's **`standard_name`** attribute must come from the CF Standard Names vocabulary for the dataset to comply with CF. <br><br>The format for the **`standard_name`** attribute must follow the ACDD recommendation ('CF Standard Name Table vXX', where 'XX' is a version of the standard name table), in order to be valid and meet the ACDD conventions.<br><br>If a variables does not have an existing standard name in the CF-managed list, the variable should not include a **`standard_name`** attribute. In these cases, a standard name can be proposed to the CF community for consideration.<br><br>  Example:<br>{::nomarkdown}<ul><li><b><code>standard_name_vocabulary = "CF Standard Name Table v64"</b></code></li></ul>{:/} | global | **required**
-summary  | ACDD | One paragraph describing the data set. |  global | recommended
+summary  | ACDD | One paragraph describing the data set. |  global | required
 title  | ACDD | One sentence about the data contained within the file. | global | **required**
 
 #### Example
