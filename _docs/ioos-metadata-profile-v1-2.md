@@ -244,18 +244,34 @@ qartod_variable:references | CF | Published or web-based references that describ
 
 #### Example
 
-Source: Morro Bay BS1 MET ERDDAP Gold-Standard [dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
+Adapted from: Morro Bay BS1 MET ERDDAP Gold-Standard [dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
 
 ```
   air_temperature {
     String standard_name "air_temperature";
     String long_name "Air Temperature";
     String units "degree_Celsius";
-    String ancillary_variables "air_temperature_qc_agg air_temperature_qc_tests";
+    String ancillary_variables "air_temperature_qc_agg air_temperature_gross_range air_temperature_flat_line";
   }
   air_temperature_qc_agg {
     String standard_name "aggregate_quality_flag";
     String long_name "Air Temperature QARTOD Aggregate Quality Flag";
+    String flag_values "1, 2, 3, 4, 9";
+    String flag_meanings "PASS NOT_EVALUATED SUSPECT FAIL MISSING";
+    String references "http://services.cormp.org/quality.php";
+    Int32 _FillValue 2;
+  }
+  air_temperature_gross_range {
+    String standard_name "gross_range_test_quality_flag";
+    String long_name "Air Temperature QARTOD Gross Range Test Quality Flag";
+    String flag_values "1, 2, 3, 4, 9";
+    String flag_meanings "PASS NOT_EVALUATED SUSPECT FAIL MISSING";
+    String references "http://services.cormp.org/quality.php";
+    Int32 _FillValue 2;
+  }
+  air_temperature_flat_line {
+    String standard_name "flat_line_test_quality_flag";
+    String long_name "Air Temperature QARTOD Flat Line Test Quality Flag";
     String flag_values "1, 2, 3, 4, 9";
     String flag_meanings "PASS NOT_EVALUATED SUSPECT FAIL MISSING";
     String references "http://services.cormp.org/quality.php";
