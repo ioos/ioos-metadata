@@ -76,10 +76,11 @@ Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.senso
 
 ```
 NC_GLOBAL {
-    Conventions               IOOS-1.2, CF-1.6, ACDD-1.3
+    Conventions               CF-1.6, ACDD-1.3, IOOS-1.2
     featureType               TimeSeries
     id                        morro-bay-bs1-met
     infoUrl                   https://data.cencoos.org/#metadata/57163/station
+    license                   The data may be used and redistributed for free but is not intended for legal use, since it may contain inaccuracies.  Neither the data Contributor, ERD, NOAA, nor the United States Government, nor any of their employees or contractors, makes any warranty, express or implied, including warranties of merchantability and fitness for a particular purpose, or assumes any legal liability for the accuracy, completeness, or usefulness, of this information.
     naming_authority          edu.calpoly.marine
     standard_name_vocabulary  CF Standard Name Table v71
     summary                   Timeseries data from 'Morro Bay - BS1 MET' (morro-bay-bs1-met)
