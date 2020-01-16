@@ -26,15 +26,19 @@ This is the simplest scenario: an ERDDAP dataset with a single fixed station and
 
 Links:
 
-* [ERDDAP Dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html)
+* [ERDDAP Dataset](http://erddap.cencoos.org/erddap/tabledap/edu_calpoly_marine_morro_bay_met.html)
 * [View in CeNCOOS Data Portal](https://data.cencoos.org/#metadata/57163/station)
 
 ### Moored buoy, surface waves package and currents package, single dataset
 
 In this example, multiple packages are served in a single ERDDAP dataset.
 
-* [ERDDAP Dataset](http://erddap.sensors.axds.co/erddap/tabledap/ssbn7-sun2wave-sun2w-sunset-n.html)
-* [View in SECOORA Data Portal](https://portal.secoora.org/?&sensor_version=v2#metadata/100058/station/data)
+* [ERDDAP Dataset](https://erddap.secoora.org/erddap/tabledap/ssbn7-sun2wave-sun2w-sunset-n.html)
+* [View in SECOORA Data Portal](https://portal.secoora.org/#metadata/100058/station/data)
+
+### GTS Ingest
+
+The [WQB-04](https://pae-paha.pacioos.hawaii.edu/erddap/info/WQB-04/index.html) and [WQB-05](https://pae-paha.pacioos.hawaii.edu/erddap/info/WQB-05/index.html) PacIOOS buoys are actively used by NDBC for collecting data.
 
 ### Moored buoy, multiple packages, each with its own dataset
 
