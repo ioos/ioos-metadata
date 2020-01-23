@@ -426,6 +426,10 @@ Notes on GTS ingest and QC flagging:
 
 <br><br>
 
+#### Examples
+
+The [WQB-04](https://pae-paha.pacioos.hawaii.edu/erddap/info/WQB-04/index.html) and [WQB-05](https://pae-paha.pacioos.hawaii.edu/erddap/info/WQB-05/index.html) PacIOOS buoys are actively used by NDBC for collecting data.
+
 ## Rules for IOOS Asset Identifier Generation
 
 For reference, the [IOOS Asset Identifier 1.0](https://ioos.github.io/conventions-for-observing-asset-identifiers/ioos-assets-v1-0.html) is composed of the following components:
