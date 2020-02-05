@@ -68,7 +68,7 @@ entries:
           url: /ioos-metadata-profile-v1-2.html#ioos-metadata-profile-attributes
           output: web
 
-        - title: Requirements for IOOS Dataset GTS Ingestion
+        - title: Requirements for IOOS Dataset GTS Ingest
           url: /ioos-metadata-profile-v1-2.html#requirements-for-ioos-dataset-gts-ingest
           output: web
 
