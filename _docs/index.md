@@ -31,7 +31,7 @@ Individual releases of the IOOS Metadata Profile (e.g. 1.0, 1.1, 1.2) target spe
 
 ### [**IOOS Metadata Profile, Version 1.2** (Current)](ioos-metadata-profile-v1-2.html)
 
-IOOS Metadata Profile Version 1.2 (released in 2019) is the current **valid**{: style="color: green"} profile, and is based upon the following convention versions:
+IOOS Metadata Profile Version 1.2 (released in 2020) is the current **valid**{: style="color: green"} profile, and is based upon the following convention versions:
 
 - [Climate and Forecast Conventions (CF) 1.7](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html)
 - [Attribute Convention for Data Discovery 1.3](http://wiki.esipfed.org/index.php/Attribute_Convention_for_Data_Discovery_1-3)

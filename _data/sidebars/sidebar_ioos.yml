@@ -69,7 +69,7 @@ entries:
           output: web
 
         - title: Requirements for IOOS Dataset GTS Ingestion
-          url: /ioos-metadata-profile-v1-2.html#requirements-for-ioos-dataset-gts-ingestion
+          url: /ioos-metadata-profile-v1-2.html#requirements-for-ioos-dataset-gts-ingest
           output: web
 
         - title: Rules for IOOS Asset Identifier Generation
