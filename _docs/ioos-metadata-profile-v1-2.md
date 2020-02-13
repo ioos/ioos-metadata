@@ -32,7 +32,7 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 1. In the IOOS Profile, attributes can be either **required** or **recommended**:
 * all **required** attributes must have meaningful values assigned to them in accordance with the rules prescribed by the corresponding Convention or Template.
 * each and all of the **recommended** attributes may be omitted; however, it is highly desirable that these attributes are included into the netCDF metadata ***AND*** have meaningful values assigned to them.
-* consult the `Role` field value in the table to determine the value for each attribute
+* consult the `Role` field value in the table to determine whether each attribute is required or recommended
 
 1. The IOOS Profile allows only one **'platform'** per dataset.  Please see the corresponding [Platform](#platform) section of the profile below for more information.
 
@@ -203,9 +203,11 @@ The correct method for specifying platform metadata has historically been a sour
 
 **Guidelines for Platforms in Datasets**:
 
-**One platform per dataset:**  The IOOS Metadata Profile restricts datasets to include only **one platform per dataset**.  This simplifies the dataset structure significantly, allows for attribution that might otherwise be handled by variable-level attributes of the **`platform_variable`** to be replaced by the global attributes described below, and simplifies creation of aggregated datasets of multiple individual platform datasets in ERDDAP.  Note that because the **`platform_id`** attribute is not required in this profile, any dataset that does not include it will be considered to be specifying data for only one, distinct platform.
+**One platform per dataset:**  The IOOS Metadata Profile restricts datasets to include only **one platform per dataset**.  This simplifies the dataset structure significantly, allows for attribution that might otherwise be handled by variable-level attributes of the **`platform_variable`** to be replaced by the global attributes described below, and simplifies creation of aggregated datasets of multiple individual platform datasets in ERDDAP.  
 
-**Single-sensor datasets:** although multi-platform datasets are disallowed in the IOOS Metadata Profile, it is acceptable to provide data for an individual platform across multiple datasets. Some IOOS RAs use this pattern already, and provide one dataset for sensor package (e.g., CTD, ADCP, met, etc).  In this case, individual sensor datasets in ERDDAP will be associated together into a single platform by sharing a common global **`platform_id`** attribute value (indicating they belong to the same platform).  The code used to harvest sensor datasets for GTS publication by NDBC or into the Sensor Map by IOOS will perform this aggregation, so no action need be taken by the data provider themselves to aggregate these datasets in ERDDAP.  Each individual dataset must follow the [requirements for GTS ingest](#requirements-for-ioos-dataset-gts-ingest) individually.
+**Single-sensor datasets:** although multi-platform datasets are disallowed in the IOOS Metadata Profile, it is acceptable to provide data for an individual platform across multiple datasets. Some IOOS RAs use this pattern already, and provide one dataset for sensor package (e.g., CTD, ADCP, met, etc).  In this case, individual sensor datasets in ERDDAP will be associated together into a single platform by sharing a common global **`platform_id`** attribute value (indicating they belong to the same platform).  The code used to harvest sensor datasets for GTS publication by NDBC or into the Sensor Map by IOOS will perform this aggregation, so no action need be taken by the data provider themselves to aggregate these datasets in ERDDAP.  Each individual dataset intended for the GTS must follow the [requirements for GTS ingest](#requirements-for-ioos-dataset-gts-ingest) individually.  
+
+Note that because the **`platform_id`** attribute is not required in this profile, any dataset that does not include it will be considered to be specifying data for only one, distinct platform, and aggregation with other datasets by downstream processes at NDBC or IOOS is not guaranteed.  
 
 **Aggregated ERDDAP datasets:** ERDDAP provides the ability to create aggregated datasets from collections of individual datasets.  While this is encouraged as a way to streamline access for end users to related datasets, IOOS will not harvest aggregated datasets into upstream national products, nor will NDBC harvest them for GTS publication.  Therefore, you should set **`gts_ingest=false`** and **`ioos_ingest=false`** flags on any ERDDAP aggregated datasets.
 
@@ -221,17 +223,17 @@ wmo_platform_code | IOOS | The WMO identifier for the platform used to measure t
 
 ### Platform Variable
 
-CF Discrete Sampling Geometries guidelines specify that datasets include a coordinate variable that uniquely identifies 'features' in a collection of DSG featureTypes (e.g. 'timeSeries', 'profile', 'trajectory', 'timeSeriesProfile', 'trajectoryProfile').  For example, each buoy in a dataset with timeSeries feature instances from multiple buoys would have a unique identifier specified by the value of this coordinate variable.  
+CF Discrete Sampling Geometries guidelines specify that datasets include a coordinate variable that uniquely identifies 'features' in a collection of DSG featureTypes (e.g. 'timeSeries', 'profile', 'trajectory', 'timeSeriesProfile', 'trajectoryProfile', as specified by the **`featureType`** attribute).  For example, each buoy in a dataset with timeSeries feature instances from multiple buoys would have a unique identifier specified by the value of this coordinate variable.  
 
 **Guidelines for Platform Variable in Datasets**:
 
-For the purposes of this profile - which restricts datasets to **one platform-per-dataset** - this variable should only have a dimension of **1** (indicating only a single sampling platform is present).  Additionally, geophysical data variables must reference the name of this variable in their **`platform`** attribute (described in the [Platform](#platform) section above). The Platform Variable can be of any data type.
+For the purposes of this profile - which restricts datasets to **one platform-per-dataset** - this variable should only have a dimension of **1** (indicating only a single sampling platform is present).  Additionally, geophysical data variables must reference the name of this variable in their **`platform`** attribute (described in the [Platform](#platform) section above). The Platform Variable can be of any data type, however if the global attribute **`platform_id`** is specified, it should match the value of the Platform Variable.
 
 For more information about CF Discrete Sampling Geometries and associated requirements, see the [CF Documentation - Chapter 9](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#discrete-sampling-geometries).
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
-platform_variable:cf_role | CF | Indicates the values of this variable contain identifiers for the [CF Discrete Sampling Geometry featureType](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#_features_and_feature_types) features in the dataset. Allowed values are defined in [CF Coordinates and metadata - Chapter 9.5](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#coordinates-metadata) and consist of: `timeseries_id`, `profile_id`, and `trajectory_id`, depending on the data type represented in the dataset, as specified by the **`featureType`** global attribute. <br><br>Example: {::nomarkdown}<ul> <li> <b><code>cf_role = "timeseries_id"</code></b> </ul>{:/}| variable | **required**
+platform_variable:cf_role | CF | Indicates the values of this variable contain identifiers for the [CF Discrete Sampling Geometry featureType](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#_features_and_feature_types) features in the dataset. Allowed values are defined in [CF Coordinates and metadata - Chapter 9.5](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#coordinates-metadata) and consist of: `timeseries_id`, `profile_id`, and `trajectory_id`, depending on the featureType represented in the dataset, as specified by the **`featureType`** global attribute. <br><br>Example: {::nomarkdown}<ul><li><b><code>cf_role = "timeseries_id"</code></b></li></ul>{:/}| variable | **required**
 
 
 ### Quality Control/QARTOD
