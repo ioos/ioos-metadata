@@ -34,7 +34,9 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 * each and all of the **recommended** attributes may be omitted; however, it is highly desirable that these attributes are included into the netCDF metadata ***AND*** have meaningful values assigned to them.
 * consult the `Role` field value in the table to determine whether each attribute is required or recommended
 
-1. The IOOS Profile allows only one **'platform'** per dataset.  Please see the corresponding [Platform](#platform) section of the profile below for more information.
+1. The IOOS Profile is targets the representation of in situ observations encoded in multidimensional, self-describing datasets such as netCDF.  Some aspects of the profile are specific to the [CF Discrete Sampling Geometries](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#discrete-sampling-geometries) guidance, in particular the [Platform](#platform) and [Platform Variable](#platform-variable) sections.  For datasets for which this guidance does not apply (e.g. gridded model output), these sections can be disregarded (i.e. **required** attributes may be omitted as they are not relevant).  To avoid over-complicating the documentation, these Platform-related attributes are listed as '**required**' rather than '**required**, if applicable'.
+
+1. For in situ observation datasets, the IOOS Profile allows only one **'platform'** per dataset.  Please see the corresponding [Platform](#platform) section of the profile below for more information.
 
 1. The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/index.html) currently uses a slightly different [netCDF File Format (V2)](https://ioos.github.io/ioosngdac/ngdac-netcdf-file-format-version-2); work is in progress to harmonize the NGDAC File Format and IOOS Metadata Profile.
 
@@ -199,7 +201,9 @@ Attributes {
 
 ### Platform
 
-The correct method for specifying platform metadata has historically been a source of confusion. The IOOS Metadata Profile aims to simplify platform metadata specification with the addition of a few global attributes (**`platform_id`** and **`platform_name`**, as well as the OceanSITES-derived **`wmo_platform_code`**) and clarification of existing standards for global attributes and the platform container variable. Data providers are encouraged to carefully review this section and upstream standards, and especially to review the Gold Standard example datasets.
+The correct method for specifying platform metadata has historically been a source of confusion. The IOOS Metadata Profile aims to simplify platform metadata specification with the addition of a few global attributes (**`platform_id`** and **`platform_name`**, as well as the OceanSITES-derived **`wmo_platform_code`**) and clarification of existing standards for global attributes and the platform container variable. Data providers are encouraged to carefully review this section and upstream standards, and especially to review the [Gold Standard](#gold-standard-example-datasets) example datasets.
+
+As mentioned in the [Notes/Caveats section](#notescaveats), datasets that are not compliant with the CF Discrete Sampling Geometries guidelines for in situ measurements (e.g. gridded model outputs), the various Platform-related attributes listed in this section and the Platform Variable section are not required and can be omitted.  
 
 **Guidelines for Platforms in Datasets**:
 
