@@ -74,7 +74,7 @@ title  | ACDD | One sentence about the data contained within the file. | global 
 
 #### Example
 
-Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
+Taken from the [Morro Bay BS1 MET Gold Standard Example dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
 
 ```
 NC_GLOBAL {
@@ -94,7 +94,7 @@ NC_GLOBAL {
 
 The attributes listed in the table below allow for consistent attribution of datasets within IOOS' national products.  Data providers are encouraged to follow these attribute guidelines exactly to ensure datasets appear with proper attribution.  
 
-Consult the [Gold Standard example datasets](gold-standard-examples.html) for good examples to start from.
+Consult the [Gold Standard Example Datasets](gold-standard-examples.html) for good examples to start from.
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
@@ -130,7 +130,7 @@ publisher_postalcode | IOOS | The postal code of the person or organization that
 
 #### Example
 
-Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
+Taken from the [Morro Bay BS1 MET Gold Standard Example dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
 
 ```
 NC_GLOBAL {
@@ -182,7 +182,7 @@ geophysical_variable:units  | CF | Required for most all variables that represen
 
 #### Example
 
-Taken from the [Morro Bay BS1 MET Gold Standard Example](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
+Taken from the [Morro Bay BS1 MET Gold Standard Example dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
 
 ```
 Attributes {
@@ -253,12 +253,12 @@ This profile requires that all variables containing results from QARTOD tests be
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
 geophysical_variable:ancillary_variables | CF | From [CF Chapter 3.4](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html#ancillary-data):{::nomarkdown}<ul> <li>"When one data variable provides metadata about the individual values of another data variable it may be desirable to express this association by providing a link between the variables. For example, instrument data may have associated measures of uncertainty. The attribute <code><b>ancillary_variables</b></code> is used to express these types of relationships. It is a string attribute whose value is a blank separated list of variable names. The nature of the relationship between variables associated via ancillary_variables must be determined by other attributes." </li></ul>{:/}For purposes of the IOOS Metadata Profile, the **`ancillary_variables`** attribute associates the data variable with one or many QARTOD flag variables containing test results. Multiple QARTOD ancillary variables should be represented as a space-separated list of individual test variable names (for cases where data provider includes multiple test results, or includes the QARTOD "Aggregate/Rollup" flag in addition to individual flags, as required by this profile). | variable | **required**, if applicable
-qartod_variable:standard_name | CF | The full set of CF Standard Names available to identify QARTOD flag ancillary variables is anticipated to be released in [Standard Name Table v72](http://cfconventions.org/Data/cf-standard-names/72/build/cf-standard-name-table.html) (March 2020), pending acceptance of [cf-convention/cf-conventions#216](https://github.com/cf-convention/cf-conventions/issues/216) and includes: {::nomarkdown}<ul><li><code><b>aggregate_quality_flag</b></code>: an Aggregate/Rollup flag combining multiple individual flags</li><li><code><b>attenuated_signal_test_quality_flag</b></code>: Attenuated Signal Test flag</li><li><code><b>climatology_test_quality_flag</b></code>: Climatology Test flag</li><li><code><b>flat_line_test_quality_flag</b></code>: Flat Line Test flag</li><li><code><b>gap_test_quality_flag</b></code>: Timing/Gap Test flag</li><li><code><b>gross_range_test_quality_flag</b></code>: Gross Range Test flag</li><li><code><b>location_test_quality_flag</b></code>: Location Test flag</li><li><code><b>multi_variate_test_quality_flag</b></code>: Multi-variate Test flag</li><li><code><b>neighbor_test_quality_flag</b></code>: Neighbor Test flag </li><li><code><b>rate_of_change_test_quality_flag</b></code>: Rate of Change Test flag</li><li><code><b>spike_test_quality_flag</b></code>: Spike Test flag</li><li><code><b>syntax_test_quality_flag</b></code>:  Syntax Test flag</li></ul>{:/} | variable | **required**, if applicable
+qartod_variable:standard_name | CF | The full set of CF Standard Names available to identify QARTOD flag ancillary variables can be found in [Standard Name Table v72](http://cfconventions.org/Data/cf-standard-names/72/build/cf-standard-name-table.html) (March 2020) and includes: {::nomarkdown}<ul><li><code><b>aggregate_quality_flag</b></code>: an Aggregate/Rollup flag combining multiple individual flags</li><li><code><b>attenuated_signal_test_quality_flag</b></code>: Attenuated Signal Test flag</li><li><code><b>climatology_test_quality_flag</b></code>: Climatology Test flag</li><li><code><b>flat_line_test_quality_flag</b></code>: Flat Line Test flag</li><li><code><b>gap_test_quality_flag</b></code>: Timing/Gap Test flag</li><li><code><b>gross_range_test_quality_flag</b></code>: Gross Range Test flag</li><li><code><b>location_test_quality_flag</b></code>: Location Test flag</li><li><code><b>multi_variate_test_quality_flag</b></code>: Multi-variate Test flag</li><li><code><b>neighbor_test_quality_flag</b></code>: Neighbor Test flag </li><li><code><b>rate_of_change_test_quality_flag</b></code>: Rate of Change Test flag</li><li><code><b>spike_test_quality_flag</b></code>: Spike Test flag</li><li><code><b>syntax_test_quality_flag</b></code>:  Syntax Test flag</li></ul>{:/} | variable | **required**, if applicable
 qartod_variable:references | CF | This should be a URL to a resource that describes the test configuration, parameters used, etc, if such a resource is available. The global `references` attribute can also be used to describe QC methods in general. | variable | recommended
 
 #### Example
 
-Adapted from: Morro Bay BS1 MET ERDDAP Gold-Standard [dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
+Adapted from: [Morro Bay BS1 MET Gold-Standard Example dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
 
 ```
   air_temperature {
