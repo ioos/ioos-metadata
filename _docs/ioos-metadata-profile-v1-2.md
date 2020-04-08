@@ -226,7 +226,7 @@ Recommendations on the specific CF DSG featureTypes to use for different platfor
 
 Platform Type | CF DSG Dataset Type
 :--------- | :-------- |
-Buoy/Station with:{::nomarkdown}<ul><li>single sensor package <i><b>or</b></i></li><li>multiple sensor packages with same vertical (height/depth) position and same sampling frequency</li></ul>{:/} | TimeSeries - single station
+Buoy/Station with:{::nomarkdown}<ul><li>single sensor package <i><b>or</b></i></li><li>multiple sensor packages with identical vertical (height/depth) position and same sampling frequency</li></ul>{:/} | TimeSeries - single station
 Buoy/Station with:{::nomarkdown}<ul><li>multiple sensor packages with different vertical (height/depth) positions <i><b>or</b></i></li><li>multiple sensor packages with different sampling frequencies</li></ul>{:/} | TimeSeries - multiple station _**or**_ <br> TimeSeriesProfile - single station _**or**_ <br> ‘single-sensor-per-dataset’
 Profiling Glider | TrajectoryProfile
 
