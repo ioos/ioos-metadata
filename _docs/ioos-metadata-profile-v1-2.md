@@ -84,7 +84,7 @@ NC_GLOBAL {
     infoUrl                   https://data.cencoos.org/#metadata/57163/station
     license                   The data may be used and redistributed for free but is not intended for legal use, since it may contain inaccuracies.  Neither the data Contributor, ERD, NOAA, nor the United States Government, nor any of their employees or contractors, makes any warranty, express or implied, including warranties of merchantability and fitness for a particular purpose, or assumes any legal liability for the accuracy, completeness, or usefulness, of this information.
     naming_authority          edu.calpoly.marine
-    standard_name_vocabulary  CF Standard Name Table v71
+    standard_name_vocabulary  CF Standard Name Table v72
     summary                   Timeseries data from 'Morro Bay - BS1 MET' (morro-bay-bs1-met)
     title                     Morro Bay - BS1 MET
 }
@@ -272,7 +272,7 @@ Adapted from: [Morro Bay BS1 MET Gold-Standard Example dataset](https://standard
   air_temperature_qc_agg {
     String standard_name "aggregate_quality_flag";
     String long_name "Air Temperature QARTOD Aggregate Quality Flag";
-    String flag_values "1, 2, 3, 4, 9";
+    String flag_values 1, 2, 3, 4, 9;
     String flag_meanings "PASS NOT_EVALUATED SUSPECT FAIL MISSING";
     String references "http://services.cormp.org/quality.php";
     Int32 _FillValue 2;
@@ -280,7 +280,7 @@ Adapted from: [Morro Bay BS1 MET Gold-Standard Example dataset](https://standard
   air_temperature_gross_range {
     String standard_name "gross_range_test_quality_flag";
     String long_name "Air Temperature QARTOD Gross Range Test Quality Flag";
-    String flag_values "1, 2, 3, 4, 9";
+    String flag_values 1, 2, 3, 4, 9;
     String flag_meanings "PASS NOT_EVALUATED SUSPECT FAIL MISSING";
     String references "http://services.cormp.org/quality.php";
     Int32 _FillValue 2;
@@ -288,7 +288,7 @@ Adapted from: [Morro Bay BS1 MET Gold-Standard Example dataset](https://standard
   air_temperature_flat_line {
     String standard_name "flat_line_test_quality_flag";
     String long_name "Air Temperature QARTOD Flat Line Test Quality Flag";
-    String flag_values "1, 2, 3, 4, 9";
+    String flag_values 1, 2, 3, 4, 9;
     String flag_meanings "PASS NOT_EVALUATED SUSPECT FAIL MISSING";
     String references "http://services.cormp.org/quality.php";
     Int32 _FillValue 2;
