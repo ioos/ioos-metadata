@@ -16,7 +16,7 @@ Since the IOOS standard builds off of the [**NOAA NCEI NetCDF Templates**](https
 
 The IOOS Gold Standard Examples focus on IOOS-specific guidelines, and can serve as templates for data providers interested in implementing the profile.  In addition to the dataset links below, IOOS maintains a fully-deployable ERDDAP instance that includes both the example data and configuration files.  Consult the following link for more information:
 
-* [IOOS "ERDDAP Gold Standard" GitHub Repository](https://github.com/ioos/erddap-gold-standard)
+* [IOOS "ERDDAP Gold Standard" GitHub Repository](https://github.com/ioos/erddap-gold-standard) and [Live ERDDAP server](https://standards.sensors.ioos.us/erddap/index.html)
 
 ## **Dataset Types and Examples**
 
@@ -29,20 +29,24 @@ Links:
 * [ERDDAP Dataset](http://erddap.cencoos.org/erddap/tabledap/edu_calpoly_marine_morro_bay_met.html)
 * [View in CeNCOOS Data Portal](https://data.cencoos.org/#metadata/57163/station)
 
-### Moored buoy, surface waves package and currents package, single dataset
+### Moored buoy, met package and currents package
 
-In this example, multiple packages are served in a single ERDDAP dataset.
+In this example, the two packages are broken up into two ERDDAP datasets.
 
-* [ERDDAP Dataset](https://erddap.secoora.org/erddap/tabledap/ssbn7-sun2wave-sun2w-sunset-n.html)
-* [View in SECOORA Data Portal](https://portal.secoora.org/#metadata/100058/station/data)
+* Met
+  * [ERDDAP Dataset (DSG TimeSeries)](http://erddap.secoora.org/erddap/tabledap/edu_usf_marine_comps_c10.html)
+  * [In SECOORA Data Portal](https://portal.secoora.org/#metadata/60387/station)
+* Currents
+  * [ERDDAP Dataset (DSG TimeSeriesProfile)](http://erddap.secoora.org/erddap/tabledap/c10-wave-wfs-central-buoy.html)
+  * [In SECOORA Data Portal](https://portal.secoora.org/#metadata/100167/station)
+
+### Station, multiple packages, single dataset
+
+*Example coming soon...*
 
 ### GTS Ingest
 
 The [WQB-04](https://pae-paha.pacioos.hawaii.edu/erddap/info/WQB-04/index.html) and [WQB-05](https://pae-paha.pacioos.hawaii.edu/erddap/info/WQB-05/index.html) PacIOOS buoys are actively used by NDBC for collecting data.
-
-### Moored buoy, multiple packages, each with its own dataset
-
-*Example coming soon...*
 
 ### Moving station, UAV with sub-surface measurements
 
