@@ -208,7 +208,7 @@ More information about CF DSG and associated requirements is available in [CF Do
 
 **Guidelines for Platforms in Datasets**:   
 
-**One platform per dataset:** The IOOS Metadata Profile restricts datasets to contain only a **single physical observing platform per dataset** (e.g. buoy, glider, station, or anything that might be assigned a WMO ID).  This simplifies the dataset structure significantly, and it allows the use of several global attributes to specify platform metadata that might otherwise be found in platform container variable(s) (e.g. **`platform_id`** and **`platform_name`**, as well as the OceanSITES-derived **`wmo_platform_code`**).  It also simplifies the creation of aggregated datasets at the ERDDAP-level to group individual platform datasets together.  
+**One platform per dataset:** The IOOS Metadata Profile restricts datasets to contain only a **single physical observing platform per dataset** (e.g. buoy, glider, station, or anything that might be assigned a WMO ID).  This simplifies the dataset structure significantly, and it allows the use of several global attributes to specify platform metadata that might otherwise be found in platform container variable(s) (e.g. **`platform_id`** and **`platform_name`**, as well as the OceanSITES-derived **`wmo_platform_code`**).  It also simplifies the creation of aggregated datasets at the ERDDAP level to create groups of individual platform datasets.
 
 Notes:
 
@@ -419,11 +419,12 @@ Refer to the [GTS Ingest](#gts-ingest) and [QARTOD](#quality-controlqartod) tabl
 #### For NDBC to pull data for a dataset to the GTS:
 
 1. The dataset should be in ERDDAP
+1. The dataset should meet the Single Platform requirement described in the [Platform](#platform) section
 1. The dataset should have a global attribute called **`wmo_platform_code`**, with the WMO ID or NWS ID as the value (see **`wmo_platform_code`** in the [Platform](#platform) section for details on specific ID requirements)
 1. The dataset should have a global attribute called **`gts_ingest`** with a value of **`true`**
 1. Any variables the RA wants to push to NDBC should have an attribute called **`gts_ingest`** with value of **`true`**
 1. The variable should have a **`standard_name`** attribute with a value that's a valid CF Standard Name
-1. The variable should include an ancillary variable representing the QARTOD aggregate flag (see rules for this below)
+1. The variable should include an ancillary variable representing the QARTOD aggregate flag (see [rules](#requirements-for-the-qartod-aggregaterollup-flag) for this below)
 1. The variable should have a **`units`** attribute, with a value that's a valid unit (that is, the units are convertible to the CF canonical unit using the [**`udunits`**](https://www.unidata.ucar.edu/software/udunits/) library) <br><br>
 
 **Note:** it is not a requirement for a variable's QC flag ancillary variables to include a **`gts_ingest`** flag.
