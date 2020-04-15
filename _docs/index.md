@@ -1,10 +1,10 @@
 ---
-title: IOOS Metadata Profile
+title: IOOS Metadata Profile Document
 keywords: [ioos, metadata, netCDF]
 tags: [ioos, metadata, netCDF]
 toc: false
 #permalink: index.html
-summary: The IOOS Metadata Profile contains dataset attribution guidelines and examples to help the US IOOS community publish datasets in netCDF and other related data formats in an interoperable manner.  The goal of the metadata profile is to allow users of IOOS' data services, such as ERDDAP, THREDDS, OPeNDAP, and SOS, seamless access and use across individual IOOS data providers' services.
+summary: The Metadata Profile contains dataset attribution guidelines and examples to help the US IOOS community publish datasets in netCDF and other related data formats in an interoperable manner.  The goal of the metadata profile is to allow users of IOOS' data services, such as ERDDAP, THREDDS, OPeNDAP, and SOS, seamless access and use across individual IOOS data providers' services.
 ---
 
 ## **Current Profile Version**
