@@ -412,22 +412,35 @@ Attributes {
 
 ## Requirements for IOOS Dataset GTS Ingest
 
-IOOS partners with NOAA [NDBC](https://www.ndbc.noaa.gov/) to ingest datasets to the WMO [Global Telecommunication System (GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  This process will leverage an IOOS data provider's ERDDAP server as a data interchange server.  In order to allow NDBC to query and filter the correct subset of datasets in an ERDDAP server to process, **data providers must ensure the following dataset attribution requirements are met**.  
+IOOS partners with NOAA [NDBC](https://www.ndbc.noaa.gov/) to ingest datasets to the WMO [Global Telecommunication System (GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  This process will leverage an IOOS data provider's ERDDAP server as a data interchange server.  In order to allow NDBC to query and filter the correct subset of datasets in an ERDDAP server and process them consistently and predictably, **data providers must ensure the following dataset attribution requirements are met**.  
 
-Refer to the [GTS Ingest](#gts-ingest) and [QARTOD](#quality-controlqartod) tables above for detailed descriptions of the attributes shown below.
+Refer to the [Platform](#platform), [GTS Ingest](#gts-ingest), and [Quality Control/QARTOD](#quality-controlqartod) tables above for detailed descriptions of the attributes shown below.
 
 #### For NDBC to pull data for a dataset to the GTS:
 
 1. The dataset should be in ERDDAP
 1. The dataset should meet the Single Platform requirement described in the [Platform](#platform) section
+1. The dataset should meet requirements for defining the vertical coordinate variable set forth in the [Requirements for Vertical Coordinate Variable](#requirements-for-vertical-coordinate-variable) section
 1. The dataset should have a global attribute called **`wmo_platform_code`**, with the WMO ID or NWS ID as the value (see **`wmo_platform_code`** in the [Platform](#platform) section for details on specific ID requirements)
 1. The dataset should have a global attribute called **`gts_ingest`** with a value of **`true`**
 1. Any variables the RA wants to push to NDBC should have an attribute called **`gts_ingest`** with value of **`true`**
 1. The variable should have a **`standard_name`** attribute with a value that's a valid CF Standard Name
-1. The variable should include an ancillary variable representing the QARTOD aggregate flag (see [rules](#requirements-for-the-qartod-aggregaterollup-flag) for this below)
+1. The variable should include an ancillary variable representing the QARTOD aggregate flag as defined in the [Requirements for the QARTOD Aggregate/Rollup Flag](#requirements-for-the-qartod-aggregaterollup-flag) section
 1. The variable should have a **`units`** attribute, with a value that's a valid unit (that is, the units are convertible to the CF canonical unit using the [**`udunits`**](https://www.unidata.ucar.edu/software/udunits/) library) <br><br>
 
 **Note:** it is not a requirement for a variable's QC flag ancillary variables to include a **`gts_ingest`** flag.
+
+#### Requirements for Vertical Coordinate Variable:
+
+In order for NDBC to be able to uniformly identify and interpret the vertical coordinate variable in IOOS datasets to ensure consistent processing, a specific implementation of the CF guidelines for vertical coordinate variables is necessary.  This profile requires the vertical coordinate variable to include the following attributes:
+
+Name | Accepted Values
+:--------- | :------- |
+axis | 'Z' |
+positive | 'up', down' |
+units | One of: [meter, meters, inch, foot, yard, mile, miles, US_survey_foot, US_survey_feet, <br> fathom, fathoms, international_inch, international_inches, international_foot, <br> international_feet, international_yard, international_yards, international_mile, <br> international_miles, inches, in, feet, ft, yd, mi] |
+
+**Note:** The vertical position of an individual observation must always be encoded using the vertical coordinate variable (as specified in the CF DSG guidelines) and _cannot_ be included as an attribute on a data variable.
 
 #### Requirements for the QARTOD Aggregate/Rollup Flag:
 
