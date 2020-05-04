@@ -432,9 +432,7 @@ Refer to the [Platform](#platform), [GTS Ingest](#gts-ingest), and [Quality Cont
 
 #### Requirements for Vertical Coordinate Variable:
 
-To support consistent ingest of observations by NDBC, and in order for NDBC to be able to uniformly identify and interpret the vertical coordinate variable in IOOS datasets destined for GTS ingest, some restrictions must be enforced beyond those specified by the CF requirements themselves.
-
-Specifically, the vertical coordinate variable must include the following attributes:
+In order for NDBC to be able to uniformly identify and interpret the vertical coordinate variable in IOOS datasets to ensure consistent processing, a specific implementation of the CF guidelines for vertical coordinate variables is necessary.  This profile requires the vertical coordinate variable to include the following attributes:
 
 Name | Accepted Values
 :--------- | :------- |
