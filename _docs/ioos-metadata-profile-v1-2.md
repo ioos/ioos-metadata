@@ -412,9 +412,29 @@ Attributes {
 
 ## Requirements for IOOS Dataset NDBC/GTS Ingest
 
-In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfederal IOOS partner data and delivers a subset of those variables through the NWS system and on to the WMO [Global Telecommunication System (GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  NDBC also publishes all the data they harvest to their web products. Variables harvested by NDBC, including variables delivered to the GTS, are listed in [this table].
+In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfederal IOOS partner data and delivers a subset of those variables through the NWS system and on to the WMO [Global Telecommunication System (GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  NDBC also publishes all the data they harvest to their web products. Generally, NDBC delivers meteorological and physical oceanographic variables to the GTS, but does not deliver water quality variables.  Regardless, water quality variables are still posted to the NDBC website for public access.
+| Variables that NDBC accepts | Variables that NDBC delivers to the GTS |
+|:--- |:--- |
+| Winds (direction, speed, gust) | x (except gust) |
+| Air temperature | x | 
+| Dew point | x |
+| Barometric pressure (sea level) | x |
+| Relative humidity |   |
+| Shortwave and longwave radiation |   |
+| Waves: Directional and non-directional, spectra | x |
+| Water temperature (surface, subsurface - 30 depths) | x |
+| Salinity (surface, subsurface) | x |
+| Current speed/direction (70 depths/bins) | x |
+| Water level |   | 
+| Dissolved oxygen (surface, bottom) |   | 
+| Turbidity |   | 
+| Chlorophyll |   | 
+| pH |   |
+| Eh |   |
 
-NDBC will leverage IOOS RA ERDDAP servers as the central access points for nonfederal IOOS partner data.  This is a departure from the previous data delivery method, where providers and RAs packaged XML files and posted them to an NDBC FTP server.  [This diagram] illustrates the data flow from providers to NDBC.  It is critical that RAs work with their regional data providers to ensure their data are available in the RA ERDDAPs, so that NDBC can continue to access those datasets.   
+
+NDBC will leverage IOOS RA ERDDAP servers as the central access points for nonfederal IOOS partner data.  This is a departure from the previous data delivery method, where providers and RAs packaged XML files and posted them to an NDBC FTP server. It is critical that RAs work with their regional data providers to ensure their data are available in the RA ERDDAPs, so that NDBC can continue to access those datasets. 
+![Data flow](/_docs/images/NDBC-data-flow.png)   
 
 In order to allow NDBC to query and filter the correct subset of datasets in an ERDDAP server and process them consistently and predictably, **data providers must ensure the following dataset attribution requirements are met**.  
 
