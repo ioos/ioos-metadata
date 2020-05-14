@@ -350,7 +350,7 @@ sea_water_temperature_raw {
 
 ### IOOS Ingest
 
-The **`ioos_ingest`** flag is intended to flag datasets that, in the rare case, should **not** be harvested by IOOS national products (such as the IOOS Catalog and Sensor Map).  This allows data providers and ERDDAP operators the ability to exclude datasets that aren't  allowed for these public products on an individual basis.  For example, an IOOS RA might host data owned by a private industry group who places sharing restrictions on their datasets.  Note: RAs who are Certified RICEs must adhere to the NOAA data sharing policy and strive to make data publicly available, regardless of funding relationships with data providers.   
+The **`ioos_ingest`** flag is intended to flag datasets that, in the rare case, should **not** be harvested by IOOS national products (such as the IOOS Catalog and Sensor Map).  This allows data providers and ERDDAP operators the ability to exclude datasets that aren't  allowed for these public products on an individual basis.  For example, an IOOS RA might host data owned by a private industry group who places sharing restrictions on their datasets.  Note: RAs who are Certified RICEs must adhere to the NOAA data sharing policy and strive to make data publicly available, regardless of funding relationships with data providers. Therefore, this flag should be used for rare exceptions to this rule.  
 
 
 Name | Convention | Description | Type | Role
@@ -410,9 +410,13 @@ Attributes {
 ```
 <br><br>
 
-## Requirements for IOOS Dataset GTS Ingest
+## Requirements for IOOS Dataset NDBC/GTS Ingest
 
-IOOS partners with NOAA [NDBC](https://www.ndbc.noaa.gov/) to ingest datasets to the WMO [Global Telecommunication System (GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  This process will leverage an IOOS data provider's ERDDAP server as a data interchange server.  In order to allow NDBC to query and filter the correct subset of datasets in an ERDDAP server and process them consistently and predictably, **data providers must ensure the following dataset attribution requirements are met**.  
+In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfederal IOOS partner data and delivers a subset of those variables through the NWS system and on to the WMO [Global Telecommunication System (GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  NDBC also publishes all the data they harvest to their web products. Variables harvested by NDBC, including variables delivered to the GTS, are listed in [this table].
+
+NDBC will leverage IOOS RA ERDDAP servers as the central access points for nonfederal IOOS partner data.  This is a departure from the previous data delivery method, where providers and RAs packaged XML files and posted them to an NDBC FTP server.  [This diagram] illustrates the data flow from providers to NDBC.  It is critical that RAs work with their regional data providers to ensure their data are available in the RA ERDDAPs, so that NDBC can continue to access those datasets.   
+
+In order to allow NDBC to query and filter the correct subset of datasets in an ERDDAP server and process them consistently and predictably, **data providers must ensure the following dataset attribution requirements are met**.  
 
 Refer to the [Platform](#platform), [GTS Ingest](#gts-ingest), and [Quality Control/QARTOD](#quality-controlqartod) tables above for detailed descriptions of the attributes shown below.
 
@@ -421,7 +425,7 @@ Refer to the [Platform](#platform), [GTS Ingest](#gts-ingest), and [Quality Cont
 1. The dataset should be in ERDDAP
 1. The dataset should meet the Single Platform requirement described in the [Platform](#platform) section
 1. The dataset should meet requirements for defining the vertical coordinate variable set forth in the [Requirements for Vertical Coordinate Variable](#requirements-for-vertical-coordinate-variable) section
-1. The dataset should have a global attribute called **`wmo_platform_code`**, with the WMO ID or NWS ID as the value (see **`wmo_platform_code`** in the [Platform](#platform) section for details on specific ID requirements)
+1. The dataset should have a global attribute called **`wmo_platform_code`**, with the numeric WMO ID or alphanumeric NWS ID as the value (see **`wmo_platform_code`** in the [Platform](#platform) section for details on specific ID requirements)
 1. The dataset should have a global attribute called **`gts_ingest`** with a value of **`true`**
 1. Any variables the RA wants to push to NDBC should have an attribute called **`gts_ingest`** with value of **`true`**
 1. The variable should have a **`standard_name`** attribute with a value that's a valid CF Standard Name
