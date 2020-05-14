@@ -432,7 +432,6 @@ In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfed
 | pH |   |
 | Eh |   |
 
-
 NDBC will leverage IOOS RA ERDDAP servers as the central access points for nonfederal IOOS partner data.  This is a departure from the previous data delivery method, where providers and RAs packaged XML files and posted them to an NDBC FTP server. It is critical that RAs work with their regional data providers to ensure their data are available in the RA ERDDAPs, so that NDBC can continue to access those datasets. 
 ![Data flow](/_docs/images/NDBC-data-flow.png)   
 
