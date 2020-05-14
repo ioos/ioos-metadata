@@ -412,7 +412,7 @@ Attributes {
 
 ## Requirements for IOOS Dataset NDBC/GTS Ingest
 
-In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfederal IOOS partner data and delivers a subset of those variables through the NWS system and on to the WMO [Global Telecommunication System (GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  NDBC also publishes all the data they harvest to their web products. Generally, NDBC delivers meteorological and physical oceanographic variables to the GTS, but does not deliver water quality variables.  Regardless, water quality variables are still posted to the NDBC website for public access.
+In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfederal IOOS partner data and delivers a subset of those variables (mainly meteorological and physical oceanographic) through the NWS system and on to the WMO [Global Telecommunication System (GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  NDBC also publishes all the data they harvest to their web products. 
 | Variables that NDBC accepts | Variables that NDBC delivers to the GTS |
 |:--- |:--- |
 | Winds (direction, speed, gust) | x (except gust) |
