@@ -413,6 +413,7 @@ Attributes {
 ## Requirements for IOOS Dataset NDBC/GTS Ingest
 
 In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfederal IOOS partner data and delivers a subset of those variables (mainly meteorological and physical oceanographic) through the NWS system and on to the WMO [Global Telecommunication System (GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  NDBC also publishes all the data they harvest to their web products. 
+
 | Variables that NDBC accepts | Variables that NDBC delivers to the GTS |
 |:--- |:--- |
 | Winds (direction, speed, gust) | x (except gust) |
@@ -433,7 +434,7 @@ In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfed
 | Eh |   |
 
 NDBC will leverage IOOS RA ERDDAP servers as the central access points for nonfederal IOOS partner data.  This is a departure from the previous data delivery method, where providers and RAs packaged XML files and posted them to an NDBC FTP server. It is critical that RAs work with their regional data providers to ensure their data are available in the RA ERDDAPs, so that NDBC can continue to access those datasets. 
-![Data flow](./images/NDBC-data-flow.png?raw=true)
+![Data flow](NDBC-data-flow.png)
 
 In order to allow NDBC to query and filter the correct subset of datasets in an ERDDAP server and process them consistently and predictably, **data providers must ensure the following dataset attribution requirements are met**.  
 
