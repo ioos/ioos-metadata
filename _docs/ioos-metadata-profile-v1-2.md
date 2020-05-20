@@ -14,7 +14,7 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 |:--- |:--- |:--- |
 | 1.0 | [Initial version based on the NODC Templates 1.1 and ACDD 1.1](./ioos-metadata-profile-v1-0.html) | 2016-10-01 |
 | 1.1 | [Updated version based on the NCEI Templates 2.0 and ACDD 1.3](./ioos-metadata-profile-v1-1.html) | 2016-11-01 |
-| **1.2** |**Currently Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `infoUrl` and `Conventions`<br>* Make `creator_institution`, `creator_url`, `license`, `publisher_url`, and `summary` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary` (recommended)<br>* Make `contributor_name`, `contributor_role`, `institution`, and `publisher_name` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset; clarify use of 'Platform' variable and related `platform` global and variable attributes <br> * Add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_url` <br> * Add `gts_ingest` to indicate datasets and variables intended for NDBC/GTS harvest <br> * Add `ioos_ingest` to indicate datasets intended to be harvested into IOOS national products <br> * Add `instrument_variable:component` <br> * Add [Quality Control/QARTOD](#quality-controlqartod) section describing QARTOD flag variable requirements <br> * Add [Requirements for NDBC/GTS Ingest](#requirements-for-ioos-dataset-gts-ingest) section | **2020-01-10** |
+| **1.2** |**Currently Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `infoUrl` and `Conventions`<br>* Make `creator_institution`, `creator_url`, `license`, `publisher_url`, and `summary` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary` (recommended)<br>* Make `contributor_name`, `contributor_role`, `institution`, and `publisher_name` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset; clarify use of 'Platform' variable and related `platform` global and variable attributes <br> * Add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_url` <br> * Add `gts_ingest` to indicate datasets and variables intended for NDBC/GTS harvest <br> * Add `ioos_ingest` to indicate datasets intended to be harvested into IOOS national products <br> * Add `instrument_variable:component` <br> * Add [Quality Control/QARTOD](#quality-controlqartod) section describing QARTOD flag variable requirements <br> * Add [Requirements for NDBC/GTS Ingest](#requirements-for-ioos-dataset-ndbcgts-ingest) section | **2020-01-10** |
 
 ## Notes/Caveats
 
@@ -236,7 +236,7 @@ Profiling Glider | TrajectoryProfile
 
 **TimeSeriesProfile - single station:** A [DSG TimeSeriesProfile feature](http://cfconventions.org/cf-conventions/cf-conventions.html#time-series-profiles) represents a platform with multiple sensors as a vertical profile with a altitude (depth or height) position for each sensor.  This can also be used for profiling sensors like ADCPs.  This metadata profile restricts TimeSeriesProfile datasets to include a 'station dimension' of only 1, indicating a single timeSeries feature (or 'station') per dataset.
 
-**single-sensor-per-dataset:** individual ERDDAP datasets of either TimeSeries or TimeSeriesProfile type that are associated via matching **`platform_id`** and **`wmo_platform_code`** global attributes, breaking a platform's data apart into individual DSG datasets.  Some IOOS RAs use this pattern already, and provide one dataset for sensor package (e.g., CTD, ADCP, met, etc).  The code used to ingest sensor datasets for GTS by NDBC or for Sensor Map by IOOS will perform this aggregation, so data providers need not create aggregations in ERDDAP.  Each individual dataset intended for the GTS must follow the [Requirements for GTS Ingest](#requirements-for-ioos-dataset-gts-ingest) individually.
+**single-sensor-per-dataset:** individual ERDDAP datasets of either TimeSeries or TimeSeriesProfile type that are associated via matching **`platform_id`** and **`wmo_platform_code`** global attributes, breaking a platform's data apart into individual DSG datasets.  Some IOOS RAs use this pattern already, and provide one dataset for sensor package (e.g., CTD, ADCP, met, etc).  The code used to ingest sensor datasets for GTS by NDBC or for Sensor Map by IOOS will perform this aggregation, so data providers need not create aggregations in ERDDAP.  Each individual dataset intended for the GTS must follow the [Requirements for NDBC/GTS Ingest](#requirements-for-ioos-dataset-ndbcgts-ingest) individually.
 
 Note that because neither **`platform_id`** or **`wmo_platform_code`** attributes are required in this profile, any dataset without them will be considered to be specifying data for only one, distinct platform, and aggregation with other datasets by downstream processes at NDBC or IOOS is not guaranteed.   
 
@@ -264,7 +264,7 @@ Guidance for implementing [QARTOD](https://ioos.noaa.gov/project/qartod/) qualit
 This profile requires that all variables containing results from QARTOD tests be referenced by ancillary variables, and those variables use a valid CF Standard Name to reflect the test performed (see **`qartod_variable:standard_name`** in the table below for a list of suitable standard names).
 
 **Notes:**
-* See the [Requirements for GTS Ingest](#requirements-for-ioos-dataset-gts-ingest) section below for important guidelines to properly specify a dataset's QARTOD "Aggregate/Rollup" flag variable for GTS ingest by NDBC.
+* See the [Requirements for NDBC/GTS Ingest](#requirements-for-ioos-dataset-ndbcgts-ingest) section below for important guidelines to properly specify a dataset's QARTOD "Aggregate/Rollup" flag variable for GTS ingest by NDBC.
 *  The table below uses **`geophysical_variable`** as an alias intending to represent any variable containing geophysical data, and **`qartod_variable`** as an alias for an ancillary QC flag variable.
 
 Name | Convention | Description | Type | Role
@@ -314,13 +314,13 @@ Adapted from: [Morro Bay BS1 MET Gold-Standard Example dataset](https://standard
 
 ### NDBC/GTS Ingest
 
-A collection of variables that relate to requirements for IOOS datasets to be harvested by NDBC for ingestion and for delivery to the GTS. A description of the specifics of the NDBC/GTS ingest process used by IOOS is available in the [Requirements for GTS Ingest](#requirements-for-ioos-dataset-gts-ingest) section below.  
+A collection of variables that relate to requirements for IOOS datasets to be harvested by NDBC for ingestion and for delivery to the GTS. A description of the specifics of the NDBC/GTS ingest process used by IOOS is available in the [Requirements for NDBC/GTS Ingest](#requirements-for-ioos-dataset-ndbcgts-ingest) section below.  
 
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
 gts_ingest | IOOS |  **Global** attribute that indicates the data provider intends this dataset to be harvested by NDBC and published on the GTS.<br><br>In order for NDBC to harvest the dataset, this attribute must have a value of **`true`**. | global | **required**, if applicable
-gts_ingest | IOOS |  **Variable** attribute, used in concert with the global equivalent, that indicates a variable's data should be harvested by NDBC and published to the GTS.<br><br>In order for NDBC to harvest the variable's data, both the global **`gts_ingest`** attribute and this variable attribute must have a value of **`true`** (in addition to further requirements). <br><br>Refer to the  [GTS requirements](#requirements-for-ioos-dataset-gts-ingest) section below for more detail on these requirements and on the handling of these variables. | variable | **required**, if applicable
+gts_ingest | IOOS |  **Variable** attribute, used in concert with the global equivalent, that indicates a variable's data should be harvested by NDBC and published to the GTS (if supported for the particular data type).<br><br>In order for NDBC to harvest the variable's data, both the global **`gts_ingest`** attribute and this variable attribute must have a value of **`true`** (in addition to further requirements). <br><br>Refer to the  [NDBC/GTS requirements](#requirements-for-ioos-dataset-ndbcgts-ingest) section below for more detail on these requirements and on the handling of these variables. | variable | **required**, if applicable
 
 #### Example
 
@@ -412,12 +412,12 @@ Attributes {
 
 ## Requirements for IOOS Dataset NDBC/GTS Ingest
 
-In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfederal IOOS partner data and delivers a subset of those variables (mainly meteorological and physical oceanographic) through the NWS system and on to the WMO [Global Telecommunication System (GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  NDBC also publishes all the data they harvest to their web products. 
+In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfederal IOOS partner data and delivers a subset of those variables (mainly meteorological and physical oceanographic) through the NWS system and on to the WMO [Global Telecommunication System (GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  NDBC also publishes all the data they harvest to their web products.
 
 | Variables that NDBC accepts | Variables that NDBC delivers to the GTS |
 |:--- |:--- |
 | Winds (direction, speed, gust) | x (except gust) |
-| Air temperature | x | 
+| Air temperature | x |
 | Dew point | x |
 | Barometric pressure (sea level) | x |
 | Relative humidity |   |
@@ -426,19 +426,20 @@ In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfed
 | Water temperature (surface, subsurface - 30 depths) | x |
 | Salinity (surface, subsurface) | x |
 | Current speed/direction (70 depths/bins) | x |
-| Water level |   | 
-| Dissolved oxygen (surface, bottom) |   | 
-| Turbidity |   | 
-| Chlorophyll |   | 
+| Water level |   |
+| Dissolved oxygen (surface, bottom) |   |
+| Turbidity |   |
+| Chlorophyll |   |
 | pH |   |
 | Eh |   |
 
-NDBC will leverage IOOS RA ERDDAP servers as the central access points for nonfederal IOOS partner data.  This is a departure from the previous data delivery method, where providers and RAs packaged XML files and posted them to an NDBC FTP server. It is critical that RAs work with their regional data providers to ensure their data are available in the RA ERDDAPs, so that NDBC can continue to access those datasets. 
+NDBC will leverage IOOS RA ERDDAP servers as the central access points for nonfederal IOOS partner data.  This is a departure from the previous data delivery method, where providers and RAs packaged XML files and posted them to an NDBC FTP server. It is critical that RAs work with their regional data providers to ensure their data are available in the RA ERDDAPs, so that NDBC can continue to access those datasets.
+
 ![Data flow](NDBC-data-flow.png)
 
 In order to allow NDBC to query and filter the correct subset of datasets in an ERDDAP server and process them consistently and predictably, **data providers must ensure the following dataset attribution requirements are met**.  
 
-Refer to the [Platform](#platform), [GTS Ingest](#gts-ingest), and [Quality Control/QARTOD](#quality-controlqartod) tables above for detailed descriptions of the attributes shown below.
+Refer to the [Platform](#platform), [NDBC/GTS Ingest](#ndbcgts-ingest), and [Quality Control/QARTOD](#quality-controlqartod) tables above for detailed descriptions of the attributes shown below.
 
 #### For NDBC to pull data for a dataset to the GTS:
 
@@ -484,11 +485,10 @@ Currently, IOOS RAs push a custom XML format to NDBC for GTS ingestion, so they 
 1. NDBC should exclude any values that are QC fail (and missing) but include everything else (not eval, pass, suspect) <br> <br>
 
 
-Notes on GTS ingest and QC flagging:
+**Notes on NDBC/GTS ingest and QC flagging:**
 
 * Although having **`gts_ingest`** on both the dataset itself and each of its variables is redundant, it allows for more efficient querying across a large ERDDAP server
-* Some of the data that NDBC pulls never makes it to the GTS, but it still used in other NDBC products
-* If you set **`gts_ingest`** on a variable the NDBC doesn't care about, NDBC will just ignore it.
+* If you set **`gts_ingest`** on a variable that NDBC doesn’t currently accept, NDBC will just ignore it.
 * RAs may publish ancillary variables with results of individual QC tests, however NDBC will only examine contents of the **`aggregate_quality_flag`** variable for filtering purposes for GTS harvest.  The CF Standard Names table includes several names appropriate for individual QC tests - consult the [QARTOD](#quality-controlqartod) section for the current list.
 
 

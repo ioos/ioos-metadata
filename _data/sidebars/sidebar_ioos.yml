@@ -68,8 +68,8 @@ entries:
           url: /ioos-metadata-profile-v1-2.html#ioos-metadata-profile-attributes
           output: web
 
-        - title: Requirements for IOOS Dataset GTS Ingest
-          url: /ioos-metadata-profile-v1-2.html#requirements-for-ioos-dataset-gts-ingest
+        - title: Requirements for IOOS Dataset NDBC/GTS Ingest
+          url: /ioos-metadata-profile-v1-2.html#requirements-for-ioos-dataset-ndbcgts-ingest
           output: web
 
         - title: Rules for IOOS Asset Identifier Generation
