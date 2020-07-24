@@ -46,13 +46,16 @@ Version 1.2 of the Metadata Profile targets ERDDAP as the future platform for IO
   - `contributor_role`
   - `institution`
   - `publisher_name`
-- Removed from Profile 1.2:
+- Removed from Metadata Profile 1.2:
   - `platform_variable:ioos_code`
   - `platform_variable:short_name`
   - `platform_variable:long_name`
   - `platform_variable:type`
+- Change attribute names in Metadata Profile 1.2:
+  - `creator_zipcode` to `creator_postalcode`
+  - `publisher_zipcode` to `publisher_postalcode`
 
-Data providers wishing to maintain ncSOS/IOOS SOS compatibility can refer to this list and add all required IOOS attributes from deprecated Metadata Profile 1.1.
+Data providers wishing to maintain ncSOS/IOOS SOS compatibility can refer to this list and add all required IOOS attributes from deprecated Metadata Profile 1.1 and or duplicate attributes where appropriate.
 
 
 ### [**IOOS Metadata Profile, Version 1.1**](ioos-metadata-profile-v1-1.html)
