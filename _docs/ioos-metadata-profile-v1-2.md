@@ -376,14 +376,15 @@ The IOOS Metadata Profile generally follows the [NCEI Templates](https://www.nod
 
 The IOOS Metadata Profile defines specific attributes that can be attached to a dataset's **`instrument_variable`**s:
 
-* attributes that describe the instrument details (**`calibration_date`**, **`make_model`**)
-* attributes that allow compliance with the [IOOS Convention for Asset Identification](https://ioos.github.io/conventions-for-observing-asset-identifiers/) by further qualifying the resulting Asset Identifier for measured variables<br><br>
+* attributes that describe the instrument details (e.g. **`calibration_date`**, **`make_model`**)
+
+* attributes that allow compliance with the [IOOS Convention for Asset Identification](https://ioos.github.io/conventions-for-observing-asset-identifiers/) by further qualifying the resulting Asset Identifier for measured variables (e.g. **`component`**, **`discriminant`**) <br><br>
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
 geophysical_variable:instrument | NCEI | **Variable** attribute to be specified on each **`geophysical variable`** to identify the instrument that collected the data.  The value of the attribute should be set to another variable which contains the details of the instrument. There can be multiple instruments involved depending on if all the instances of the featureType in the collection come from the same instrument or not. If multiple instruments are involved, a variable should be defined for each instrument and referenced from the **`geophysical variable`** in a comma separated string. | variable | recommended
 instrument | ACDD | **Global**, vocabulary-constrained attribute indicating the name of the contributing instrument(s) or sensor(s) used to create this dataset. Indicate controlled vocabulary used in the **`instrument_vocabulary`** attribute.  Separate multiple instruments using commas. | global | recommended
-instrument_variable:calibration_date | IOOS | The date the instrument was last calibrated. | variable | recommended
+instrument_variable:calibration_date | IOOS | The date the instrument was last calibrated. Value should be specified using ISO\-8601 compatible strings. | variable | recommended
 instrument_variable:component | IOOS | The value of a **`component`** applies to the like-named field in the IOOS SOS Asset Identifier URN; it is used to identify individual, distinct components, or sub-assets (for example, two different sensor types), on a single platform. The **`:component`** is mapped to the Asset Identifier as follows:<br><br> Asset Identifier = <code>urn:ioos:asset_type:authority:label<b>[:component]</b>[:discriminant][#functional_parameters]</code><br><br>See examples below.| variable | recommended, if applicable
 instrument_variable:discriminant | IOOS | The value of a **`discriminant`** applies to the like-named field in the IOOS SOS Asset Identifier URN; it ensures that in case of multiple deployments of identical sensors on the same platform (for example, measuring the same **`observedProperty`**), each sensor has a unique ID in the Identifier.  The **`:discriminant`** is mapped to the Asset Identifier as follows:<br><br> Asset Identifier = <code>urn:ioos:asset_type:authority:label[:component]<b>[:discriminant]</b>[#functional_parameters]</code> <br><br>See examples below. | variable | recommended, if applicable
 instrument_variable:make_model | IOOS | The make and model of the instrument. | variable | recommended
