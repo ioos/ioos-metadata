@@ -466,11 +466,15 @@ Refer to the [Platform](#platform), [NDBC/GTS Ingest](#ndbcgts-ingest), and [Qua
 1. The dataset should have a global attribute called **`wmo_platform_code`**, with the numeric WMO ID or alphanumeric NWS ID as the value (see **`wmo_platform_code`** in the [Platform](#platform) section for details on specific ID requirements)
 1. The dataset should have a global attribute called **`gts_ingest`** with a value of **`true`**
 1. Any variables the RA wants to push to NDBC should have an attribute called **`gts_ingest`** with value of **`true`**
-1. The variable should have a **`standard_name`** attribute with a value that's a valid CF Standard Name
+1. The variable should have a **`standard_name`** attribute with a value that's a valid CF Standard Name.  Consult the spreadsheet in the **XML to CF Standard Name Mappings** section below for Standard Name mappings for specific variables.
 1. The variable should include an ancillary variable representing the QARTOD aggregate flag as defined in the [Requirements for the QARTOD Aggregate/Rollup Flag](#requirements-for-the-qartod-aggregaterollup-flag) section
-1. The variable should have a **`units`** attribute, with a value that's a valid unit (that is, the units are convertible to the CF canonical unit using the [**`udunits`**](https://www.unidata.ucar.edu/software/udunits/) library) <br><br>
+1. The variable should have a **`units`** attribute, with a value that's a valid unit (that is, the units are convertible to the CF canonical unit using the [**`udunits`**](https://www.unidata.ucar.edu/software/udunits/) library)<br><br>
 
-**Note:** it is not a requirement for a variable's QC flag ancillary variables to include a **`gts_ingest`** flag.
+**Note:** it is not a requirement for a variable's QC flag ancillary variables to include a **`gts_ingest`** flag. <br><br>
+
+**XML to CF Standard Name Mappings**: Mappings between the elements, or tags, of the XML file format used for GTS dissemination and the corresponding CF Standard Names to use in ERDDAP variables are found in the spreadsheet below.  Note that the file includes additional attribution guidance for certain variables (e.g. salinity) and information about default values that NDBC uses for some elements in derived XML files that RAs typically will not need to address in their own ERDDAP datasets.
+
+<a href="NDBC_GTS_Variable_List.pdf" target="_blank" ><img src="ndbc-variable-list-crop.png" style="border: 2px solid #248ec2" /></a>
 
 #### Requirements for Vertical Coordinate Variable:
 
