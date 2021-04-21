@@ -26,7 +26,7 @@ This is the simplest scenario: an ERDDAP dataset with a single fixed station and
 
 Links:
 
-* [ERDDAP Dataset](http://erddap.cencoos.org/erddap/tabledap/edu_calpoly_marine_morro_bay_met.html)
+* [ERDDAP Dataset](https://erddap.cencoos.org/erddap/tabledap/edu_calpoly_marine_morro_bay_met.html)
 * [View in CeNCOOS Data Portal](https://data.cencoos.org/#metadata/57163/station)
 
 ### Moored buoy, met package and currents package
@@ -34,10 +34,10 @@ Links:
 In this example, the two packages are broken up into two ERDDAP datasets.
 
 * Met
-  * [ERDDAP Dataset (DSG TimeSeries)](http://erddap.secoora.org/erddap/tabledap/edu_usf_marine_comps_c10.html)
+  * [ERDDAP Dataset (DSG TimeSeries)](https://erddap.secoora.org/erddap/tabledap/edu_usf_marine_comps_c10.html)
   * [In SECOORA Data Portal](https://portal.secoora.org/#metadata/60387/station)
 * Currents
-  * [ERDDAP Dataset (DSG TimeSeriesProfile)](http://erddap.secoora.org/erddap/tabledap/c10-wave-wfs-central-buoy.html)
+  * [ERDDAP Dataset (DSG TimeSeriesProfile)](https://erddap.secoora.org/erddap/tabledap/c10-water-velocity-wfs-central-b.html)
   * [In SECOORA Data Portal](https://portal.secoora.org/#metadata/100167/station)
 
 ### Station, multiple packages, single dataset
