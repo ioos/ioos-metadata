@@ -18,14 +18,14 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 
 ## Notes/Caveats
 
-1. The IOOS Metadata Profile is a compound profile that builds off of the [**NOAA NCEI NetCDF Templates v2.0**](https://www.nodc.noaa.gov/data/formats/netcdf/), meaning the full IOOS Metadata Profile is a combination of the NCEI Templates plus IOOS-specific guidance included in this document, such as:
+1. The IOOS Metadata Profile is a compound profile that builds off of the [**NOAA NCEI NetCDF Templates v2.0**](https://www.ncei.noaa.gov/data/oceans/ncei/formats/netcdf/v2.0/index.html), meaning the full IOOS Metadata Profile is a combination of the NCEI Templates plus IOOS-specific guidance included in this document, such as:
 * attributes that are IOOS-specific (i.e. additions to the NCEI Templates)
 * attributes where variations exist between the IOOS guidance and the NCEI Templates (e.g. **`platform_vocabulary`**, where NCEI recommendations are specifically disallowed)
 * attributes with a different role in the NCEI Templates; for example, the attribute **`_FillValue`** is **required** by the NCEI Template; however, in the IOOS Profile it is listed as **recommended** only;  conversely the opposite is possible as well
 * attributes with otherwise modified or further qualified meanings/definitions
 
 1. The NCEI Templates in turn build off of the ACDD and CF conventions.  Some attributes in the IOOS Profile originate from ACDD and CF (consult the `Convention` field in the table to determine the origin of each attribute).  Links to each are below:
-* [NOAA NCEI NetCDF Templates 2.0](https://www.nodc.noaa.gov/data/formats/netcdf/v2.0/)
+* [NOAA NCEI NetCDF Templates 2.0](https://www.ncei.noaa.gov/data/oceans/ncei/formats/netcdf/v2.0/index.html)
 * [Attribute Convention for Data Discovery 1.3](http://wiki.esipfed.org/index.php/Attribute_Convention_for_Data_Discovery_1-3)
 * [Climate and Forecast Conventions (CF) 1.7](http://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/cf-conventions.html)
 
@@ -368,7 +368,7 @@ ioos_ingest | IOOS |  **Global** attribute that indicates the data provider inte
 
 ### Instrument
 
-The IOOS Metadata Profile generally follows the [NCEI Templates](https://www.nodc.noaa.gov/data/formats/netcdf/v2.0/) guidance on usage of the **`instrument`** attribute and associated **`instrument_variable`**s.  The NCEI Templates define two different usages of the **`instrument`** attribute in a dataset:
+The IOOS Metadata Profile generally follows the [NCEI Templates](https://www.ncei.noaa.gov/netcdf-templates) guidance on usage of the **`instrument`** attribute and associated **`instrument_variable`**s.  The NCEI Templates define two different usages of the **`instrument`** attribute in a dataset:
 
 1) as a global variable containing a vocabulary-constrained string describing the instrument type, or
 
