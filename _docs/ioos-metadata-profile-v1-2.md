@@ -14,7 +14,7 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 |:--- |:--- |:--- |
 | 1.0 | [Initial version based on the NODC Templates 1.1 and ACDD 1.1](./ioos-metadata-profile-v1-0.html) | 2016-10-01 |
 | 1.1 | [Updated version based on the NCEI Templates 2.0 and ACDD 1.3](./ioos-metadata-profile-v1-1.html) | 2016-11-01 |
-| **1.2** |**Currently Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `infoUrl` and `Conventions`<br>* Make `creator_institution`, `creator_url`, `license`, `publisher_url`, and `summary` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary` (recommended)<br>* Make `contributor_name`, `contributor_role`, `institution`, and `publisher_name` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset; clarify use of 'Platform' variable and related `platform` global and variable attributes <br> * Add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_url`, `geophysical_variable:accuracy`, `geophysical_variable:precision`, `geophysical_variable:resolution` <br> * Add `instrument_vocabulary` <br> * Add `instrument_variable:calibration_date`, `instrument_variable:component`, `instrument_variable:make_model` <br> * Add `gts_ingest` to indicate datasets and variables intended for NDBC/GTS harvest <br> * Add `ioos_ingest` to indicate datasets intended to be harvested into IOOS national products <br> * Add [Quality Control/QARTOD](#quality-controlqartod) section describing QARTOD flag variable requirements <br> * Add [Requirements for NDBC/GTS Ingest](#requirements-for-ioos-dataset-ndbcgts-ingest) section | **2020-01-10** |
+| **1.2** |**Currently Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `infoUrl` and `Conventions`<br>* Make `creator_institution`, `creator_url`, `license`, `publisher_url`, and `summary` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary` (recommended)<br>* Make `contributor_name`, `contributor_role`, `institution`, and `publisher_name` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset; clarify use of 'Platform' variable and related `platform` global and variable attributes <br> * Add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_url`, `geophysical_variable:accuracy`, `geophysical_variable:precision`, `geophysical_variable:resolution` <br> * Add `instrument_vocabulary` <br> * Add `instrument_variable:calibration_date`, `instrument_variable:component`, `instrument_variable:make_model` <br> * Add `gts_ingest` to indicate datasets and variables intended for NDBC/GTS harvest <br> * Add `ioos_ingest` to indicate datasets intended to be harvested into IOOS national products <br> * Add [Quality Control/QARTOD](#quality-controlqartod) section describing QARTOD flag variable requirements <br> * Add [Requirements for NDBC/GTS Ingest](#requirements-for-ioos-dataset-ndbcgts-ingest) section <br> * Add `creator_institution_url` suggested attribute | **2020-01-10** |
 
 ## Notes/Caveats
 
@@ -108,12 +108,13 @@ creator_city | IOOS | City of the person or organization that collected the data
 creator_country | IOOS | Country of the person or organization that operates a platform or network, which collected the observation data. | global | **required**
 creator_email  | ACDD | Email address of the person or institution that collected the data. | global | **required**
 creator_institution  | ACDD | Institution that collected the data. This should be specified even if it matches the value of **`publisher_institution`**, **`institution`** or if **`creator_type`** is institution. | global | **required**
+creator_institution_url  | IOOS | URL for the institution that collected the data. For clarity, it is recommended that this field is specified even if the creator_type is institution and a creator_url is provided. | global | recommended
 creator_name  | ACDD | Name of the person or organization that collected the data. <br><br>Follow the guidance described in the **`creator_type`** attribute for how to populate this field depending on whether a person, institution, group, or position. | global | recommended
 creator_phone | IOOS | The phone number of the person or group that collected the data. <br><br>Example:{::nomarkdown}<ul><li><b><code>creator_phone = "(240) 533-9444"</b></code></li><li><b><code>creator_phone = "+1-240-533-9444"</b></code></li></ul>{:/} | global | recommended
 creator_sector | IOOS | [IOOS classifier](https://mmisw.org/ont/ioos/sector) that best describes the platform (network) operator's societal sector. <br><br>Example:{::nomarkdown}<ul><li><b><code>creator_sector = "academic"</b></code></li></ul>{:/} | global |**required**
 creator_state | IOOS | State of the person or organization that collected the data.  | global | recommended
 creator_type | ACDD | Specifies type of creator with one of the following: 'person', 'group', 'institution', or 'position'. If this attribute is not specified, the creator is assumed to be a person.  | global | recommended
-creator_url  | ACDD/IOOS | The URL of the *institution* that collected the data. Note that this should always reference an institution URL, and not a personal URL, even if **`creator_type=person`**.  | global | **required**
+creator_url  | ACDD | URL of the person or organization that collected the data.  | global | **required**
 creator_postalcode | IOOS | The postal code of the person or organization that collected the data.  | global | recommended
 institution  | ACDD | The institution of the person or group that collected the data. | global | recommended
 publisher_address | IOOS | Street address of the person or organization that distributes the data.   | global | recommended
@@ -134,14 +135,15 @@ Taken from the [Morro Bay BS1 MET Gold Standard Example dataset](https://standar
 
 ```
 NC_GLOBAL {
-    creator_country      USA
-    creator_email        marineops at calpoly.edu
-    creator_institution  California Polytechnic State University, Center for Coastal Marine Sciences
-    creator_name         California Polytechnic State University, Center for Coastal Marine Sciences
-    creator_sector       academic
-    creator_type         institution
-    creator_url          http://www.marine.calpoly.edu/
-    institution          California Polytechnic State University, Center for Coastal Marine Sciences
+    creator_country          USA
+    creator_email            marineops at calpoly.edu
+    creator_institution      California Polytechnic State University, Center for Coastal Marine Sciences
+    creator_institution_url  http://www.marine.calpoly.edu/
+    creator_name             California Polytechnic State University, Center for Coastal Marine Sciences
+    creator_sector           academic
+    creator_type             institution
+    creator_url              http://www.marine.calpoly.edu/
+    institution              California Polytechnic State University, Center for Coastal Marine Sciences
 }
 ```
 
