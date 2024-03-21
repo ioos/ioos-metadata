@@ -10,7 +10,7 @@ summary:  Describes gold standard examples for various dataset types and scenari
 
 ## **Overview**
 
-The page provides links to example datasets that satisfy the [IOOS Metadata Profile 1.2](ioos-metadata-profile-v1-2.html).
+The page provides links to example datasets that satisfy the [IOOS Metadata Profile 1.2](./ioos-metadata-profile-v1-2).
 
 Since the IOOS standard builds off of the [**NOAA NCEI NetCDF Templates**](https://www.nodc.noaa.gov/data/formats/netcdf/), the NCEI "Gold Standard" examples ([HTTP](https://data.nodc.noaa.gov/ncei/example/data/netcdf/), [THREDDS](https://data.nodc.noaa.gov/thredds/catalog/example/catalog.html)) provide a great starting point.
 

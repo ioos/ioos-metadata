@@ -9,7 +9,7 @@ summary: The IOOS Metadata Profile contains dataset attribution guidelines and e
 
 ## **Current Profile Version**
 
-### [**IOOS Metadata Profile 1.2**](ioos-metadata-profile-v1-2.html)
+### [**IOOS Metadata Profile 1.2**](ioos-metadata-profile-v1-2)
 
 Looking for the latest version?  Follow the link above for details on requirements to implement the IOOS Metadata Profile for publishing data according to the latest IOOS guidelines.
 
@@ -29,7 +29,7 @@ Individual releases of the IOOS Metadata Profile (e.g. 1.0, 1.1, 1.2) target spe
 
 ## Profile Versions:
 
-### [**IOOS Metadata Profile, Version 1.2** (Current)](ioos-metadata-profile-v1-2.html)
+### [**IOOS Metadata Profile, Version 1.2** (Current)](ioos-metadata-profile-v1-2)
 
 IOOS Metadata Profile Version 1.2 (released in 2020) is the current **valid**{: style="color: green"} profile, and is based upon the following convention versions:
 
@@ -58,7 +58,7 @@ Version 1.2 of the Metadata Profile targets ERDDAP as the future platform for IO
 Data providers wishing to maintain ncSOS/IOOS SOS compatibility can refer to this list and add all required IOOS attributes from deprecated Metadata Profile 1.1 and or duplicate attributes where appropriate.
 
 
-### [**IOOS Metadata Profile, Version 1.1**](ioos-metadata-profile-v1-1.html)
+### [**IOOS Metadata Profile, Version 1.1**](ioos-metadata-profile-v1-1)
 
 IOOS Metadata Profile Version 1.1 (**deprecated in 2019**{: style="color: red"}) is based upon the following convention versions:
 
@@ -66,7 +66,7 @@ IOOS Metadata Profile Version 1.1 (**deprecated in 2019**{: style="color: red"})
 - [Attribute Convention for Data Discovery 1.3](http://wiki.esipfed.org/index.php/Attribute_Convention_for_Data_Discovery_1-3)
 - [NOAA NCEI NetCDF Templates 2.0](https://www.nodc.noaa.gov/data/formats/netcdf/v2.0/)
 
-### [**IOOS Metadata Profile, Version 1.0**](ioos-metadata-profile-v1-0.html)
+### [**IOOS Metadata Profile, Version 1.0**](ioos-metadata-profile-v1-0)
 
 IOOS Metadata Profile Version 1.0 (**deprecated in 2016**{: style="color: red"}) is based upon the following convention versions:
 

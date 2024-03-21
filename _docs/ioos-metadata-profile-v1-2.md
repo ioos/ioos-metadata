@@ -12,8 +12,8 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 
 | Version | Description | Date  |
 |:--- |:--- |:--- |
-| 1.0 | [Initial version based on the NODC Templates 1.1 and ACDD 1.1](./ioos-metadata-profile-v1-0.html) | 2016-10-01 |
-| 1.1 | [Updated version based on the NCEI Templates 2.0 and ACDD 1.3](./ioos-metadata-profile-v1-1.html) | 2016-11-01 |
+| 1.0 | [Initial version based on the NODC Templates 1.1 and ACDD 1.1](./ioos-metadata-profile-v1-0) | 2016-10-01 |
+| 1.1 | [Updated version based on the NCEI Templates 2.0 and ACDD 1.3](./ioos-metadata-profile-v1-1) | 2016-11-01 |
 | **1.2** |**Currently Active Version** <br>Updated to reflect new IOOS attribution guidance and ERDDAP implementation: <br>* Add `infoUrl` and `Conventions`<br>* Make `creator_institution`, `creator_url`, `license`, `publisher_url`, and `summary` required <br>* Add `contributor_url`, `contributor_email`, and `contributor_role_vocabulary` (recommended)<br>* Make `contributor_name`, `contributor_role`, `institution`, and `publisher_name` recommended (previously were required)<br>* Clarify default vocabulary for `contributor_role` and `contributor_role_vocabulary`<br>* Clarify use of `contributor_name` and `contributor_role` for multiple contributors <br>* Restrict the profile to allow only a single Platform per dataset; clarify use of 'Platform' variable and related `platform` global and variable attributes <br> * Add global `platform_id`, `platform_name`, and `wmo_platform_code` <br>* Remove `platform_variable:ioos_code`, `platform_variable:short_name`, `platform_variable:long_name` and `platform_variable:type` <br>* Change `creator_zipcode` and `publisher_zipcode` to `creator_postalcode` and `publisher_postalcode` <br> * Add `geophysical_variable:standard_name_url`, `geophysical_variable:accuracy`, `geophysical_variable:precision`, `geophysical_variable:resolution` <br> * Add `instrument_vocabulary` <br> * Add `instrument_variable:calibration_date`, `instrument_variable:component`, `instrument_variable:make_model` <br> * Add `gts_ingest` to indicate datasets and variables intended for NDBC/GTS harvest <br> * Add `ioos_ingest` to indicate datasets intended to be harvested into IOOS national products <br> * Add [Quality Control/QARTOD](#quality-controlqartod) section describing QARTOD flag variable requirements <br> * Add [Requirements for NDBC/GTS Ingest](#requirements-for-ioos-dataset-ndbcgts-ingest) section <br> * Add `creator_institution_url` suggested attribute | **2020-01-10** |
 
 ## Notes/Caveats
@@ -38,7 +38,7 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 
 1. For in situ observation datasets, the IOOS Profile allows only one **'platform'** per dataset.  Please see the corresponding [Platform](#platform) section of the profile below for more information.
 
-1. The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/index.html) currently uses a slightly different [netCDF File Format (V2)](https://ioos.github.io/ioosngdac/ngdac-netcdf-file-format-version-2); work is in progress to harmonize the NGDAC File Format and IOOS Metadata Profile.
+1. The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/index.html) currently uses a slightly different [netCDF File Format (V2)](https://ioos.github.io/glider-dac/ngdac-netcdf-file-format-version-2.html); work is in progress to harmonize the NGDAC File Format and IOOS Metadata Profile.
 
 
 ## Gold Standard Example Datasets
@@ -181,7 +181,7 @@ geophysical_variable:accuracy | IOOS | The sensor accuracy is the closeness of t
 geophysical_variable:missing_value | CF | This should always be equal to the `_FillValue` attribute and both are used for legacy library support. {::nomarkdown}<ul><b><code> <li>time:missing_value = -999999.0f    <li>lat:missing_value = -999999.0f    <li>lon:missing_value =-999999.0f    <li>z:missing_value = -999999.0f <li>sea_water_temperature:missing_value = Float.NaN</li></b></code></ul>{:/} | variable | recommended
 geophysical_variable:precision | IOOS | The sensor precision is the closeness of the measurements to each other. It should be given in the same units as the measured variable. If the instrument has been calibrated multiple times with different results, the most recent precision should be provided here (see **`instrument_variable:calibration_date`**). | variable |  recommended
 geophysical_variable:resolution | IOOS | The sensor resolution is the smallest change it can represent in the quantity that it is measuring. It should be given in the same units as the measured variable. | variable |  recommended
-geophysical_variable:standard_name | CF | Standardized field which uses the [CF Standard Names](http://www.cfconventions.org/documents.html). If a variables does not have an existing standard_name in the CF-managed list, this attribute should not be used. In these cases, a standard name can be proposed to the CF community for consideration and acceptance. | variable | **required**
+geophysical_variable:standard_name | CF | Standardized field which uses the [CF Standard Names](https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html). If a variables does not have an existing standard_name in the CF-managed list, this attribute should not be used. In these cases, a standard name can be proposed to the CF community for consideration and acceptance. | variable | **required**
 geophysical_variable:standard_name_url | IOOS | The URL of a **`standard_name`** in the online vocabulary listed in the global **`standard_name_vocabulary`** attribute.<br><br>Example: {::nomarkdown}<ul> <li> <b><code>sea_water_temperature:standard_name_url = "https://vocab.nerc.ac.uk/collection/P07/current/CFSN0335/"</code></b> </li>  <li> <b><code>sea_water_temperature:standard_name = "sea_water_temperature"</code></b> </li> </ul>{:/} | variable | recommended
 geophysical_variable:units  | CF | Required for most all variables that represent dimensional quantities. The value for a geophysical variable's **`units`** attribute should match or be derived from the canonical units specified for the variable's **`standard_name`** in the CF Standard Name table. <br><br>CF units are specified by the  [**`udunits`**](https://www.unidata.ucar.edu/software/udunits/) package, which includes a file `udunits.dat` listing the valid individual unit names (e.g., "g" and "m") from which which composite **`units`** strings can be formed (e.g., "kg m-3"). <br><br>For example, all temperature standard names have canonical units of "K", but often geophysical variables that measure temperature are specified with **`units`** of `degree_Celsius` or some variant thereof. | variable | **required**
 
@@ -329,7 +329,7 @@ gts_ingest | IOOS |  **Variable** attribute, used in concert with the global equ
 
 #### Example
 
-Taken from [PacIOOS's AWS-HIMB ERDDAP Dataset](https://pae-paha.pacioos.hawaii.edu/erddap/info/AWS-HIMB/index.html).
+Taken from [PacIOOS's AWS-HIMB ERDDAP Dataset](https://pae-paha.pacioos.hawaii.edu/erddap/info/aws_himb/index.html).
 
 ```
 NC_GLOBAL {

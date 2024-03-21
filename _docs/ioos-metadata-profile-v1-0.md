@@ -4,7 +4,7 @@ keywords: [ioos, metadata, netCDF, 1.0]
 tags: [ioos, metadata, netCDF, 1.0]
 toc: false
 #permalink: index.html
-summary: Deprecated 2016.  Visit the [1.2 Metadata Profile](./ioos-metadata-profile-v1-2.html) page for the current version.
+summary: Deprecated 2016.  Visit the [1.2 Metadata Profile](ioos-metadata-profile-v1-2) page for the current version.
 ---
 
 
@@ -18,7 +18,7 @@ summary: Deprecated 2016.  Visit the [1.2 Metadata Profile](./ioos-metadata-prof
  2. Each attribute in the Profile is either **required** or **recommended**.
  3. All **required** attributes must have meaningful values assigned to them in accordance with the rules prescribed by the corresponding Convention or Template.
  4. Each and all of the **recommended** attributes may be omitted; however, it is highly desirable that these attributes are included into the NetcDF metadata ***AND*** have meaningful values assigned to them.
- 5. The **`platform_variable:ioos_code`** and **`platform_variable:short_name`** are the only **interchangeable** attributes - either a single **`platform_variable:ioos_code`** or a combination of **`platform_variable:short_name`** with **`naming_authority`** is **required** to ensure that ncSOS will be able to produce the IOOS SOS Asset Identifier for the specific platform (see the [NetCDF to IOOS SOS Crosswalk](https://github.com/ioos/ioos-metadata/blob/master/docs/NetCDF-to-SOS%20Mappings_clean_2016-04-07a.xlsx) for details). The rest of attributes ***may not*** be substituted for one another.
+ 5. The **`platform_variable:ioos_code`** and **`platform_variable:short_name`** are the only **interchangeable** attributes - either a single **`platform_variable:ioos_code`** or a combination of **`platform_variable:short_name`** with **`naming_authority`** is **required** to ensure that ncSOS will be able to produce the IOOS SOS Asset Identifier for the specific platform (see the [NetCDF to IOOS SOS Crosswalk](https://github.com/ioos/ioos-metadata/raw/gh-pages/_docs/NetCDF-to-SOS%20Mappings_clean_2016-04-07a.xlsx) for details). The rest of attributes ***may not*** be substituted for one another.
  6. The **`platform_vocabulary`** attribute is at the moment the only pure ACDD v1.3 attribute that is included in the Profile.
  7. This document only describes a fraction of the Profile:
    - attributes that are IOOS-specific;
@@ -46,7 +46,7 @@ creator_url  | ACDD | The URL of the institution that collected the data. | glob
 creator_zipcode | IOOS | ZIP code of the person or organization that collected the data.  | global | recommended
 featureType | CF | CF attribute for identifying the featureType, e.g. featureType = "timeSeries". | global | required
 geophysical_variable:_FillValue<br>geospatial_variable:_FillValue | CF | This value is considered to be a special value that indicates undefined or missing data, and is returned when reading values that were not written: {::nomarkdown}<i><ul>  <li>time:_FillValue = 0.0f    <li>lat:_FillValue = 0.0f    <li>on:_FillValue = 0.0f    <li>z:_FillValue = 0.0f    <li>sea_water_temperature:_FillValue = 0.0f</ul></i>{:/} | variable | recommended
-geophysical_variable:standard_name | CF | Standardized field which uses the [CF Standard Names](http://www.cfconventions.org/documents.html/). If a variables does not have an existing standard_name in the CF-managed list, this attribute should not be used. In these cases, a standard name can be proposed to the CF community for consideration and acceptance. | variable | required
+geophysical_variable:standard_name | CF | Standardized field which uses the [CF Standard Names](https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html/). If a variables does not have an existing standard_name in the CF-managed list, this attribute should not be used. In these cases, a standard name can be proposed to the CF community for consideration and acceptance. | variable | required
 id | ACDD | An identifier for the data set, provided by and unique within its naming authority. The combination of the **`naming authority`** and the **`id`** should be globally unique, but the **`id`** can be globally unique by itself also. IDs can be URLs, URNs, DOIs, meaningful text strings, a local key, or any other unique string of characters. The **`id`** should not include blanks. | global | required
 institution  | ACDD | The institution of the person or group that collected the data. | global | required
 instrument_variable:discriminant | IOOS | The value of a **`discriminant`** applies to the like-named field in the IOOS SOS Asset Identifier URN; it ensures that in case of multiple sensors measuring the same **`observedProperty`**, each sensor has a unique ID. <br><br>Examples: {::nomarkdown}<i><ul> <li>sea_water_temperature:<b>top</b> <li> sea_water_temperature:<b>bottom</b> <li> sea_water_temperature:<b>nortek_adp_514</b></i></ul>{:/}| variable | required, if applicable
@@ -68,7 +68,7 @@ publisher_phone | IOOS | The phone number of the person or group that distribute
 publisher_state | IOOS | State of the person or organization that distributes the data.   | global | recommended
 publisher_url  | ACDD | URL of the person or group that distributes the data files. | global | recommended
 publisher_zipcode | IOOS | ZIP code of the person or organization that distributes the data.   | global | recommended
-standard_name_vocabulary  | ACDD | Standardized field which uses the [CF Standard Names](http://www.cfconventions.org/documents.html/). If a variables does not have an existing standard_name in the CF-managed list, this attribute should not be used. In these cases, a standard name can be proposed to the CF community for consideration and acceptance. | global | required
+standard_name_vocabulary  | ACDD | Standardized field which uses the [CF Standard Names](https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html/). If a variables does not have an existing standard_name in the CF-managed list, this attribute should not be used. In these cases, a standard name can be proposed to the CF community for consideration and acceptance. | global | required
 summary  | ACDD | One paragraph describing the data set. |  global | recommended
 title  | ACDD | One sentence about the data contained within the file. | global | required
 units  | CF | Required for most all variables that represent dimensional quantities. The value should come from [**`udunits`**](http://www.unidata.ucar.edu/software/udunits/) authoritative vocabulary, which is documented in the CF standard name table with it's corresponding standard name. The **`udunits`** package includes a file `udunits.dat` which lists its supported unit names. | variable | required
