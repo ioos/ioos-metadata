@@ -46,7 +46,7 @@ In this example, the two packages are broken up into two ERDDAP datasets.
 
 ### GTS Ingest
 
-The [WQB-04](https://pae-paha.pacioos.hawaii.edu/erddap/info/WQB-04/index.html) and [WQB-05](https://pae-paha.pacioos.hawaii.edu/erddap/info/WQB-05/index.html) PacIOOS buoys are actively used by NDBC for collecting data.
+The [WQB_04](https://pae-paha.pacioos.hawaii.edu/erddap/info/wqb_04/index.html) and [WQB_05](https://pae-paha.pacioos.hawaii.edu/erddap/info/wqb_05/index.html) PacIOOS buoys are actively used by NDBC for collecting data.
 
 ### Moving station, UAV with sub-surface measurements
 
