@@ -517,7 +517,7 @@ Currently, IOOS RAs push a custom XML format to NDBC for GTS ingestion, so they 
 
 #### Examples
 
-The [WQB-04](https://pae-paha.pacioos.hawaii.edu/erddap/info/WQB-04/index.html) and [WQB-05](https://pae-paha.pacioos.hawaii.edu/erddap/info/WQB-05/index.html) PacIOOS buoys are actively used by NDBC for collecting data.
+The [WQB_04](https://pae-paha.pacioos.hawaii.edu/erddap/info/wqb_04/index.html) and [WQB_05](https://pae-paha.pacioos.hawaii.edu/erddap/info/wqb_05/index.html) PacIOOS buoys are actively used by NDBC for collecting data.
 
 <br/>
 
