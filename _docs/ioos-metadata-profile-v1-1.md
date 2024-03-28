@@ -31,7 +31,7 @@ summary:  Deprecated 2019.  Visit the [1.2 Metadata Profile](ioos-metadata-profi
  4. The **`platform_variable:ioos_code`** and **`platform_variable:short_name`** are the only **interchangeable** attributes - either a single **`platform_variable:ioos_code`** or a combination of **`platform_variable:short_name`** with **`naming_authority`** is **required** to ensure that ncSOS will be able to produce the IOOS SOS Asset Identifier for the specific platform (see the [NetCDF to IOOS SOS Crosswalk](https://github.com/ioos/ioos-metadata/blob/gh-pages/_docs/NetCDF-to-SOS%20Mappings_clean_2016-04-07a.xlsx) for details). The rest of attributes ***may not*** be substituted for one another.
  <!-- The **`platform_vocabulary`** attribute is at the moment the only pure ACDD v1.3 attribute that is included in the Profile.-->
 
- 5. The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/index.html) currently uses a slightly different [NetCDF Metadata Profile](https://github.com/ioos/ioosngdac/wiki/NGDAC-NetCDF-File-Format-Version-2); work is in progress to harmonize the NGDAC and IOOS NetCDF Profiles.
+ 1. The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/) currently uses a slightly different [NetCDF Metadata Profile](https://github.com/ioos/ioosngdac/wiki/NGDAC-NetCDF-File-Format-Version-2); work is in progress to harmonize the NGDAC and IOOS NetCDF Profiles.
 
 ## **IOOS NetCDF Metadata Profile Attributes**
 

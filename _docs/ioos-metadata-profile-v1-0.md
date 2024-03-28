@@ -25,7 +25,7 @@ summary: Deprecated 2016.  Visit the [1.2 Metadata Profile](ioos-metadata-profil
    - attributes with a different role in the Templates; for example, the attribute **`_FillValue`** is required by the NODC Template; however, the Profile just recommends to use it because it is optional in the IOOS SOS metadata set (whether the Template requirement should prevail, is beyond the scope of the Profile description);
    - attributes that are **required** by the Profile regardless of their role in the Templates.
  8.  Other Profile attributes are described in the [**NOAA NODC NetCDF Templates v1.1**](http://www.nodc.noaa.gov/data/formats/netcdf/v1.1/).  A set of "Gold Standard" example NetCDF files, which precisely follow the NODC/NCEI Templates, may be found [here](http://data.nodc.noaa.gov/ncei/example/data/netcdf/) or [here](http://data.nodc.noaa.gov/thredds/catalog/example/catalog.html).
- 9.  The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/index.html) currently uses a slightly different [NetCDF Metadata Profile](https://github.com/ioos/ioosngdac/wiki/NGDAC-NetCDF-File-Format-Version-2); work is in progress to harmonize the NGDAC and IOOS NetCDF Profiles.
+ 9.  The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/) currently uses a slightly different [NetCDF Metadata Profile](https://github.com/ioos/ioosngdac/wiki/NGDAC-NetCDF-File-Format-Version-2); work is in progress to harmonize the NGDAC and IOOS NetCDF Profiles.
 
 
 ## **IOOS NetCDF Metadata Profile Attributes**

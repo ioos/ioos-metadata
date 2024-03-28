@@ -38,7 +38,7 @@ summary:  This is the currently active IOOS Metadata Profile version.  See links
 
 1. For in situ observation datasets, the IOOS Profile allows only one **'platform'** per dataset.  Please see the corresponding [Platform](#platform) section of the profile below for more information.
 
-1. The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/index.html) currently uses a slightly different [netCDF File Format (V2)](https://ioos.github.io/glider-dac/ngdac-netcdf-file-format-version-2.html); work is in progress to harmonize the NGDAC File Format and IOOS Metadata Profile.
+2. The [**U.S. IOOS National Glider Data Assembly Center**](https://gliders.ioos.us/) currently uses a slightly different [netCDF File Format (V2)](https://ioos.github.io/glider-dac/ngdac-netcdf-file-format-version-2.html); work is in progress to harmonize the NGDAC File Format and IOOS Metadata Profile.
 
 
 ## Gold Standard Example Datasets
@@ -431,7 +431,7 @@ Attributes {
 
 ## Requirements for IOOS Dataset NDBC/GTS Ingest
 
-In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfederal IOOS partner data and delivers a subset of those variables (mainly meteorological and physical oceanographic) through the NWS system and on to the WMO [Global Telecommunication System (GTS)](http://www.wmo.int/pages/prog/www/TEM/GTS/index_en.html).  NDBC also publishes all the data they harvest to their web products.
+In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfederal IOOS partner data and delivers a subset of those variables (mainly meteorological and physical oceanographic) through the NWS system and on to the WMO [Global Telecommunication System (GTS)](https://community.wmo.int/en/activity-areas/global-telecommunication-system-gts).  NDBC also publishes all the data they harvest to their web products.
 
 | Variables that NDBC accepts | Variables that NDBC delivers to the GTS |
 |:--- |:--- |
