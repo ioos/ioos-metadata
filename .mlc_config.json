@@ -14,5 +14,5 @@
       "replacement": "https://ioos.github.io/$1"
     }
 ],
-  "aliveStatusCodes": [200, 400, 0]
+  "aliveStatusCodes": [200, 400, 403, 0]
 }
