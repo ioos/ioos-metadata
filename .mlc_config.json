@@ -4,5 +4,15 @@
       "pattern": "://localhost"
     }
   ],
+  "replacementPatterns": [
+    {
+      "pattern": "^/(.*)",
+      "replacement": "https://ioos.github.io/$1"
+    },
+    {
+      "pattern": "^\\s*{{\\s*site.baseurl\\s*}}\\s*/(.*)",
+      "replacement": "https://ioos.github.io/$1"
+    }
+],
   "aliveStatusCodes": [200, 0]
 }
