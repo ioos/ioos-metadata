@@ -370,7 +370,7 @@ ioos_ingest | IOOS |  **Global** attribute that indicates the data provider inte
 
 ### Instrument
 
-The IOOS Metadata Profile generally follows the [NCEI Templates](https://www.ncei.noaa.gov/netcdf-templates) guidance on usage of the **`instrument`** attribute and associated **`instrument_variable`**s.  The NCEI Templates define two different usages of the **`instrument`** attribute in a dataset:
+The IOOS Metadata Profile generally follows the [NCEI Templates](https://www.ncei.noaa.gov/netcdf-templates) guidance on usage of the **`instrument`** attribute and associated **`instrument_container_variable`**s.  The NCEI Templates define two different usages of the **`instrument`** attribute in a dataset:
 
 1) as a global variable containing a vocabulary-constrained string describing the instrument type, or
 
@@ -381,6 +381,9 @@ The IOOS Metadata Profile defines specific attributes that can be attached to a 
 * attributes that describe the instrument details (e.g. **`calibration_date`**, **`make_model`**)
 
 * attributes that allow compliance with the [IOOS Convention for Asset Identification](https://ioos.github.io/conventions-for-observing-asset-identifiers/) by further qualifying the resulting Asset Identifier for measured variables (e.g. **`component`**, **`discriminant`**) <br><br>
+
+The string `[instrument_container_variable]` is used in the table below as a placeholder for the actual instrument container variable name.
+
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
