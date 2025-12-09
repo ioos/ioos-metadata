@@ -92,82 +92,131 @@ NC_GLOBAL {
 
 ### Attribution
 
-The attributes listed in the table below allow for consistent attribution of datasets within IOOS' national products.  Data providers are encouraged to follow these attribute guidelines exactly to ensure datasets appear with proper attribution.  
+The attributes listed in the table below allow for consistent attribution of datasets within IOOS' national and regional products (e.g., the [IOOS Environmental Sensor Map](https://sensors.ioos.us/#map)). They also provide data users with the information needed to properly acknowledge and cite data that is used.  Data providers are encouraged to follow these attribute guidelines exactly to ensure datasets appear with proper attribution.  
 
-Typically, data providers should use the Regional Association information to populate the publisher attributes (see the example below).
+#### Creator
 
-Consult the [Gold Standard Example Datasets](gold-standard-examples) for good examples to start from.
+A **creator** is a "person (or other creator type specified by the `creator_type` attribute) principally responsible for creating this data" ([ACDD 1-3](https://wiki.esipfed.org/Attribute_Convention_for_Data_Discovery_1-3#creator_name)).
+
+Describe them using the following global attributes:
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
-contributor_email | IOOS | Email addresses of the individuals or institutions that contributed to the creation of this data. Multiple emails should be given in CSV format, and presented in the same order and number as the names in **`contributor_names`**. | global | recommended
-contributor_name | ACDD | The name of any individuals or institutions that contributed to the creation of this data. Combined with the **`contributor_role`**, it provides the full description of the contributor. Multiple names should be given in CSV format. <br><br>Examples: {::nomarkdown}<ul><li><b><code>contributor_name = "Pacific Islands Ocean Observing System (PacIOOS)"</b></code></li> <li><b><code>contributor_name = "Great Lakes Observing System (GLOS),LimnoTech"</b></code></li></ul>{:/} | global | recommended
-contributor_role | ACDD | The role of any individuals or institutions that contributed to the creation of this data. The CI_RoleCode vocabulary ([NERC](https://vocab.nerc.ac.uk/collection/G04/current/), [NOAA-NCEI](https://www.ngdc.noaa.gov/wiki/index.php?title=ISO_19115_and_19115-2_CodeList_Dictionaries#CI_RoleCode)) should be used. Multiple roles should be given in CSV format, and presented in the same order and number as the names in **`contributor_names`**.<br>For the IOOS ncSOS, **`contributor_role = "sponsor"`** defines a person, group, or organization’s full or partial support of an IOOS activity, asset, model, or product. <br><br>Examples:  {::nomarkdown}<ul><li><b><code>contributor_role = "sponsor"</b></code></li> <li><b><code>contributor_role = "sponsor, collaborator"</b></code></li></ul>{:/} | global | recommended
-contributor_role_vocabulary | IOOS | The URL of the controlled vocabulary used for the **`contributor_role`** attribute. <br><br>The default is ["https://vocab.nerc.ac.uk/collection/G04/current/"](https://vocab.nerc.ac.uk/collection/G04/current/). | global | recommended
-contributor_url | IOOS | The URL of the individuals or institutions that contributed to the creation of this data. Multiple URLs should be given in CSV format, and presented in the same order and number as the names in **`contributor_names`**. | global | recommended
-creator_address | IOOS | Street address of the person or organization that collected the data.  | global | recommended
-creator_city | IOOS | City of the person or organization that collected the data.  | global | recommended
-creator_country | IOOS | Country of the person or organization that operates a platform or network, which collected the observation data. | global | **required**
-creator_email  | ACDD | Email address of the person or institution that collected the data. | global | **required**
-creator_institution  | ACDD | Institution that collected the data. This should be specified even if it matches the value of **`publisher_institution`**, **`institution`** or if **`creator_type`** is institution. | global | **required**
-creator_institution_url  | IOOS | URL for the institution that collected the data. For clarity, it is recommended that this field is specified even if the creator_type is institution and a creator_url is provided. | global | recommended
-creator_name  | ACDD | Name of the person or organization that collected the data. <br><br>Follow the guidance described in the **`creator_type`** attribute for how to populate this field depending on whether a person, institution, group, or position. | global | recommended
-creator_phone | IOOS | The phone number of the person or group that collected the data. <br><br>Example:{::nomarkdown}<ul><li><b><code>creator_phone = "(240) 533-9444"</b></code></li><li><b><code>creator_phone = "+1-240-533-9444"</b></code></li></ul>{:/} | global | recommended
-creator_sector | IOOS | [IOOS classifier](https://mmisw.org/ont/ioos/sector) that best describes the platform (network) operator's societal sector. <br><br>Example:{::nomarkdown}<ul><li><b><code>creator_sector = "academic"</b></code></li></ul>{:/} | global |**required**
-creator_state | IOOS | State of the person or organization that collected the data.  | global | recommended
-creator_type | ACDD | Specifies type of creator with one of the following: 'person', 'group', 'institution', or 'position'. If this attribute is not specified, the creator is assumed to be a person.  | global | recommended
-creator_url  | ACDD | URL of the person or organization that collected the data.  | global | **required**
-creator_postalcode | IOOS | The postal code of the person or organization that collected the data.  | global | recommended
+**creator_country** | IOOS | The country of the creator. | global | **required**
+**creator_email**  | ACDD | The email address of the creator. | global | **required**
+**creator_institution**  | ACDD | The institution that collected the data. This should be specified even if it matches the value of **`publisher_institution`**, **`institution`** or if **`creator_type`** is institution. | global | **required**
+**creator_sector** | IOOS | The [IOOS classifier](https://mmisw.org/ont/ioos/sector) that best describes the platform (network) operator's societal sector.| global |**required**
+**creator_url**  | ACDD | The URL of the creator.  | global | **required**
+creator_address | IOOS | The street address of the creator.  | global | recommended
+creator_city | IOOS | The city of the creator.  | global | recommended
+creator_institution_url  | IOOS | The URL for the institution that collected the data. For clarity, it is recommended that this field is specified even if the `creator_type` is institution and a `creator_url` is provided. | global | recommended
+creator_name  | ACDD | The name of the creator. <br><br>Follow the guidance described in the **`creator_type`** attribute for how to populate this field depending on whether a person, institution, group, or position. | global | recommended
+creator_phone | IOOS | The phone number of the creator. | global | recommended
+creator_state | IOOS | The state of the creator.  | global | recommended
+creator_type | ACDD | The type of creator, categorized as one of the following: 'person', 'group', 'institution', or 'position'. If this attribute is not specified, the creator is assumed to be a person.  | global | recommended
+creator_postalcode | IOOS | The postal code of the creator.  | global | recommended
+
+The following example in [CDL](https://docs.unidata.ucar.edu/nug/2.0-draft/cdl.html) illustrates the use of these global attributes (code adapted from the [Morro Bay BS1 MET Gold Standard Example dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html)).
+
+```
+// global attributes:
+:creator_type = "person";
+:creator_name = "Ryan Walter";
+:creator_email = "rkwalter@calpoly.edu";
+:creator_phone = "805.756.1357";
+:creator_url = "http://www.marine.calpoly.edu";
+:creator_institution = "California Polytechnic State Univeristy, San Luis 
+      Obispo";
+:creator_institution_url = "http://www.marine.calpoly.edu";
+:creator_sector = "academic";
+:creator_address = "1 Grand Avenue";
+:creator_city = "San Luis Obispo";
+:creator_state = "California";
+:creator_postalcode = "93407";
+:creator_country = "USA";
+```
+
+#### Contributor 
+
+**Contributors** include entities (e.g., individuals) that assisted the creator in the collection of the data. 
+
+If there are multiple contributors, for each attribute, contributor information should be listed in the same order and quantity, separated by commas. For example, if `contributor_name = "Jane Doe, John Smith"`, then there should be two names given for `contributor_email`, with Jane Doe's email listed first and John Smith's listed second: `contributor_email = "janedoe@gmail.com, johnsmith@gmail.com"`.
+
+Describe contributors using the following global attributes: 
+
+
+Name | Convention | Description | Type | Role
+:--------- | :-------: | :------------------- | :--------: | :-------:
+contributor_email | IOOS | The email address(es) of the contributor(s). | global | recommended
+contributor_name | ACDD | The name(s) of contributor(s). | global | recommended
+contributor_role | ACDD | The role(s) of the contributor(s). <br><br>Use the CI_RoleCode vocabulary ([NERC](https://vocab.nerc.ac.uk/collection/G04/current/)).<br>For the IOOS [ncSOS](https://github.com/asascience-open/ncSOS), **`:contributor_role = "sponsor"`** defines a person, group, or organization’s full or partial support of an IOOS activity, asset, model, or product. | global | recommended
+contributor_role_vocabulary | IOOS | The URL of the controlled vocabulary used for the **`contributor_role`** attribute, which should be listed as ["https://vocab.nerc.ac.uk/collection/G04/current/"](https://vocab.nerc.ac.uk/collection/G04/current/). | global | recommended
+contributor_url | IOOS | The URL(s) of the contributor(s). | global | recommended
+
+The following example in [CDL](https://docs.unidata.ucar.edu/nug/2.0-draft/cdl.html) illustrates the use of these global attributes (code adapted from the [Morro Bay BS1 MET Gold Standard Example dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html)).
+
+```
+// global attributes:
+		:contributor_name = "Central & Northern California Ocean Observing System (CeNCOOS),Axiom Data Science" ;
+		:contributor_email = "cencoos_communications@mbari.org,feedback@axiomdatascience.com" ;
+		:contributor_role = "contributor,processor" ;
+		:contributor_role_vocabulary = "NERC" ;
+		:contributor_url = "http://cencoos.org/,https://www.axiomdatascience.com" ;
+```
+
+#### Publisher
+
+A publisher is an entity (e.g., person or organization) that distributes the data. Typically, data providers should use the Regional Association information to populate the publisher attributes (see the example below).
+
+Consult the [Gold Standard Example Datasets](gold-standard-examples) for good examples to start from.
+
+
+Describe them using the following global attributes:
+
+Name | Convention | Description | Type | Role
+:--------- | :-------: | :------------------- | :--------: | :-------:
+**publisher_country** | IOOS | The country of the publisher.   | global | **required**
+**publisher_email**  | ACDD | The email address of the publisher. | global | **required**
+**publisher_institution**  | ACDD | The institution that distributes the data. This should be specified even if **`publisher_type`** is 'institution' (in which case **`publisher_name`** would have an identical value). | global | **required**
+**publisher_url**  | ACDD/IOOS | The URL of the publisher. This should always reference an institution URL, even if **`publisher_type=person`**.   | global | **required**
+publisher_address | IOOS | The street address of the publisher.   | global | recommended
+publisher_city | IOOS | The city of the publisher.   | global | recommended
+publisher_name  | ACDD | The name of the publisher. | global | recommended
+publisher_phone | IOOS | The phone number of the publisher.  The formatting is flexible can be formatted like `"(240) 533-9444"` or `"+1-240-533-9444"`. | global | recommended
+publisher_state | IOOS | The state of the publisher.   | global | recommended
+publisher_type | ACDD | The type of publisher, categorized as one of the following: 'person', 'group', 'institution', or 'position'. If this attribute is not specified, the publisher is assumed to be a person. | global | recommended
+publisher_postalcode | IOOS | The postal code of the publisher.   | global | recommended
+
+The following example in [CDL](https://docs.unidata.ucar.edu/nug/2.0-draft/cdl.html) illustrates the use of these global attributes (code adapted from the [Morro Bay BS1 MET Gold Standard Example dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html)).
+
+```
+// global attributes:
+:publisher_type = "institution";
+:publisher_name = "Central & Northern California Ocean Observing System (CeNCOOS)";
+:publisher_institution = "California Polytechnic State University, Center for 
+      Coastal Marine Sciences";
+:publisher_email = "cencoos_communicatons@mbari.org";
+:publisher_phone = "(831) 775-1987";
+:publisher_url = "http://www.cencoos.org";
+:publisher_address = "7700 Sandholdt Rd";
+:publisher_city = "Moss Landing";
+:publisher_state = "California";
+:publisher_postalcode = "95039";
+:publisher_country = "USA";
+```
+
+
+#### Institution
+
+Name | Convention | Description | Type | Role
+:--------- | :-------: | :------------------- | :--------: | :-------:
 institution  | ACDD | The institution of the person or group that collected the data. | global | recommended
-publisher_address | IOOS | Street address of the person or organization that distributes the data.   | global | recommended
-publisher_city | IOOS | City of the person or organization that distributes the data.   | global | recommended
-publisher_country | IOOS | Country of the person or organization that distributes the data.   | global | **required**
-publisher_email  | ACDD | The email address of the person or group that distributes the data files. | global | **required**
-publisher_institution  | ACDD | Institution that distributes the data. This should be specified even if **`publisher_type`** is institution (in which case **`publisher_name`** would have an identical value). | global | **required**
-publisher_name  | ACDD | Name of the person or group that distributes the data files. <br><br>Follow the guidance described in the **`publisher_type`** attribute for how to populate this field depending on whether a person, institution, group, or position. | global | recommended
-publisher_phone | IOOS | The phone number of the person or group that distributes the data files. <br><br>Example:{::nomarkdown}<ul><li><b><code>creator_phone = "(240) 533-9444"</b></code></li><li><b><code>creator_phone = "+1-240-533-9444"</b></code></li></ul>{:/} | global | recommended
-publisher_state | IOOS | State of the person or organization that distributes the data.   | global | recommended
-publisher_type | ACDD | Specifies type of publisher with one of the following: 'person', 'group', 'institution', or 'position'. If this attribute is not specified, the publisher is assumed to be a person. | global | recommended
-publisher_url  | ACDD/IOOS | URL of the person or group that distributes the data files. Note that this should always reference an institution URL, and not a personal URL, even if **`publisher_type=person`**.   | global | **required**
-publisher_postalcode | IOOS | The postal code of the person or organization that distributes the data.   | global | recommended
 
-#### Example
-
-Taken from the [Morro Bay BS1 MET Gold Standard Example dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
+The following example in [CDL](https://docs.unidata.ucar.edu/nug/2.0-draft/cdl.html) illustrates the use of these global attributes (code adapted from the [Morro Bay BS1 MET Gold Standard Example dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html)).
 
 ```
-NC_GLOBAL {
-    creator_country          USA
-    creator_email            marineops at calpoly.edu
-    creator_institution      California Polytechnic State University, Center for Coastal Marine Sciences
-    creator_institution_url  http://www.marine.calpoly.edu/
-    creator_name             California Polytechnic State University, Center for Coastal Marine Sciences
-    creator_sector           academic
-    creator_type             institution
-    creator_url              http://www.marine.calpoly.edu/
-    institution              California Polytechnic State University, Center for Coastal Marine Sciences
-}
-```
-
-```
-NC_GLOBAL {
-    contributor_email            cencoos_communications@mbari.org,feedback@axiomdatascience.com
-    contributor_name             Central & Northern California Ocean Observing System (CeNCOOS),Axiom Data Science
-    contributor_role             contributor,processor
-    contributor_url              http://cencoos.org/,https://www.axiomdatascience.com
-    contributor_role_vocabulary  https://vocab.nerc.ac.uk/collection/G04/current/
-}
-```
-
-```
-NC_GLOBAL {
-    publisher_country      USA
-    publisher_email        marineops at calpoly.edu
-    publisher_institution  California Polytechnic State University, Center for Coastal Marine Sciences
-    publisher_name         California Polytechnic State University, Center for Coastal Marine Sciences
-    publisher_type         institution
-    publisher_url          http://www.marine.calpoly.edu/
-}
+// global attributes:
+:institution = "California Polytechnic State University, San Luis Obispo";
 ```
 
 Another hypothetical example shows how to list a regional association as the publisher:
