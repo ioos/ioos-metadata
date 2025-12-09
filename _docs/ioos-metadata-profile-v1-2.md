@@ -176,29 +176,33 @@ The string **`[geophysical_variable]`** is used in the table below as a placehol
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
-**[geophysical_variable]:standard_name** | CF | The [CF Standard Names](https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html) value of the variable with which this attribute is associated.<br><br>**Do not include the variable `standard_name` attribute if a corresponding CF standard name for the variable does not exist.** See [How do I ask for a new standard name?](cfconventions.org/faq.html#how-do-i-ask-for-a-new-standard-name) for more information.| variable | **required**
-**[geophysical_variable]:units**  | CF | A defined standard for a quantity of the variable to which the attribute is associated and which should match or be derived from the canonical units specified for the associated variable's **`standard_name`** in the [CF Standard Names](https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html) table.  Required for almost all variables that represent dimensional quantities. <br><br> CF units are specified by the  [**`udunits`**](https://www.unidata.ucar.edu/software/udunits/) package, which includes a file `udunits.dat` listing the valid individual unit names (e.g., "g" and "m") from which composite **`units`** strings can be formed (e.g., "kg m-3").<br><br>For example, all temperature standard names have canonical units of "K", but often geophysical variables that measure temperature are specified with **`units`** of `degree_Celsius` or some variant thereof. | variable | **required**
 [geophysical_variable]:_FillValue | CF | A value representing undefined or missing data, of the same type of the variable with which it is associated, and which is returned when reading values that were not written. Examples include setting `_FillValue` to `-999999.0f` or `Float.NaN`. | variable | recommended
 [geophysical_variable]:accuracy | IOOS | The closeness of the measurements to the variable's true value, given in the same units as the measured variable.<br><br>If the instrument used to measure this variable has been calibrated multiple times with different results, the most recent accuracy should be provided (see **`instrument_variable:calibration_date`**). | variable |  recommended
 [geophysical_variable]:missing_value | CF | Equal to the `_FillValue` attribute.<br><br> Both `missing_value` and `_FillValue` are used for legacy library support. | variable | recommended
 [geophysical_variable]:precision | IOOS | The closeness of the measurements to each other, given in the same units as the measured variable.<br><br>If the instrument used to measure this variable has been calibrated multiple times with different results, the most recent precision should be provided (see **`instrument_variable:calibration_date`**). | variable |  recommended
 [geophysical_variable]:resolution | IOOS | The smallest value change the sensor can detect when measuring the variable with which this attribute is associated and given in the same unit as that variable. | variable |  recommended
+**[geophysical_variable]:standard_name** | CF | The [CF Standard Names](https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html) value of the variable with which this attribute is associated.<br><br>**Do not include the variable `standard_name` attribute if a corresponding CF standard name for the variable does not exist.** See [How do I ask for a new standard name?](cfconventions.org/faq.html#how-do-i-ask-for-a-new-standard-name) for more information.| variable | **required**
 [geophysical_variable]:standard_name_url | IOOS | The URL referencing the definition of the **`standard_name`**, which is part of the controlled vocabulary listed in the global **`standard_name_vocabulary`** attribute. | variable | recommended
+**[geophysical_variable]:units**  | CF | A defined standard for a quantity of the variable to which the attribute is associated and which should match or be derived from the canonical units specified for the associated variable's **`standard_name`** in the [CF Standard Names](https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html) table.  Required for almost all variables that represent dimensional quantities. <br><br> CF units are specified by the  [**`udunits`**](https://www.unidata.ucar.edu/software/udunits/) package, which includes a file `udunits.dat` listing the valid individual unit names (e.g., "g" and "m") from which composite **`units`** strings can be formed (e.g., "kg m-3").<br><br>For example, all temperature standard names have canonical units of "K", but often geophysical variables that measure temperature are specified with **`units`** of `degree_Celsius` or some variant thereof. | variable | **required**
 
+#### Example
 
-The following example in [CDL](https://docs.unidata.ucar.edu/nug/2.0-draft/cdl.html) illustrates the use of these variable attributes (code adapted from the [Morro Bay BS1 MET Gold Standard Example dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html)).
+Taken from the [Morro Bay BS1 MET Gold Standard Example dataset](https://standards.sensors.ioos.us/erddap/info/morro-bay-bs1-met/index.html).
 
 ```
-double air_temperature(time);
-  air_temperature:_FillValue = -9999.9;
-  air_temperature:accuracy = ;
-  air_temperature:missing_value = -9999.0;
-  air_temperature:precision = ;
-  air_temperature:resolution = ;
-  air_temperature:standard_name = "air_temperature";
-  air_temperature:standard_name_url = "http://vocab.nerc.ac.uk/collection/P07/current/CFSN0023/";
-  air_temperature:units = "degree_Celsius";
+Attributes {
+    air_temperature {
+        _FillValue        -9999.0
+        missing_value     -9999.0
+        long_name         Air Temperature
+        platform          station
+        standard_name     air_temperature
+        units             degree_Celsius
+        standard_name_url http://vocab.nerc.ac.uk/collection/P07/current/CFSN0023/
+    }
+}
 ```
+
 
 ### Platform
 
