@@ -170,9 +170,9 @@ NC_GLOBAL {
 
 ## Variable Attributes
 
-The following attributes should be applied to all geophysical or other measured parameter variables in the dataset.
+The following attributes should be applied to all geophysical or other measured parameter variables in the dataset.  This is mostly a re-listing and description of how to use CF convention attributes, with the addition of a few IOOS-specific attributes for variable precision/accuracy and standard name identification.  
 
-The string **`[geophysical_variable]`** is used in the table below as a placeholder for the actual geophysical variable name.
+The string **`[geophysical_variable]`** is used in the table below as an alias, representing any variable containing geophysical data.
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
