@@ -285,7 +285,7 @@ This profile requires that all variables containing results from QARTOD tests be
   - [syntax_test_quality_flag](http://vocab.nerc.ac.uk/collection/P07/current/VJ1PUAOC/) 
   
 
-The table below uses **`[geophysical_variable]`** to represent any variable containing geophysical data and **`[qartod_variable]`** to represent an ancillary QARTOD flag variable.
+The table below uses **`geophysical_variable`** to represent any variable containing geophysical data and **`[qartod_variable]`** to represent an ancillary QARTOD flag variable.
 
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
