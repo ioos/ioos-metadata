@@ -94,6 +94,8 @@ NC_GLOBAL {
 
 The attributes listed in the table below allow for consistent attribution of datasets within IOOS' national products.  Data providers are encouraged to follow these attribute guidelines exactly to ensure datasets appear with proper attribution.  
 
+Typically, data providers should use the Regional Association information to populate the publisher attributes (see the example below).
+
 Consult the [Gold Standard Example Datasets](gold-standard-examples) for good examples to start from.
 
 Name | Convention | Description | Type | Role
@@ -168,6 +170,18 @@ NC_GLOBAL {
 }
 ```
 
+Another hypothetical example shows how to list a regional association as the publisher:
+
+```
+// global attributes:
+publisher_name = "NANOOS Data Manager" ;
+publisher_url = "http://nanoos.org" ;
+publisher_email =  "dmac@nanoos.org" ;
+publisher_phone = "555-555-5555" ;
+publisher_type =  "position" ;
+publisher_institution = "NANOOS" ;
+```
+
 ### Variables
 
 A collection of variable attributes that should be applied to all geophysical or other measured parameter variable contained in the dataset.  This is mostly a re-listing and description of how to use CF convention attributes, with the addition of a few IOOS-specific attributes for variable precision/accuracy and standard name identification.  
@@ -181,7 +195,7 @@ geophysical_variable:accuracy | IOOS | The sensor accuracy is the closeness of t
 geophysical_variable:missing_value | CF | This should always be equal to the `_FillValue` attribute and both are used for legacy library support. {::nomarkdown}<ul><b><code> <li>time:missing_value = -999999.0f    <li>lat:missing_value = -999999.0f    <li>lon:missing_value =-999999.0f    <li>z:missing_value = -999999.0f <li>sea_water_temperature:missing_value = Float.NaN</li></b></code></ul>{:/} | variable | recommended
 geophysical_variable:precision | IOOS | The sensor precision is the closeness of the measurements to each other. It should be given in the same units as the measured variable. If the instrument has been calibrated multiple times with different results, the most recent precision should be provided here (see **`instrument_variable:calibration_date`**). | variable |  recommended
 geophysical_variable:resolution | IOOS | The sensor resolution is the smallest change it can represent in the quantity that it is measuring. It should be given in the same units as the measured variable. | variable |  recommended
-geophysical_variable:standard_name | CF | Standardized field which uses the [CF Standard Names](https://cfconventions.org/Data/cf-standard-names/current/build/cf-standard-name-table.html). If a variables does not have an existing standard_name in the CF-managed list, this attribute should not be used. In these cases, a standard name can be proposed to the CF community for consideration and acceptance. | variable | **required**
+geophysical_variable:standard_name | CF | The CF Standard Names value of the variable with which this attribute is associated.<br><br>**Do not include the variable standard_name attribute if a corresponding CF standard name for the variable does not exist.** Instead, use the `long_name` attribute to clearly identify what the variable contains. Then, populate the `units` attribute with the appropriate descriptive units for the variable. To be CF-compliant, the units attribute must be in a compliant UDUNITS format.<br><br>See [How do I ask for a new standard name?](cfconventions.org/faq.html#how-do-i-ask-for-a-new-standard-name) for instructions on how to propose a new standard name. | variable | **required**
 geophysical_variable:standard_name_url | IOOS | The URL of a **`standard_name`** in the online vocabulary listed in the global **`standard_name_vocabulary`** attribute.<br><br>Example: {::nomarkdown}<ul> <li> <b><code>sea_water_temperature:standard_name_url = "https://vocab.nerc.ac.uk/collection/P07/current/CFSN0335/"</code></b> </li>  <li> <b><code>sea_water_temperature:standard_name = "sea_water_temperature"</code></b> </li> </ul>{:/} | variable | recommended
 geophysical_variable:units  | CF | Required for most all variables that represent dimensional quantities. The value for a geophysical variable's **`units`** attribute should match or be derived from the canonical units specified for the variable's **`standard_name`** in the CF Standard Name table. <br><br>CF units are specified by the  [**`udunits`**](https://www.unidata.ucar.edu/software/udunits/) package, which includes a file `udunits.dat` listing the valid individual unit names (e.g., "g" and "m") from which which composite **`units`** strings can be formed (e.g., "kg m-3"). <br><br>For example, all temperature standard names have canonical units of "K", but often geophysical variables that measure temperature are specified with **`units`** of `degree_Celsius` or some variant thereof. | variable | **required**
 
@@ -431,7 +445,7 @@ Attributes {
 
 ## Requirements for IOOS Dataset NDBC/GTS Ingest
 
-In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfederal IOOS partner data and delivers a subset of those variables (mainly meteorological and physical oceanographic) through the NWS system and on to the WMO [Global Telecommunication System (GTS)](https://community.wmo.int/en/activity-areas/global-telecommunication-system-gts).  NDBC also publishes all the data they harvest to their web products.
+In partnership with IOOS, NOAA [NDBC](https://www.ndbc.noaa.gov/) ingests nonfederal IOOS partner data and delivers a subset of those variables (mainly meteorological and physical oceanographic) through the NWS system and on to the WMO [Global Telecommunication System (GTS)](https://community.wmo.int/programmes-initiatives/global-telecommunication-system-gts).  NDBC also publishes all the data they harvest to their web products.
 
 | Variables that NDBC accepts | Variables that NDBC delivers to the GTS |
 |:--- |:--- |
