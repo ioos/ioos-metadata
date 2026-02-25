@@ -125,7 +125,7 @@ The following example in [CDL](https://docs.unidata.ucar.edu/nug/2.0-draft/cdl.h
 :creator_email = "rkwalter@calpoly.edu";
 :creator_phone = "805.756.1357";
 :creator_url = "http://www.marine.calpoly.edu";
-:creator_institution = "California Polytechnic State Univeristy, San Luis 
+:creator_institution = "California Polytechnic State University, San Luis 
       Obispo";
 :creator_institution_url = "http://www.marine.calpoly.edu";
 :creator_sector = "academic";
@@ -182,7 +182,7 @@ Name | Convention | Description | Type | Role
 publisher_address | IOOS | The street address of the publisher.   | global | recommended
 publisher_city | IOOS | The city of the publisher.   | global | recommended
 publisher_name  | ACDD | The name of the publisher. | global | recommended
-publisher_phone | IOOS | The phone number of the publisher.  The formatting is flexible can be formatted like `"(240) 533-9444"` or `"+1-240-533-9444"`. | global | recommended
+publisher_phone | IOOS | The phone number of the publisher.  The formatting is flexible. For example, both `"(240) 533-9444"` or `"+1-240-533-9444"` are acceptable. | global | recommended
 publisher_state | IOOS | The state of the publisher.   | global | recommended
 publisher_type | ACDD | The type of publisher, categorized as one of the following: 'person', 'group', 'institution', or 'position'. If this attribute is not specified, the publisher is assumed to be a person. | global | recommended
 publisher_postalcode | IOOS | The postal code of the publisher.   | global | recommended
