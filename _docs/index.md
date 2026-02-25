@@ -17,7 +17,7 @@ Looking for the latest version?  Follow the link above for details on requiremen
 
 The Profile defines recommended and required global and variable attributes for IOOS data providers to include when publishing their datasets and accompanying services.
 
-Global and variable attributes are concepts of the [netCDF specification](https://www.unidata.ucar.edu/software/netcdf), which is 'a set of software libraries and machine-independent data formats that support the creation, access, and sharing of array-oriented scientific data.'  
+Global and variable attributes are concepts of the [netCDF specification](https://www.unidata.ucar.edu/software/netcdf/) which is 'a set of software libraries and machine-independent data formats that support the creation, access, and sharing of array-oriented scientific data. It is also a community standard for sharing scientific data.'  
 
 The IOOS DMAC data management system has adopted netCDF as a standard data format.  These guidelines are targeted towards netCDF files, however to the degree that they can be applied to other data formats they are referred to as a generalized 'Metadata Profile' rather than a netCDF-specific profile.  They are based on several community netCDF conventions, which each build off of each other in the following order:
 
