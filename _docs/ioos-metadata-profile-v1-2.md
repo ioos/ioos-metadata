@@ -205,6 +205,18 @@ The following example in [CDL](https://docs.unidata.ucar.edu/nug/2.0-draft/cdl.h
 :publisher_country = "USA";
 ```
 
+Another hypothetical example shows how to list a regional association as the publisher:
+
+```
+// global attributes:
+:publisher_name = "NANOOS Data Manager" ;
+:publisher_url = "http://nanoos.org" ;
+:publisher_email =  "dmac@nanoos.org" ;
+:publisher_phone = "555-555-5555" ;
+:publisher_type =  "position" ;
+:publisher_institution = "NANOOS" ;
+```
+
 
 #### Institution
 
@@ -219,17 +231,7 @@ The following example in [CDL](https://docs.unidata.ucar.edu/nug/2.0-draft/cdl.h
 :institution = "California Polytechnic State University, San Luis Obispo";
 ```
 
-Another hypothetical example shows how to list a regional association as the publisher:
 
-```
-// global attributes:
-publisher_name = "NANOOS Data Manager" ;
-publisher_url = "http://nanoos.org" ;
-publisher_email =  "dmac@nanoos.org" ;
-publisher_phone = "555-555-5555" ;
-publisher_type =  "position" ;
-publisher_institution = "NANOOS" ;
-```
 
 ### Variables
 
