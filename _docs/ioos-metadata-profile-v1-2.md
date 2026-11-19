@@ -384,7 +384,7 @@ ioos_ingest | IOOS |  **Global** attribute that indicates the data provider inte
 
 ### Instrument
 
-The IOOS Metadata Profile generally follows the [NCEI Templates](https://www.ncei.noaa.gov/netcdf-templates) guidance on usage of the **`instrument`** attribute and associated **`instrument_variable`**s.  The NCEI Templates define two different usages of the **`instrument`** attribute in a dataset:
+The IOOS Metadata Profile generally follows the [NCEI Templates](https://www.ncei.noaa.gov/netcdf-templates) guidance on usage of the **`instrument`** attribute and associated **`instrument_container_variable`**s.  The NCEI Templates define two different usages of the **`instrument`** attribute in a dataset:
 
 1) as a global variable containing a vocabulary-constrained string describing the instrument type, or
 
@@ -396,15 +396,18 @@ The IOOS Metadata Profile defines specific attributes that can be attached to a 
 
 * attributes that allow compliance with the [IOOS Convention for Asset Identification](https://ioos.github.io/conventions-for-observing-asset-identifiers/) by further qualifying the resulting Asset Identifier for measured variables (e.g. **`component`**, **`discriminant`**) <br><br>
 
+The string `[instrument_container_variable]` is used in the table below as a placeholder for the actual instrument container variable name.
+
+
 Name | Convention | Description | Type | Role
 :--------- | :-------: | :------------------- | :--------: | :-------:
-geophysical_variable:instrument | NCEI | **Variable** attribute to be specified on each **`geophysical variable`** to identify the instrument that collected the data.  The value of the attribute should be set to another variable which contains the details of the instrument. There can be multiple instruments involved depending on if all the instances of the featureType in the collection come from the same instrument or not. If multiple instruments are involved, a variable should be defined for each instrument and referenced from the **`geophysical variable`** in a comma separated string. | variable | recommended
+[geophysical_variable]:instrument | NCEI |A string attribute applied to **each** **`geophysical variable`** to identify the instrument that collected the data.  The value of the attribute should be set to the name of the instrument container variable that contains the details of the instrument.<br><br> If multiple instruments were used to measure data, reference each instrument container variable in a comma-separated string. | variable | recommended
 instrument | ACDD | **Global**, vocabulary-constrained attribute indicating the name of the contributing instrument(s) or sensor(s) used to create this dataset. Indicate controlled vocabulary used in the **`instrument_vocabulary`** attribute.  Separate multiple instruments using commas. | global | recommended
-instrument_variable:calibration_date | IOOS | The date the instrument was last calibrated. Value should be specified using ISO\-8601 compatible strings. | variable | recommended
-instrument_variable:component | IOOS | The value of a **`component`** applies to the like-named field in the IOOS SOS Asset Identifier URN; it is used to identify individual, distinct components, or sub-assets (for example, two different sensor types), on a single platform. The **`:component`** is mapped to the Asset Identifier as follows:<br><br> Asset Identifier = <code>urn:ioos:asset_type:authority:label<b>[:component]</b>[:discriminant][#functional_parameters]</code><br><br>See examples below.| variable | recommended, if applicable
-instrument_variable:discriminant | IOOS | The value of a **`discriminant`** applies to the like-named field in the IOOS SOS Asset Identifier URN; it ensures that in case of multiple deployments of identical sensors on the same platform (for example, measuring the same **`observedProperty`**), each sensor has a unique ID in the Identifier.  The **`:discriminant`** is mapped to the Asset Identifier as follows:<br><br> Asset Identifier = <code>urn:ioos:asset_type:authority:label[:component]<b>[:discriminant]</b>[#functional_parameters]</code> <br><br>See examples below. | variable | recommended, if applicable
-instrument_variable:make_model | IOOS | The make and model of the instrument. | variable | recommended
-instrument_vocabulary | ACDD | Controlled vocabulary for the names used in the **`instrument`** attribute. <br><br>The recommended value for the **`instrument_vocabulary`** attribute is a URL to a controlled vocabulary of instrument terms, similar to guidance for **`platform_vocabulary`**. | global | recommended
+[instrument_container_variable]:calibration_date | IOOS | The date the instrument was last calibrated. Value should be specified using [ISO\-8601 compatible strings](https://www.iso.org/iso-8601-date-and-time-format.html). | variable | recommended
+[instrument_container_variable]:component | IOOS | A string identifying an individual, distinct component or sub-asset on a single platform (for example, one of two different sensor types). | variable |  recommended, if applicable
+[instrument_container_variable]:discriminant | IOOS | A string that uniquely identifies a physical sensor when multiple sensors of the same make and model (e.g., that have identical **`make_model`** values) are deployed on a platform. | variable | recommended, if applicable
+[instrument_container_variable]:make_model | IOOS | A string giving the make and model of the instrument. | variable |  recommended
+instrument_vocabulary | ACDD | The controlled vocabulary for the names used in the **`instrument`** global attribute, ideally given as a URL. | global | recommended
 
 #### Example
 
